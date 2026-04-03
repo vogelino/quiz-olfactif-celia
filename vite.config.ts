@@ -5,8 +5,8 @@ import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
   plugins: [
-    solidStart(),
+    solidStart({ ssr: false }),
     tailwindcss(),
-    nitro()
-  ]
+    nitro(process.env.VERCEL ? { preset: "vercel" } : {}),
+  ],
 });
