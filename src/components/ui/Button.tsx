@@ -14,9 +14,9 @@ export function Button({
       {...rest}
       class={cn(
         "px-4 py-2 rounded cursor-pointer",
-        "bg-black text-white hover:bg-neutral-800",
+        "bg-foreground text-background hover:bg-foreground/80",
         "focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-offset-2",
-        "focus-visible:ring-offset-white",
+        "focus-visible:ring-offset-background",
         className,
       )}
     >

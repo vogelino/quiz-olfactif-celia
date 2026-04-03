@@ -4,10 +4,13 @@ import { IngredientId } from "~/data/ingredients";
 import { MemoryPair, MemoryPairId } from "~/data/memory";
 import { Card, getShuffledCards } from "./utils/cards";
 
+export const statuses = ["initial", "started", "complete"] as const;
+export type Status = (typeof statuses)[number];
+
 type StoreType = {
   cards: Card[];
   pairMatch: MemoryPair | null;
-  status: "initial" | "started" | "complete";
+  status: Status;
   currentTurn: IngredientId[];
   discoveredPairs: MemoryPairId[];
 };

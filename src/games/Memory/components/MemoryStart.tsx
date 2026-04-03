@@ -14,7 +14,7 @@ export function MemoryStart() {
       <div
         class={cn(
           "flex items-center justify-center flex-col gap-6",
-          "bg-white py-16 px-20 rounded-lg",
+          "bg-background py-16 px-20 rounded-lg",
         )}
       >
         <h1 class="text-7xl font-bold text-center">

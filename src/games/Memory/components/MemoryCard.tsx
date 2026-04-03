@@ -45,7 +45,7 @@ export function MemoryCard({
           class={cn(
             "size-full aspect-square relative",
             "flex items-center justify-center",
-            pairIsDiscovered() && "bg-white",
+            pairIsDiscovered() && "bg-background",
           )}
         >
           <img

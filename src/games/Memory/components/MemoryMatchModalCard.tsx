@@ -16,7 +16,7 @@ export function MemoryMatchModalCard({
   return (
     <div
       class={cn(
-        "aspect-square rounded shadow relative overflow-clip",
+        "aspect-square rounded-xl shadow relative overflow-clip",
         "shrink flex items-center justify-center",
         className,
       )}
@@ -29,11 +29,18 @@ export function MemoryMatchModalCard({
       <img
         src="/memory/card-front.webp"
         aria-hidden="true"
-        class={cn("absolute-full", "-z-10 pointer-events-auto select-none")}
+        class={cn(
+          "absolute-full rounded-xl",
+          "-z-10 pointer-events-auto select-none",
+        )}
       />
       <div
         aria-hidden="true"
-        class={cn("absolute-full", "z-10 mix-blend-color", colorClass)}
+        class={cn(
+          "absolute-full rounded-xl",
+          "z-10 mix-blend-color",
+          colorClass,
+        )}
       />
     </div>
   );
