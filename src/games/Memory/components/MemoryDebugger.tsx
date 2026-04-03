@@ -47,7 +47,7 @@ export function MemoryDebugger() {
       <Show when={store.debuggerStatus === "expanded"}>
         <div class="p-2">
           <div class="mb-1 text-gray-400">Status</div>
-          <div class="flex gap-1">
+          <div class="grid grid-cols-2 gap-1">
             <For each={statuses}>
               {(s) => (
                 <button

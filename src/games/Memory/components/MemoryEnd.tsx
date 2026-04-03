@@ -1,11 +1,18 @@
 import { cn } from "~/utils/cn";
 import { Button } from "../../../components/ui/Button";
 import { useMemoryStore } from "../store";
-import { batch } from "solid-js";
+import { batch, onMount } from "solid-js";
 import { getShuffledCards } from "../utils/cards";
+import { useSoundManager } from "~/utils/SoundManager";
 
 export function MemoryEnd() {
   const [, setStore] = useMemoryStore();
+  const soundManager = useSoundManager();
+
+  onMount(() => {
+    soundManager.stopAllLoops();
+    soundManager.play("success");
+  });
 
   return (
     <div
@@ -33,6 +40,7 @@ export function MemoryEnd() {
               setStore("pairMatchId", null);
               setStore("status", "initial");
             });
+            soundManager.play("click");
           }}
           class="text-lg"
         >

@@ -1,9 +1,15 @@
 import { cn } from "~/utils/cn";
 import { Button } from "../../../components/ui/Button";
 import { useMemoryStore } from "../store";
+import { useSoundManager } from "~/utils/SoundManager";
+import { onMount } from "solid-js";
 
 export function MemoryStart() {
   const [, setStore] = useMemoryStore();
+  const soundManager = useSoundManager();
+
+  onMount(() => soundManager.stopAllLoops());
+
   return (
     <div
       class={cn(
@@ -24,7 +30,15 @@ export function MemoryStart() {
           Find pairs of raw material cards and discover what they have in
           common!
         </p>
-        <Button onClick={() => setStore("status", "started")} class="text-lg">
+        <Button
+          onClick={() => {
+            setStore("status", "started");
+            soundManager.play("click");
+            soundManager.play("match");
+            soundManager.playLoop("music", { volume: 0.4 });
+          }}
+          class="text-lg"
+        >
           Start Finding Matches
         </Button>
       </div>

@@ -4,7 +4,7 @@ import { IngredientId } from "~/data/ingredients";
 import { MemoryPairId } from "~/data/memory";
 import { Card, getShuffledCards } from "./utils/cards";
 
-export const statuses = ["initial", "started", "complete"] as const;
+export const statuses = ["loading", "initial", "started", "complete"] as const;
 export type Status = (typeof statuses)[number];
 
 type StoreType = {
@@ -14,16 +14,18 @@ type StoreType = {
   currentTurn: IngredientId[];
   discoveredPairs: MemoryPairId[];
   debuggerStatus: "expanded" | "collapsed";
+  error?: string;
 };
 
 export const createMemoryStore = () =>
   createStore<StoreType>({
     pairMatchId: null,
-    status: "initial" as const,
+    status: "loading" as const,
     currentTurn: [],
     discoveredPairs: [],
     cards: getShuffledCards(),
     debuggerStatus: "collapsed",
+    error: undefined,
   });
 type StoreReturn = ReturnType<typeof createMemoryStore>;
 

@@ -6,9 +6,12 @@ import { cn } from "~/utils/cn";
 import { MemoryMatchModalCard } from "./MemoryMatchModalCard";
 import { Button } from "../../../components/ui/Button";
 import { useMemoryStore } from "../store";
+import { useSoundManager } from "~/utils/SoundManager";
 
 export function MemoryMatchModal() {
   const [store, setStore] = useMemoryStore();
+  const soundManager = useSoundManager();
+
   const pairMatch = () => {
     const pairMatchId = store.pairMatchId;
     return pairMatchId ? idToMemoryPair[pairMatchId] : null;
@@ -73,7 +76,13 @@ export function MemoryMatchModal() {
               </section>
             </div>
             <footer class="flex justify-center shrink-0">
-              <Button onClick={() => setStore("pairMatchId", null)}>
+              <Button
+                onClick={() => {
+                  setStore("pairMatchId", null);
+                  soundManager.play("click", { volume: 0.5 });
+                  soundManager.play("close", { volume: 1.5 });
+                }}
+              >
                 Fing other matches →
               </Button>
             </footer>

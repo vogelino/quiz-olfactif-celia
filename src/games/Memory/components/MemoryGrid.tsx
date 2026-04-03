@@ -1,11 +1,13 @@
-import { For, createEffect } from "solid-js";
+import { For, batch, createEffect } from "solid-js";
 import { ingredientIdToPair, memoryPairs } from "~/data/memory";
 import { MemoryCard } from "./MemoryCard";
 import { IngredientId } from "~/data/ingredients";
 import { useMemoryStore } from "../store";
+import { useSoundManager } from "~/utils/SoundManager";
 
 export function MemoryGrid() {
   const [store, setStore] = useMemoryStore();
+  const soundManager = useSoundManager();
 
   const onCardRevealToggle = (ingredientId: IngredientId) => {
     const pair = ingredientIdToPair(ingredientId);
@@ -16,6 +18,7 @@ export function MemoryGrid() {
 
     if (store.currentTurn.length === 2) {
       setStore("currentTurn", [ingredientId]);
+      soundManager.play("flip");
       return;
     }
 
@@ -27,10 +30,18 @@ export function MemoryGrid() {
       const pair2 = ingredientIdToPair(newTurn[1]);
 
       if (pair1 && pair2 && pair1.id === pair2.id) {
-        setStore("discoveredPairs", (prev) => [...prev, pair1.id]);
-        setStore("currentTurn", []);
-        setStore("pairMatchId", pair1.id);
+        batch(() => {
+          setStore("discoveredPairs", (prev) => [...prev, pair1.id]);
+          setStore("currentTurn", []);
+          setStore("pairMatchId", pair1.id);
+        });
+        soundManager.play("match");
+        soundManager.play("click");
+      } else {
+        soundManager.play("flip");
       }
+    } else {
+      soundManager.play("flip");
     }
   };
 
