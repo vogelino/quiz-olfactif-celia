@@ -3,6 +3,7 @@ import { MemoryPair } from "~/data/memory";
 import { idToMolecule } from "~/data/molecules";
 import { cn } from "~/utils/cn";
 import { MemoryMatchModalCard } from "./MemoryMatchModalCard";
+import { Button } from "../ui/Button";
 
 type MemoryMatchModalProps = MemoryPair & {
   onClose: () => void;
@@ -68,12 +69,7 @@ export function MemoryMatchModal({
         </section>
       </div>
       <footer class="flex justify-center shrink-0">
-        <button
-          onClick={onClose}
-          class="px-4 py-2 rounded bg-black text-white hover:bg-neutral-800 cursor-pointer"
-        >
-          Fing other matches →
-        </button>
+        <Button onClick={onClose}>Fing other matches →</Button>
       </footer>
     </dialog>
   );

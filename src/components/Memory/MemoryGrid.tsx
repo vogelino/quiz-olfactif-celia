@@ -1,5 +1,5 @@
-import { For, createSignal, onMount } from "solid-js";
-import { ingredientIdToPair, MemoryPairId } from "~/data/memory";
+import { For, createEffect, createSignal, onMount } from "solid-js";
+import { ingredientIdToPair, MemoryPairId, memoryPairs } from "~/data/memory";
 import { MemoryCard } from "./MemoryCard";
 import { createStore } from "solid-js/store";
 import { Ingredient, IngredientId, ingredients } from "~/data/ingredients";
@@ -12,6 +12,7 @@ type StoreType = {
 
 type MemoryGridProps = {
   onPairFound: (pairId: MemoryPairId) => void;
+  onGridComplete: () => void;
   inert?: boolean;
 };
 
@@ -51,7 +52,11 @@ const shuffleCards = (source: CardModel[]) => {
   }));
 };
 
-export function MemoryGrid({ onPairFound, inert = false }: MemoryGridProps) {
+export function MemoryGrid({
+  onPairFound,
+  onGridComplete,
+  inert = false,
+}: MemoryGridProps) {
   const [store, setStore] = createStore<StoreType>({
     currentTurn: [],
     discoveredPairs: [],
@@ -88,6 +93,12 @@ export function MemoryGrid({ onPairFound, inert = false }: MemoryGridProps) {
       }
     }
   };
+
+  createEffect(() => {
+    if (memoryPairs.length === store.discoveredPairs.length) {
+      onGridComplete();
+    }
+  });
 
   return (
     <div
