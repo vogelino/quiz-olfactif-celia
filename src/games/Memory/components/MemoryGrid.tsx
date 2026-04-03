@@ -29,7 +29,7 @@ export function MemoryGrid() {
       if (pair1 && pair2 && pair1.id === pair2.id) {
         setStore("discoveredPairs", (prev) => [...prev, pair1.id]);
         setStore("currentTurn", []);
-        setStore("pairMatch", pair1);
+        setStore("pairMatchId", pair1.id);
       }
     }
   };
@@ -43,7 +43,7 @@ export function MemoryGrid() {
   return (
     <div
       class="flex h-screen w-screen items-center justify-center perspective-midrange"
-      inert={!!store.pairMatch}
+      inert={!!store.pairMatchId}
     >
       <div class="grid grid-cols-4 gap-6 size-[70vh]">
         <For each={store.cards}>

@@ -1,9 +1,13 @@
 import { MemoryGrid } from "./MemoryGrid";
-import { Match, Show, Switch } from "solid-js";
+import { createSignal, Match, Show, Switch } from "solid-js";
 import { MemoryMatchModal } from "./MemoryMatchModal";
 import { MemoryStart } from "./MemoryStart";
 import { MemoryEnd } from "./MemoryEnd";
-import { MemoryStoreProvider, useMemoryStore } from "../store";
+import {
+  createMemoryStore,
+  MemoryStoreProvider,
+  useMemoryStore,
+} from "../store";
 import { MemoryDebugger } from "./MemoryDebugger";
 
 function MemoryInner() {
@@ -14,13 +18,13 @@ function MemoryInner() {
         <Match when={store.status === "initial"}>
           <MemoryStart />
         </Match>
-        <Match when={store.status === "started" && !store.pairMatch}>
+        <Match when={store.status === "started" && !store.pairMatchId}>
           <MemoryGrid />
         </Match>
-        <Match when={store.status !== "initial" && store.pairMatch}>
+        <Match when={store.status !== "initial" && store.pairMatchId}>
           <MemoryMatchModal />
         </Match>
-        <Match when={store.status === "complete" && !store.pairMatch}>
+        <Match when={store.status === "complete" && !store.pairMatchId}>
           <MemoryEnd />
         </Match>
       </Switch>
@@ -33,7 +37,7 @@ function MemoryInner() {
 
 export function Memory() {
   return (
-    <MemoryStoreProvider>
+    <MemoryStoreProvider value={createMemoryStore()}>
       <MemoryInner />
     </MemoryStoreProvider>
   );

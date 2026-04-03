@@ -30,7 +30,7 @@ export function MemoryEnd() {
               setStore("cards", getShuffledCards());
               setStore("currentTurn", []);
               setStore("discoveredPairs", []);
-              setStore("pairMatch", null);
+              setStore("pairMatchId", null);
               setStore("status", "initial");
             });
           }}
