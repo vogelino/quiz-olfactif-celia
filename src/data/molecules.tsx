@@ -54,7 +54,7 @@ const benzaldehyde = {
 
 const calone = {
   id: "calone",
-  title: "Calone (7-Methyl-2H-1,5-benzodioxepin-3(4H)-one)",
+  title: "Calone",
   pubChemId: 6432154,
   colorClass: "bg-cyan-500",
   referenceLinks: [

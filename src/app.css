@@ -16,3 +16,9 @@ body {
     background: rgb(var(--background-rgb));
     color: rgb(var(--foreground-rgb));
 }
+
+@layer utilities {
+    .absolute-full {
+        @apply absolute inset-0 size-full;
+    }
+}
