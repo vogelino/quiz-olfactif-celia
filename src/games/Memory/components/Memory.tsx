@@ -16,23 +16,38 @@ import {
   useMemoryStore,
 } from "../store";
 import { MemoryDebugger } from "./MemoryDebugger";
-import { useSoundManager } from "~/utils/SoundManager";
+import { LoadProgress, useSoundManager } from "~/utils/SoundManager";
 import { SoundControl } from "~/components/SoundControl";
+import { MemoryLoading } from "./MemoryLoading";
 
 function MemoryInner() {
   const [store, setStore] = useMemoryStore();
   const manager = useSoundManager();
+  const [progress, setProgress] = createSignal<LoadProgress>({
+    soundsCompleted: 0,
+    totalSounds: 0,
+    bytesLoaded: 0,
+    totalBytes: 0,
+    percentage: 0,
+  });
 
   onMount(async () => {
     try {
-      await manager.loadSounds({
-        click: "/sounds/click-1.mp3",
-        close: "/sounds/close-1.m4a",
-        match: "/sounds/match-1.mp3",
-        success: "/sounds/success-1.mp3",
-        flip: "/sounds/flip-1.m4a",
-        music: "/sounds/music-1.mp3",
-      });
+      await manager.loadSounds(
+        {
+          click: "/sounds/click-1.mp3",
+          close: "/sounds/close-1.m4a",
+          match: "/sounds/match-1.mp3",
+          success: "/sounds/success-1.mp3",
+          flip: "/sounds/flip-1.m4a",
+          music: "/sounds/music-1.mp3",
+        },
+        (loadProgress) =>
+          setProgress((prev) => ({
+            ...loadProgress,
+            percentage: Math.max(prev.percentage, loadProgress.percentage),
+          })),
+      );
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : "Unknown error";
       setStore("error", errorMessage);
@@ -48,6 +63,9 @@ function MemoryInner() {
       <SoundControl />
       <Show when={!!store.error}>{store.error}</Show>
       <Switch>
+        <Match when={store.status === "loading"}>
+          <MemoryLoading percentage={progress().percentage} />
+        </Match>
         <Match when={store.status === "initial"}>
           <MemoryStart />
         </Match>

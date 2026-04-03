@@ -53,7 +53,7 @@ export function MemoryGrid() {
 
   return (
     <div
-      class="flex h-screen w-screen items-center justify-center perspective-midrange"
+      class="flex h-screen w-screen items-center justify-center perspective-midrange bg-muted"
       inert={!!store.pairMatchId}
     >
       <div class="grid grid-cols-4 gap-6 size-[70vh]">

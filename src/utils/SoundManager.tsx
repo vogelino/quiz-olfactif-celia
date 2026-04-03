@@ -6,12 +6,26 @@ interface PlayOptions {
   playbackRate?: number;
 }
 
+export type LoadProgress = {
+  soundsCompleted: number;
+  totalSounds: number;
+  bytesLoaded: number;
+  totalBytes: number;
+  percentage: number;
+};
+
 export class SoundManager {
   private context: AudioContext;
   private buffers: Map<string, AudioBuffer>;
   private activeSources: Set<AudioBufferSourceNode>;
   private masterGain: GainNode;
   private loopingSources: Map<string, AudioBufferSourceNode> = new Map();
+
+  // Progress tracking
+  private totalBytes: number = 0;
+  private bytesLoaded: number = 0;
+  private soundsCompleted: number = 0;
+  private totalSounds: number = 0;
 
   constructor() {
     this.context = new (window.AudioContext ||
@@ -24,29 +38,136 @@ export class SoundManager {
     this.masterGain.connect(this.context.destination);
   }
 
-  async loadSound(name: string, url: string): Promise<void> {
-    try {
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error(`Failed to fetch ${url}: ${response.statusText}`);
-      }
+  private async fetchWithProgress(
+    url: string,
+    onProgress?: (loaded: number, total: number) => void,
+  ): Promise<ArrayBuffer> {
+    const response = await fetch(url);
 
-      const arrayBuffer = await response.arrayBuffer();
-      const audioBuffer = await this.context.decodeAudioData(arrayBuffer);
-      this.buffers.set(name, audioBuffer);
-    } catch (error) {
-      console.error(`Failed to load sound "${name}":`, error);
-      throw error;
+    if (!response.ok) {
+      throw new Error(`Failed to fetch ${url}: ${response.statusText}`);
     }
+
+    // Get total file size
+    const contentLength = response.headers.get("content-length");
+    const total = contentLength ? parseInt(contentLength, 10) : 0;
+
+    if (!response.body) {
+      throw new Error("Response body is empty");
+    }
+
+    const reader = response.body.getReader();
+    const chunks: Uint8Array[] = [];
+    let loaded = 0;
+
+    try {
+      while (true) {
+        const { done, value } = await reader.read();
+
+        if (done) break;
+
+        chunks.push(value);
+        loaded += value.length;
+
+        if (onProgress) {
+          onProgress(loaded, total);
+        }
+      }
+    } finally {
+      reader.releaseLock();
+    }
+
+    // Combine chunks into single ArrayBuffer
+    const chunksAll = new Uint8Array(loaded);
+    let position = 0;
+    for (const chunk of chunks) {
+      chunksAll.set(chunk, position);
+      position += chunk.length;
+    }
+
+    return chunksAll.buffer;
   }
 
-  async loadSounds(sounds: Record<string, string>): Promise<void> {
-    const promises = Object.entries(sounds).map(([name, url]) =>
-      this.loadSound(name, url),
+  async loadSounds(
+    sounds: Record<string, string>,
+    onProgress?: (progress: LoadProgress) => void,
+  ): Promise<void> {
+    this.totalSounds = Object.keys(sounds).length;
+    this.soundsCompleted = 0;
+    this.bytesLoaded = 0;
+    this.totalBytes = 0;
+
+    // First pass: get total file sizes
+    const soundUrls = Object.entries(sounds);
+    const sizes = await Promise.all(
+      soundUrls.map(async ([_, url]) => {
+        try {
+          const response = await fetch(url, { method: "HEAD" });
+          const contentLength = response.headers.get("content-length");
+          return contentLength ? parseInt(contentLength, 10) : 0;
+        } catch {
+          return 0;
+        }
+      }),
     );
+
+    this.totalBytes = sizes.reduce((sum, size) => sum + size, 0);
+
+    // Second pass: load sounds with progress
+    const promises = soundUrls.map(async ([name, url], index) => {
+      try {
+        const arrayBuffer = await this.fetchWithProgress(
+          url,
+          (loaded, total) => {
+            // Update progress
+            const previousLoaded = sizes
+              .slice(0, index)
+              .reduce((sum, size) => sum + size, 0);
+            this.bytesLoaded = previousLoaded + loaded;
+
+            if (onProgress) {
+              const percentage =
+                this.totalBytes > 0
+                  ? Math.round((this.bytesLoaded / this.totalBytes) * 100)
+                  : 0;
+
+              onProgress({
+                soundsCompleted: this.soundsCompleted,
+                totalSounds: this.totalSounds,
+                bytesLoaded: this.bytesLoaded,
+                totalBytes: this.totalBytes,
+                percentage,
+              });
+            }
+          },
+        );
+
+        const audioBuffer = await this.context.decodeAudioData(arrayBuffer);
+        this.buffers.set(name, audioBuffer);
+        this.soundsCompleted++;
+      } catch (error) {
+        console.error(`Failed to load sound "${name}":`, error);
+        throw error;
+      }
+    });
+
     await Promise.all(promises);
   }
 
+  getLoadProgress(): LoadProgress {
+    const percentage =
+      this.totalBytes > 0
+        ? Math.round((this.bytesLoaded / this.totalBytes) * 100)
+        : 0;
+
+    return {
+      soundsCompleted: this.soundsCompleted,
+      totalSounds: this.totalSounds,
+      bytesLoaded: this.bytesLoaded,
+      totalBytes: this.totalBytes,
+      percentage,
+    };
+  }
   play(name: string, options: PlayOptions = {}): AudioBufferSourceNode | null {
     const buffer = this.buffers.get(name);
     if (!buffer) {

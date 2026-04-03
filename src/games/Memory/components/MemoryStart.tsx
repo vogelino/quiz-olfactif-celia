@@ -20,7 +20,7 @@ export function MemoryStart() {
       <div
         class={cn(
           "flex items-center justify-center flex-col gap-6",
-          "bg-background py-16 px-20 rounded-lg",
+          "py-16 px-20 rounded-lg",
         )}
       >
         <h1 class="text-7xl font-bold text-center font-headline">
