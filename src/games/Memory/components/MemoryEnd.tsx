@@ -1,10 +1,12 @@
 import { cn } from "~/utils/cn";
-import { Button } from "../ui/Button";
+import { Button } from "../../../components/ui/Button";
+import { useMemoryStore } from "../store";
+import { batch } from "solid-js";
+import { getShuffledCards } from "../utils/cards";
 
-type MemoryEndProps = {
-  onReStart: () => void;
-};
-export function MemoryEnd({ onReStart }: MemoryEndProps) {
+export function MemoryEnd() {
+  const [, setStore] = useMemoryStore();
+
   return (
     <div
       class={cn(
@@ -22,7 +24,18 @@ export function MemoryEnd({ onReStart }: MemoryEndProps) {
         <p class="text-4xl max-w-xl leading-snug mb-12 text-center text-balance">
           Well done! You've beaten the game like a professional perfumer.
         </p>
-        <Button onClick={onReStart} class="text-lg">
+        <Button
+          onClick={() => {
+            batch(() => {
+              setStore("cards", getShuffledCards());
+              setStore("currentTurn", []);
+              setStore("discoveredPairs", []);
+              setStore("pairMatch", null);
+              setStore("status", "initial");
+            });
+          }}
+          class="text-lg"
+        >
           Play again
         </Button>
       </div>

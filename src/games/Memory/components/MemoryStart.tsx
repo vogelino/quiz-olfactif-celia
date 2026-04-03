@@ -1,10 +1,9 @@
 import { cn } from "~/utils/cn";
-import { Button } from "../ui/Button";
+import { Button } from "../../../components/ui/Button";
+import { useMemoryStore } from "../store";
 
-type MemoryStartProps = {
-  onStart: () => void;
-};
-export function MemoryStart({ onStart }: MemoryStartProps) {
+export function MemoryStart() {
+  const [, setStore] = useMemoryStore();
   return (
     <div
       class={cn(
@@ -25,7 +24,7 @@ export function MemoryStart({ onStart }: MemoryStartProps) {
           Find pairs of raw material cards and discover what they have in
           common!
         </p>
-        <Button onClick={onStart} class="text-lg">
+        <Button onClick={() => setStore("status", "started")} class="text-lg">
           Start Finding Matches
         </Button>
       </div>

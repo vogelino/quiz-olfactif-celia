@@ -20,9 +20,8 @@ export function MemoryCard({
   onToggleReveal,
   rotateLeft,
 }: MemoryCardProps) {
-  const absoluteFull = cn("absolute inset-0 size-full rounded aspect-square");
   const innerCommonClasses = cn(
-    absoluteFull,
+    "absolute-full rounded aspect-square",
     "transition-transform shadow backface-hidden",
     "pointer-events-none select-none",
   );
@@ -52,18 +51,22 @@ export function MemoryCard({
           <img
             src={illustration}
             aria-label={`Illustration of ${title}`}
-            class="size-16 aspect-square object-contain opacity-40"
+            class="size-16 aspect-square object-contain opacity-70"
           />
           <Show when={!pairIsDiscovered()}>
             <img
               src="/memory/card-front.webp"
-              class={cn(absoluteFull, "-z-20")}
+              class={cn("absolute-full aspect-square rounded", "-z-20")}
               aria-hidden="true"
             />
           </Show>
           <div
             aria-hidden="true"
-            class={cn(absoluteFull, "z-10 mix-blend-color-burn", colorClass)}
+            class={cn(
+              "absolute-full aspect-square rounded",
+              "z-10 mix-blend-color",
+              colorClass,
+            )}
           />
         </div>
       </div>

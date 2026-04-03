@@ -24,7 +24,7 @@ export function MemoryMatchModalCard({
       <img
         src={illustration}
         aria-title={title}
-        class={cn("absolute-full", "size-full scale-50 opacity-40")}
+        class={cn("absolute-full", "size-full scale-50 opacity-70")}
       />
       <img
         src="/memory/card-front.webp"
@@ -33,7 +33,7 @@ export function MemoryMatchModalCard({
       />
       <div
         aria-hidden="true"
-        class={cn("absolute-full", "z-10 mix-blend-color-burn", colorClass)}
+        class={cn("absolute-full", "z-10 mix-blend-color", colorClass)}
       />
     </div>
   );

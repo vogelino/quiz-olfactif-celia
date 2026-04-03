@@ -1,25 +1,20 @@
 import { idToIngredient } from "~/data/ingredients";
-import { MemoryPair } from "~/data/memory";
 import { idToMolecule } from "~/data/molecules";
 import { cn } from "~/utils/cn";
 import { MemoryMatchModalCard } from "./MemoryMatchModalCard";
-import { Button } from "../ui/Button";
+import { Button } from "../../../components/ui/Button";
+import { useMemoryStore } from "../store";
 
-type MemoryMatchModalProps = MemoryPair & {
-  onClose: () => void;
-};
+export function MemoryMatchModal() {
+  const [store, setStore] = useMemoryStore();
 
-export function MemoryMatchModal({
-  onClose,
-  ingredients,
-  molecule: moleculeId,
-  description,
-}: MemoryMatchModalProps) {
+  if (store.pairMatch === null) return;
+
   let modal!: HTMLDialogElement;
-  const ingredientA = idToIngredient[ingredients[0]];
-  const ingredientB = idToIngredient[ingredients[1]];
-  const molecule = idToMolecule[moleculeId];
-  const absoluteFull = cn("absolute inset-0 size-full rounded aspect-square");
+  const ingredientA = idToIngredient[store.pairMatch.ingredients[0]];
+  const ingredientB = idToIngredient[store.pairMatch.ingredients[1]];
+  const molecule = idToMolecule[store.pairMatch.molecule];
+
   return (
     <dialog
       id="memory-match-modal"
@@ -39,7 +34,9 @@ export function MemoryMatchModal({
             class="h-12"
           />
         </h3>
-        <p class="mt-4 max-w-prose text-center text-lg">{description}</p>
+        <p class="mt-4 max-w-prose text-center text-lg">
+          {store.pairMatch.description}
+        </p>
       </div>
       <div class="grow flex flex-col self-stretch h-full contain-size relative">
         <section
@@ -69,7 +66,9 @@ export function MemoryMatchModal({
         </section>
       </div>
       <footer class="flex justify-center shrink-0">
-        <Button onClick={onClose}>Fing other matches →</Button>
+        <Button onClick={() => setStore("pairMatch", null)}>
+          Fing other matches →
+        </Button>
       </footer>
     </dialog>
   );
