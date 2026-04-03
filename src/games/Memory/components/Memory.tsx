@@ -17,6 +17,7 @@ import {
 } from "../store";
 import { MemoryDebugger } from "./MemoryDebugger";
 import { useSoundManager } from "~/utils/SoundManager";
+import { SoundControl } from "~/components/SoundControl";
 
 function MemoryInner() {
   const [store, setStore] = useMemoryStore();
@@ -44,6 +45,7 @@ function MemoryInner() {
 
   return (
     <>
+      <SoundControl />
       <Show when={!!store.error}>{store.error}</Show>
       <Switch>
         <Match when={store.status === "initial"}>

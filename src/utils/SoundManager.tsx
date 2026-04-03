@@ -103,6 +103,7 @@ export class SoundManager {
   }
 
   setMasterVolume(volume: number): void {
+    console.log("SOUND SET TO", volume);
     this.masterGain.gain.value = Math.max(0, Math.min(1, volume));
   }
 
