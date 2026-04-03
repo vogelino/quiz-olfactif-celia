@@ -116,5 +116,12 @@ export const memoryPairs = Object.values(
 export type MemoryPairId = keyof typeof idToMemoryPair;
 export type MemoryPair = (typeof memoryPairs)[number];
 
-export const ingredientIdToPair = (id: IngredientId) =>
-  memoryPairs.find((m) => m.ingredients.find((i) => i === id));
+const ingredientPairEntries = memoryPairs.flatMap((pair) =>
+  pair.ingredients.map((ingredientId) => [ingredientId, pair] as const),
+);
+
+const ingredientToPair = Object.fromEntries(
+  ingredientPairEntries,
+) as Record<IngredientId, MemoryPair>;
+
+export const ingredientIdToPair = (id: IngredientId) => ingredientToPair[id];
