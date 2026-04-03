@@ -1,9 +1,20 @@
 @import "tailwindcss";
 
+@font-face {
+    font-family: "Pouler";
+    src:
+        url("/fonts/pouler/Pouler.woff2") format("woff2"),
+        url("/fonts/pouler/Pouler.woff") format("woff"),
+        url("/fonts/pouler/Pouler.otf") format("opentype");
+    font-weight: 300-900;
+    font-style: normal, italic;
+}
+
 @theme {
     --color-background: rgb(255 255 255);
     --color-foreground: rgb(0 0 0);
     --color-muted: rgb(245 245 245);
+    --font-headline: "Pouler", sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {

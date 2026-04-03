@@ -13,6 +13,9 @@ app.config.timestamp_*.js
 # dependencies
 /node_modules
 
+# Fonts
+public/fonts/pouler
+
 # IDEs and editors
 /.idea
 .project

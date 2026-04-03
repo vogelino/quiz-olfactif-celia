@@ -33,7 +33,9 @@ export function MemoryMatchModal() {
             )}
           >
             <div class="flex flex-col items-center shrink-0 gap-4">
-              <h2 class="text-7xl font-bold text-center">It's a Match!</h2>
+              <h2 class="text-7xl font-bold text-center font-headline">
+                It's a Match!
+              </h2>
               <h3 class="text-5xl flex flex-col gap-5 items-center">
                 <span>{molecule().title}</span>
                 <img

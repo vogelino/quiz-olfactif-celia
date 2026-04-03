@@ -23,7 +23,7 @@ export function MemoryStart() {
           "bg-background py-16 px-20 rounded-lg",
         )}
       >
-        <h1 class="text-7xl font-bold text-center">
+        <h1 class="text-7xl font-bold text-center font-headline">
           The Olfactive Memory Game!
         </h1>
         <p class="text-4xl max-w-xl leading-snug mb-12 text-center text-balance">

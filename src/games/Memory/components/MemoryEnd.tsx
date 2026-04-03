@@ -27,7 +27,9 @@ export function MemoryEnd() {
           "bg-background py-16 px-20 rounded-lg",
         )}
       >
-        <h1 class="text-7xl font-bold text-center">You found them all!</h1>
+        <h1 class="text-7xl font-bold text-center font-headline">
+          You found them all!
+        </h1>
         <p class="text-4xl max-w-xl leading-snug mb-12 text-center text-balance">
           Well done! You've beaten the game like a professional perfumer.
         </p>
