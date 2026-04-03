@@ -1,4 +1,5 @@
 import { ClassValue } from "clsx";
+import { Show } from "solid-js";
 import { Ingredient } from "~/data/ingredients";
 import { cn } from "~/utils/cn";
 
@@ -45,6 +46,7 @@ export function MemoryCard({
           class={cn(
             "size-full aspect-square relative",
             "flex items-center justify-center",
+            pairIsDiscovered() && "bg-white",
           )}
         >
           <img
@@ -52,11 +54,13 @@ export function MemoryCard({
             aria-label={`Illustration of ${title}`}
             class="size-16 aspect-square object-contain opacity-40"
           />
-          <img
-            src="/memory/card-front.webp"
-            class={cn(absoluteFull, "-z-20")}
-            aria-hidden="true"
-          />
+          <Show when={!pairIsDiscovered()}>
+            <img
+              src="/memory/card-front.webp"
+              class={cn(absoluteFull, "-z-20")}
+              aria-hidden="true"
+            />
+          </Show>
           <div
             aria-hidden="true"
             class={cn(absoluteFull, "z-10 mix-blend-color-burn", colorClass)}
