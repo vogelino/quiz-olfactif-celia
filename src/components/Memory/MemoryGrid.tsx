@@ -5,15 +5,14 @@ import { createStore } from "solid-js/store";
 import { Ingredient, IngredientId, ingredients } from "~/data/ingredients";
 import { idToMolecule } from "~/data/molecules";
 
-type StoreType = {
-  currentTurn: IngredientId[];
-  discoveredPairs: MemoryPairId[];
-};
-
 type MemoryGridProps = {
   onPairFound: (pairId: MemoryPairId) => void;
   onGridComplete: () => void;
   inert?: boolean;
+  currentTurn: IngredientId[];
+  discoveredPairs: MemoryPairId[];
+  onTurnChange: (newState: IngredientId[]) => void;
+  onPairDiscovered: (newPair: MemoryPairId) => void;
 };
 
 type CardModel = {
@@ -56,11 +55,11 @@ export function MemoryGrid({
   onPairFound,
   onGridComplete,
   inert = false,
+  currentTurn,
+  discoveredPairs,
+  onTurnChange,
+  onPairDiscovered,
 }: MemoryGridProps) {
-  const [store, setStore] = createStore<StoreType>({
-    currentTurn: [],
-    discoveredPairs: [],
-  });
   const [cards, setCards] = createSignal(createCards(ingredients));
 
   onMount(() => {
@@ -71,31 +70,31 @@ export function MemoryGrid({
     const pair = ingredientIdToPair(ingredientId);
     if (!pair) return;
 
-    if (store.currentTurn.includes(ingredientId)) return;
-    if (store.discoveredPairs.includes(pair.id)) return;
+    if (currentTurn.includes(ingredientId)) return;
+    if (discoveredPairs.includes(pair.id)) return;
 
-    if (store.currentTurn.length === 2) {
-      setStore("currentTurn", [ingredientId]);
+    if (currentTurn.length === 2) {
+      onTurnChange([ingredientId]);
       return;
     }
 
-    const newTurn = [...store.currentTurn, ingredientId];
-    setStore("currentTurn", newTurn);
+    const newTurn = [...currentTurn, ingredientId];
+    onTurnChange(newTurn);
 
     if (newTurn.length === 2) {
       const pair1 = ingredientIdToPair(newTurn[0]);
       const pair2 = ingredientIdToPair(newTurn[1]);
 
       if (pair1 && pair2 && pair1.id === pair2.id) {
-        setStore("discoveredPairs", (prev) => [...prev, pair1.id]);
-        setStore("currentTurn", []);
+        onPairDiscovered(pair1.id);
+        onTurnChange([]);
         onPairFound(pair1.id);
       }
     }
   };
 
   createEffect(() => {
-    if (memoryPairs.length === store.discoveredPairs.length) {
+    if (memoryPairs.length === discoveredPairs.length) {
       onGridComplete();
     }
   });
@@ -112,12 +111,10 @@ export function MemoryGrid({
               {...card.ingredient}
               colorClass={card.colorClass}
               isRevealed={() =>
-                store.currentTurn.includes(card.ingredient.id) ||
-                store.discoveredPairs.includes(card.pairId)
+                currentTurn.includes(card.ingredient.id) ||
+                discoveredPairs.includes(card.pairId)
               }
-              pairIsDiscovered={() =>
-                store.discoveredPairs.includes(card.pairId)
-              }
+              pairIsDiscovered={() => discoveredPairs.includes(card.pairId)}
               onToggleReveal={() => onCardRevealToggle(card.ingredient.id)}
               rotateLeft={card.rotateLeft}
             />

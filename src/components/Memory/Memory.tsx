@@ -6,10 +6,13 @@ import { MemoryMatchModal } from "./MemoryMatchModal";
 import { MemoryStart } from "./MemoryStart";
 import { MemoryEnd } from "./MemoryEnd";
 import { useNavigate } from "@solidjs/router";
+import { IngredientId } from "~/data/ingredients";
 
 type StoreType = {
   pairMatch: MemoryPair | null;
   status: "initial" | "started" | "complete";
+  currentTurn: IngredientId[];
+  discoveredPairs: MemoryPairId[];
 };
 
 export function Memory() {
@@ -17,6 +20,8 @@ export function Memory() {
   const [store, setStore] = createStore<StoreType>({
     pairMatch: null,
     status: "initial" as const,
+    currentTurn: [],
+    discoveredPairs: [],
   });
   const onPairFound = (pairId: MemoryPairId) => {
     const pair = idToMemoryPair[pairId];
@@ -37,6 +42,12 @@ export function Memory() {
           onPairFound={onPairFound}
           onGridComplete={onGridComplete}
           inert={showMatchModal()}
+          onPairDiscovered={(pairId) =>
+            setStore("discoveredPairs", (prev) => [...prev, pairId])
+          }
+          onTurnChange={(newTurn) => setStore("currentTurn", newTurn)}
+          currentTurn={store.currentTurn}
+          discoveredPairs={store.discoveredPairs}
         />
       </Show>
       <Show when={store.status !== "initial" && showMatchModal()}>
