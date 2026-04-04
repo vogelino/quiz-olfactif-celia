@@ -1,4 +1,5 @@
-import { Show } from "solid-js";
+import { onMount, Show } from "solid-js";
+import confetti from "@hiseb/confetti";
 import { idToIngredient } from "~/data/ingredients";
 import { idToMemoryPair } from "~/data/memory";
 import { idToMolecule } from "~/data/molecules";
@@ -17,6 +18,10 @@ export function MemoryMatchModal() {
     const pairMatchId = store.pairMatchId;
     return pairMatchId ? idToMemoryPair[pairMatchId] : null;
   };
+
+  onMount(() => {
+    confetti({});
+  });
 
   return (
     <Show when={pairMatch()}>

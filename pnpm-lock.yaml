@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@hiseb/confetti':
+        specifier: 2.1.0
+        version: 2.1.0
       '@solidjs/router':
         specifier: ^0.15.0
         version: 0.15.4(solid-js@1.9.11)
@@ -494,6 +497,9 @@ packages:
     engines: {node: '>=18'}
     cpu: [x64]
     os: [win32]
+
+  '@hiseb/confetti@2.1.0':
+    resolution: {integrity: sha512-yPalKd34NfmEsUTXj3ZrlNtj1J21WgoocDs8+92W/Quzl2j5ECuxX5L0jQp16tgvp+uIYdeNAmizP1WPyt5hfQ==}
 
   '@ioredis/commands@1.5.1':
     resolution: {integrity: sha512-JH8ZL/ywcJyR9MmJ5BNqZllXNZQqQbnVZOqpPQqE1vHiFgAw4NHbvE0FOduNU8IX9babitBT46571OnPTT0Zcw==}
@@ -3067,6 +3073,8 @@ snapshots:
 
   '@esbuild/win32-x64@0.27.3':
     optional: true
+
+  '@hiseb/confetti@2.1.0': {}
 
   '@ioredis/commands@1.5.1': {}
 
