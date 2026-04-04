@@ -44,7 +44,6 @@ export function MemoryStart() {
           onClick={() => {
             setStore("status", "started");
             soundManager.play("click");
-            soundManager.play("match");
             soundManager.playLoop("music", { volume: 0.4 });
           }}
           class="text-lg uppercase mt-6"
