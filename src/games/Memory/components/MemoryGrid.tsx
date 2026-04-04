@@ -35,7 +35,6 @@ export function MemoryGrid() {
           setStore("currentTurn", []);
           setStore("pairMatchId", pair1.id);
         });
-        soundManager.play("match");
         soundManager.play("click");
       } else {
         soundManager.play("flip");
