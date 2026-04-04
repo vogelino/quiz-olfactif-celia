@@ -1,9 +1,10 @@
 import { cn } from "~/utils/cn";
 import { Button } from "../../../components/ui/Button";
 import { useMemoryStore } from "../store";
-import { batch, onMount } from "solid-js";
+import { batch, createEffect, onMount } from "solid-js";
 import { getShuffledCards } from "../utils/cards";
 import { useSoundManager } from "~/utils/SoundManager";
+import { WavyUnderlinedText } from "~/components/ui/WavyUnderlinedText";
 
 export function MemoryEnd() {
   const [, setStore] = useMemoryStore();
@@ -23,16 +24,23 @@ export function MemoryEnd() {
     >
       <div
         class={cn(
-          "flex items-center justify-center flex-col gap-6",
-          "bg-background py-16 px-20 rounded-lg",
+          "flex items-center justify-center flex-col gap-4",
+          "py-16 px-20 rounded-lg",
         )}
       >
-        <h1 class="text-7xl font-bold text-center font-headline">
-          You found them all!
+        <h1 class="text-7xl font-bold text-center font-headline max-w-lg">
+          <span>You found</span>
+          <span> </span>
+          <span>them all!</span>
         </h1>
-        <p class="text-2xl max-w-xl leading-snug mb-12 text-center text-balance">
+        <p class="text-3xl max-w-xl text-center text-balance">
           Well done! You've beaten the game like a professional perfumer.
         </p>
+        <span class="flex gap-2">
+          <WavyUnderlinedText class="text-lg text-foreground-muted">
+            Can you finish faster?
+          </WavyUnderlinedText>
+        </span>
         <Button
           onClick={() => {
             batch(() => {
@@ -44,9 +52,10 @@ export function MemoryEnd() {
             });
             soundManager.play("click");
           }}
-          class="text-lg"
+          class="text-lg uppercase mt-6"
         >
-          Play again
+          Play <span class="tracking-wider font-headline text-base">again</span>
+          !
         </Button>
       </div>
     </div>

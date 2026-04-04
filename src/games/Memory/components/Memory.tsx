@@ -17,8 +17,9 @@ import {
 } from "../store";
 import { MemoryDebugger } from "./MemoryDebugger";
 import { LoadProgress, useSoundManager } from "~/utils/SoundManager";
-import { SoundControl } from "~/components/SoundControl";
 import { MemoryLoading } from "./MemoryLoading";
+import { GeneralControls } from "~/components/GeneralControls";
+import { MemoryRestartButton } from "./MemoryRestartButton";
 
 function MemoryInner() {
   const [store, setStore] = useMemoryStore();
@@ -60,7 +61,11 @@ function MemoryInner() {
 
   return (
     <>
-      <SoundControl />
+      <GeneralControls>
+        <Show when={["started", "complete"].includes(store.status)}>
+          <MemoryRestartButton />
+        </Show>
+      </GeneralControls>
       <Show when={!!store.error}>{store.error}</Show>
       <Switch>
         <Match when={store.status === "loading"}>

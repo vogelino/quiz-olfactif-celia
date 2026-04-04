@@ -20,10 +20,22 @@
     --font-headline: "Pouler", sans-serif;
 
     --animate-marquee: marquee 50s linear infinite;
+    --animate-wiggle: wiggle 1s both infinite;
 
     @keyframes marquee {
         to {
             translate: -50% 0;
+        }
+    }
+
+    @keyframes wiggle {
+        0%,
+        to {
+            transform: rotate(-3deg);
+        }
+
+        50% {
+            transform: rotate(3deg);
         }
     }
 }
@@ -41,6 +53,10 @@
 
 body {
     @apply bg-background text-foreground select-none;
+}
+
+.tsparticles > canvas {
+    z-index: 51 !important;
 }
 
 @layer utilities {
