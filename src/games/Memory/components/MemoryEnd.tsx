@@ -30,7 +30,7 @@ export function MemoryEnd() {
         <h1 class="text-7xl font-bold text-center font-headline">
           You found them all!
         </h1>
-        <p class="text-4xl max-w-xl leading-snug mb-12 text-center text-balance">
+        <p class="text-2xl max-w-xl leading-snug mb-12 text-center text-balance">
           Well done! You've beaten the game like a professional perfumer.
         </p>
         <Button

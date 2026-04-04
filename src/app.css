@@ -18,6 +18,14 @@
     --color-border: var(--color-neutral-300);
     --color-border-muted: var(--color-neutral-100);
     --font-headline: "Pouler", sans-serif;
+
+    --animate-marquee: marquee 50s linear infinite;
+
+    @keyframes marquee {
+        to {
+            translate: -50% 0;
+        }
+    }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -32,7 +40,7 @@
 }
 
 body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground select-none;
 }
 
 @layer utilities {

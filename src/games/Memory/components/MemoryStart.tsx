@@ -3,6 +3,7 @@ import { Button } from "../../../components/ui/Button";
 import { useMemoryStore } from "../store";
 import { useSoundManager } from "~/utils/SoundManager";
 import { onMount } from "solid-js";
+import { WavyUnderlinedText } from "~/components/ui/WavyUnderlinedText/WavyUnderlinedText";
 
 export function MemoryStart() {
   const [, setStore] = useMemoryStore();
@@ -32,14 +33,9 @@ export function MemoryStart() {
           Find pairs of raw material cards and discover what they have in
           common!
         </p>
-        <p
-          class={cn(
-            "text-lg text-foreground-muted underline decoration-wavy decoration-foreground-muted/20",
-            "underline-offset-4",
-          )}
-        >
+        <WavyUnderlinedText class="text-lg text-foreground-muted">
           Turn you sound on!
-        </p>
+        </WavyUnderlinedText>
         <Button
           onClick={() => {
             setStore("status", "started");

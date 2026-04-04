@@ -7,6 +7,7 @@ import { MemoryMatchModalCard } from "./MemoryMatchModalCard";
 import { Button } from "../../../components/ui/Button";
 import { useMemoryStore } from "../store";
 import { useSoundManager } from "~/utils/SoundManager";
+import { WavyUnderlinedText } from "~/components/ui/WavyUnderlinedText/WavyUnderlinedText";
 
 export function MemoryMatchModal() {
   const [store, setStore] = useMemoryStore();
@@ -32,19 +33,21 @@ export function MemoryMatchModal() {
               "grid grid-rows-[auto_1fr_auto] justify-center items-center gap-12",
             )}
           >
-            <div class="flex flex-col items-center shrink-0 gap-4">
+            <div class="flex flex-col items-center shrink-0 gap-3">
+              <img
+                src={`/memory/molecules/${molecule().id}.webp`}
+                aria-title={molecule().title}
+                class="h-12 dark:invert dark:mix-blend-screen mix-blend-multiply mb-4"
+              />
               <h2 class="text-7xl font-bold text-center font-headline">
                 It's a Match!
               </h2>
-              <h3 class="text-5xl flex flex-col gap-5 items-center">
-                <span>{molecule().title}</span>
-                <img
-                  src={`/memory/molecules/${molecule().id}.webp`}
-                  aria-title={molecule().title}
-                  class="h-12 dark:invert dark:mix-blend-screen mix-blend-multiply"
-                />
+              <h3 class="text-2xl flex flex-col gap-5 items-center">
+                <WavyUnderlinedText class="underline-offset-8 pb-4">
+                  {molecule().title}
+                </WavyUnderlinedText>
               </h3>
-              <p class="mt-4 max-w-prose text-center text-lg">
+              <p class="mt-4 max-w-prose text-center text-lg text-balance">
                 {pair().description}
               </p>
             </div>
@@ -68,11 +71,11 @@ export function MemoryMatchModal() {
                     className="rotate-1 w-full max-w-full max-h-full"
                   />
                 </div>
-                <strong class="text-3xl text-center">
+                <strong class="text-2xl text-center">
                   {ingredientA().title}
                 </strong>
                 <div />
-                <strong class="text-3xl text-center">
+                <strong class="text-2xl text-center">
                   {ingredientB().title}
                 </strong>
               </section>
@@ -84,8 +87,11 @@ export function MemoryMatchModal() {
                   soundManager.play("click", { volume: 0.5 });
                   soundManager.play("close", { volume: 1.5 });
                 }}
+                class="text-lg uppercase"
               >
-                Fing other matches →
+                Find{" "}
+                <span class="text-base font-headline tracking-wider">More</span>
+                !
               </Button>
             </footer>
           </dialog>
