@@ -41,7 +41,7 @@ function MemoryInner() {
           match: "/sounds/match-1.mp3",
           success: "/sounds/success-1.mp3",
           flip: "/sounds/flip-1.m4a",
-          music: "/sounds/music-1.mp3",
+          music: "/sounds/music-3.mp3",
         },
         (loadProgress) =>
           setProgress((prev) => ({

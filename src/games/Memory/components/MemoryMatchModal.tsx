@@ -90,7 +90,7 @@ export function MemoryMatchModal() {
                 onClick={() => {
                   setStore("pairMatchId", null);
                   soundManager.play("click", { volume: 0.5 });
-                  soundManager.play("close", { volume: 1.5 });
+                  soundManager.play("close");
                 }}
                 class="text-lg uppercase"
               >
