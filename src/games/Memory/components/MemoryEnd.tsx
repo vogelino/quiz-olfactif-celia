@@ -12,7 +12,6 @@ export function MemoryEnd() {
   const soundManager = useSoundManager();
 
   onMount(() => {
-    soundManager.stopAllLoops();
     soundManager.play("success");
     let positionList = [
       { x: window.innerWidth * 0.5, y: window.innerHeight * 0.6 },
@@ -20,7 +19,10 @@ export function MemoryEnd() {
       { x: window.innerWidth * 0.75, y: window.innerHeight * 0.3 },
     ];
     for (let i = 0; i < positionList.length; i++) {
-      setTimeout(() => confetti({ position: positionList[i] }), i * 250);
+      setTimeout(() => {
+        confetti({ position: positionList[i] });
+        soundManager.play("firework");
+      }, i * 250);
     }
   });
 

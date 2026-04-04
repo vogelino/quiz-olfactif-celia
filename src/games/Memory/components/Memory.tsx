@@ -38,10 +38,13 @@ function MemoryInner() {
         {
           click: "/sounds/click-1.mp3",
           close: "/sounds/close-1.m4a",
-          match: "/sounds/match-1.mp3",
+          match1: "/sounds/match-1.mp3",
+          match2: "/sounds/match-2.mp3",
+          match3: "/sounds/match-3.mp3",
           success: "/sounds/success-1.mp3",
           flip: "/sounds/flip-1.m4a",
           music: "/sounds/music-3.mp3",
+          firework: "/sounds/firework-1.mp3",
         },
         (loadProgress) =>
           setProgress((prev) => ({

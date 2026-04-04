@@ -1,4 +1,4 @@
-import { onCleanup, onMount, Show } from "solid-js";
+import { createSignal, onCleanup, onMount, Show } from "solid-js";
 import confetti from "@hiseb/confetti";
 import { idToIngredient } from "~/data/ingredients";
 import { idToMemoryPair } from "~/data/memory";
@@ -13,7 +13,6 @@ import { WavyUnderlinedText } from "~/components/ui/WavyUnderlinedText";
 export function MemoryMatchModal() {
   const [store, setStore] = useMemoryStore();
   const soundManager = useSoundManager();
-  let match: AudioBufferSourceNode | null = null;
 
   const pairMatch = () => {
     const pairMatchId = store.pairMatchId;
@@ -21,12 +20,11 @@ export function MemoryMatchModal() {
   };
 
   onMount(() => {
-    confetti({});
-    match = soundManager.play("match");
-  });
-
-  onCleanup(() => {
-    soundManager.stop(match);
+    soundManager.play(`match${Math.floor(Math.random() * 3) + 1}`);
+    setTimeout(() => {
+      confetti({});
+      soundManager.play("firework");
+    }, 250);
   });
 
   return (
