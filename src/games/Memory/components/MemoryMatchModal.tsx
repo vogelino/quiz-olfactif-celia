@@ -28,7 +28,7 @@ export function MemoryMatchModal() {
           <dialog
             id="memory-match-modal"
             class={cn(
-              "w-screen h-screen fixed inset-0 z-10 bg-muted text-foreground pt-12 pb-16 px-12",
+              "w-screen h-screen fixed inset-0 z-10 bg-background-muted text-foreground pt-12 pb-16 px-12",
               "grid grid-rows-[auto_1fr_auto] justify-center items-center gap-12",
             )}
           >

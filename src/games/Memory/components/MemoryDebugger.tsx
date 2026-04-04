@@ -36,7 +36,7 @@ export function MemoryDebugger() {
         }
         class={cn(
           "font-bold uppercase tracking-wide cursor-pointer",
-          "flex justify-between gap-4 p-2 hover:bg-muted",
+          "flex justify-between gap-4 p-2 hover:bg-background-muted",
           "transition",
         )}
       >
@@ -53,10 +53,10 @@ export function MemoryDebugger() {
                 <button
                   class={cn(
                     "flex-1 rounded px-1 py-0.5 text-xs font-medium transition-colors",
-                    "cursor-pointer border border-muted",
+                    "cursor-pointer border border-border",
                     store.status === s
                       ? "bg-foreground text-background border-foreground"
-                      : "bg-background hover:bg-muted",
+                      : "bg-background hover:bg-background-muted",
                   )}
                   onClick={() => {
                     batch(() => {
@@ -91,9 +91,9 @@ export function MemoryDebugger() {
                   <div class="grid grid-cols-[1fr_auto] gap-1">
                     <button
                       class={cn(
-                        "w-full border border-muted",
+                        "w-full border border-border",
                         "rounded px-2 py-0.5 text-left text-xs transition-colors truncate",
-                        "bg-background hover:bg-muted cursor-pointer",
+                        "bg-background hover:bg-background-muted cursor-pointer",
                         isActive(pair.id) &&
                           "bg-foreground text-background hover:bg-foreground border-foreground",
                       )}
@@ -112,9 +112,9 @@ export function MemoryDebugger() {
                     <Show when={!modalIsOpened()}>
                       <button
                         class={cn(
-                          "w-20 border border-muted",
+                          "w-20 border border-border",
                           "rounded px-2 py-0.5 text-center text-xs transition-colors",
-                          "bg-background hover:bg-muted cursor-pointer",
+                          "bg-background hover:bg-background-muted cursor-pointer",
                           isDiscovered(pair.id) &&
                             "bg-foreground text-background hover:bg-foreground border-foreground",
                         )}

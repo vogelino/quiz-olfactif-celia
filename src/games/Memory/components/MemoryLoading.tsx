@@ -6,7 +6,7 @@ type MemoryLoadingProps = {
 
 export function MemoryLoading(props: MemoryLoadingProps) {
   return (
-    <div class={cn("fixed w-screen h-screen inset-0 bg-muted z-10")}>
+    <div class={cn("fixed w-screen h-screen inset-0 bg-background-muted z-10")}>
       <div
         class={cn(
           "w-screen h-screen relative",

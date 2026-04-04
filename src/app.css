@@ -11,17 +11,23 @@
 }
 
 @theme {
-    --color-background: rgb(255 255 255);
-    --color-foreground: rgb(0 0 0);
-    --color-muted: rgb(245 245 245);
+    --color-background: var(--color-white);
+    --color-foreground: var(--color-black);
+    --color-background-muted: var(--color-neutral-50);
+    --color-foreground-muted: var(--color-neutral-500);
+    --color-border: var(--color-neutral-300);
+    --color-border-muted: var(--color-neutral-100);
     --font-headline: "Pouler", sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --color-background: rgb(0 0 0);
-        --color-foreground: rgb(255 255 255);
-        --color-muted: rgb(30 30 30);
+        --color-background: var(--color-black);
+        --color-foreground: var(--color-white);
+        --color-background-muted: var(--color-neutral-950);
+        --color-foreground-muted: var(--color-neutral-300);
+        --color-border: var(--color-neutral-700);
+        --color-border-muted: var(--color-neutral-900);
     }
 }
 

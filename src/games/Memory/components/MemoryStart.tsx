@@ -19,16 +19,26 @@ export function MemoryStart() {
     >
       <div
         class={cn(
-          "flex items-center justify-center flex-col gap-6",
+          "flex items-center justify-center flex-col gap-4",
           "py-16 px-20 rounded-lg",
         )}
       >
-        <h1 class="text-7xl font-bold text-center font-headline">
-          The Olfactive Memory Game!
+        <h1 class="text-7xl font-bold text-center font-headline max-w-xl">
+          <span>The Olfactive</span>
+          <span> </span>
+          <span>Memory Game!</span>
         </h1>
-        <p class="text-4xl max-w-xl leading-snug mb-12 text-center text-balance">
+        <p class="text-3xl max-w-xl text-center text-balance">
           Find pairs of raw material cards and discover what they have in
           common!
+        </p>
+        <p
+          class={cn(
+            "text-lg text-foreground-muted underline decoration-wavy decoration-foreground-muted/20",
+            "underline-offset-4",
+          )}
+        >
+          Turn you sound on!
         </p>
         <Button
           onClick={() => {
@@ -37,9 +47,10 @@ export function MemoryStart() {
             soundManager.play("match");
             soundManager.playLoop("music", { volume: 0.4 });
           }}
-          class="text-lg"
+          class="text-lg uppercase mt-6"
         >
-          Start Finding Matches
+          Get <span class="font-headline tracking-wide text-base">Started</span>
+          !
         </Button>
       </div>
     </div>
