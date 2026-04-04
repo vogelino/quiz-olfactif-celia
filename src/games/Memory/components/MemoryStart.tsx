@@ -3,7 +3,7 @@ import { Button } from "../../../components/ui/Button";
 import { useMemoryStore } from "../store";
 import { useSoundManager } from "~/utils/SoundManager";
 import { onMount } from "solid-js";
-import { WavyUnderlinedText } from "~/components/ui/WavyUnderlinedText/WavyUnderlinedText";
+import { WavyUnderlinedText } from "~/components/ui/WavyUnderlinedText";
 
 export function MemoryStart() {
   const [, setStore] = useMemoryStore();

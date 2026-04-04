@@ -23,7 +23,7 @@ export function MemoryMatchModalCard(props: MemoryMatchModalCardProps) {
   return (
     <div
       class={cn(
-        "aspect-square rounded-xl shadow relative overflow-clip",
+        "aspect-square rounded-xl shadow-lg relative",
         "shrink flex items-center justify-center",
         props.className,
       )}
@@ -44,7 +44,7 @@ export function MemoryMatchModalCard(props: MemoryMatchModalCardProps) {
       <div
         aria-hidden="true"
         class={cn(
-          "absolute-full rounded-xl",
+          "absolute inset-px rounded-xl",
           "z-10 mix-blend-color",
           molecule()?.colorClass,
         )}
