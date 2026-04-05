@@ -24,7 +24,7 @@ export function MemoryMatchModalCard(props: MemoryMatchModalCardProps) {
     <div
       class={cn(
         "aspect-square rounded-xl shadow-lg relative",
-        "shrink flex items-center justify-center",
+        "flex items-center justify-center",
         props.className,
       )}
     >
@@ -49,6 +49,9 @@ export function MemoryMatchModalCard(props: MemoryMatchModalCardProps) {
           molecule()?.colorClass,
         )}
       />
+      <span class="absolute -bottom-16 left-1/2 -translate-x-1/2 text-3xl uppercase font-bold whitespace-nowrap">
+        {ingredient().title}
+      </span>
     </div>
   );
 }

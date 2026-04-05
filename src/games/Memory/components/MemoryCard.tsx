@@ -23,9 +23,9 @@ export function MemoryCard({
 }: MemoryCardProps) {
   const sounds = useMemorySounds();
   const innerCommonClasses = cn(
-    "absolute-full rounded aspect-square",
+    "w-full rounded aspect-square max-w-full max-h-full",
     "transition-transform shadow backface-hidden",
-    "pointer-events-none select-none",
+    "pointer-events-none select-none absolute top-1/2 left-1/2 -translate-1/2",
   );
   const turnAround = () => pairIsDiscovered() || isRevealed();
   let lastTurnAround: boolean | null = null;
@@ -62,8 +62,8 @@ export function MemoryCard({
       <div class={cn(innerCommonClasses, !turnAround() && "rotate-y-180")}>
         <div
           class={cn(
-            "size-full aspect-square relative rounded-lg",
-            "flex items-center justify-center",
+            "w-full aspect-square relative rounded-lg contain-size",
+            "flex items-center justify-center max-w-full max-h-full",
             pairIsDiscovered() && "bg-white",
           )}
         >

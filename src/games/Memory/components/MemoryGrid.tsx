@@ -49,7 +49,7 @@ export function MemoryGrid() {
       class="flex h-screen w-screen items-center justify-center perspective-midrange bg-background-muted"
       inert={!!store.pairMatchId}
     >
-      <div class="grid grid-cols-4 gap-6 size-[70vh]">
+      <div class="grid grid-cols-4 gap-6 w-full aspect-square max-w-4xl p-8">
         <For each={store.cards}>
           {(card) => (
             <MemoryCard

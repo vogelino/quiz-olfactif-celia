@@ -39,71 +39,71 @@ export function MemoryMatchModal() {
           <dialog
             id="memory-match-modal"
             class={cn(
-              "w-screen h-screen fixed inset-0 z-10 bg-background-muted text-foreground pt-12 pb-16 px-12",
-              "grid grid-rows-[auto_1fr_auto] justify-center items-center gap-12",
+              "w-screen h-screen fixed inset-0 z-10 bg-background-muted text-foreground ",
+              "overflow-y-auto flex flex-col",
             )}
           >
-            <div class="flex flex-col items-center shrink-0 gap-3">
-              <img
-                src={`/memory/molecules/${molecule().id}.webp`}
-                aria-title={molecule().title}
-                class="h-12 dark:invert dark:mix-blend-screen mix-blend-multiply mb-4"
-              />
-              <h2 class="text-7xl font-bold text-center font-headline">
-                It's a Match!
-              </h2>
-              <h3 class="text-2xl flex flex-col gap-5 items-center">
-                <WavyUnderlinedText class="underline-offset-8 pb-4">
-                  {molecule().title}
-                </WavyUnderlinedText>
-              </h3>
-              <p class="mt-4 max-w-prose text-center text-lg text-balance">
-                {pair().description}
-              </p>
-            </div>
-            <div class="grow flex flex-col self-stretch h-full contain-size relative">
-              <section
-                class={cn(
-                  "absolute-full",
-                  "grid grid-cols-[1fr_auto_1fr] grid-rows-[1fr_auto] gap-x-8 gap-y-4 items-center contain-size",
-                )}
-              >
-                <div class="size-full contain-size flex items-end justify-center relative">
+            <div
+              class={cn(
+                "w-screen h-fit flex flex-col justify-center items-center gap-12",
+                "pt-12 pb-16 px-12 relative",
+              )}
+            >
+              <div class="flex flex-col items-center shrink-0 gap-3">
+                <img
+                  src={`/memory/molecules/${molecule().id}.webp`}
+                  aria-title={molecule().title}
+                  class="h-12 dark:invert dark:mix-blend-screen mix-blend-multiply mb-4"
+                />
+                <h2 class="text-7xl font-bold text-center font-headline">
+                  It's a Match!
+                </h2>
+                <h3 class="text-2xl flex flex-col gap-5 items-center">
+                  <WavyUnderlinedText class="underline-offset-8 pb-4">
+                    {molecule().title}
+                  </WavyUnderlinedText>
+                </h3>
+                <p class="mt-4 max-w-prose text-center text-lg text-balance">
+                  {pair().description}
+                </p>
+              </div>
+              <div class="flex flex-col relative items-center">
+                <section
+                  class={cn(
+                    "grid grid-cols-[1fr_auto_1fr] gap-x-8 gap-y-4 items-start",
+                    "pb-16",
+                  )}
+                >
                   <MemoryMatchModalCard
                     ingredientId={ingredientA().id}
-                    className="-rotate-1 h-screen max-w-full max-h-full"
+                    className={cn("-rotate-1 size-[25vmin]")}
                   />
-                </div>
-                <div class="text-4xl font-headline translate-y-2">&</div>
-                <div class="h-full contain-size flex items-end justify-center relative">
+                  <div class="text-4xl font-headline translate-y-[13vmin]">
+                    &
+                  </div>
                   <MemoryMatchModalCard
                     ingredientId={ingredientB().id}
-                    className="rotate-1 h-screen max-w-full max-h-full"
+                    className={cn("rotate-1 size-[25vmin]")}
                   />
-                </div>
-                <span class="text-2xl text-center uppercase font-medium">
-                  {ingredientA().title}
-                </span>
-                <div />
-                <span class="text-2xl text-center uppercase font-medium">
-                  {ingredientB().title}
-                </span>
-              </section>
+                </section>
+              </div>
+              <footer class="flex justify-center shrink-0 pb-16">
+                <Button
+                  onClick={() => {
+                    setStore("pairMatchId", null);
+                    sounds.playUISound("click", { volume: 0.5 });
+                    sounds.playUISound("close");
+                  }}
+                  class="text-lg uppercase"
+                >
+                  Find{" "}
+                  <span class="text-base font-headline tracking-wider">
+                    More
+                  </span>
+                  !
+                </Button>
+              </footer>
             </div>
-            <footer class="flex justify-center shrink-0">
-              <Button
-                onClick={() => {
-                  setStore("pairMatchId", null);
-                  sounds.playUISound("click", { volume: 0.5 });
-                  sounds.playUISound("close");
-                }}
-                class="text-lg uppercase"
-              >
-                Find{" "}
-                <span class="text-base font-headline tracking-wider">More</span>
-                !
-              </Button>
-            </footer>
           </dialog>
         );
       }}
