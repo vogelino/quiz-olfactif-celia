@@ -1,5 +1,5 @@
 import { ClassValue } from "clsx";
-import { Show } from "solid-js";
+import { createEffect, onCleanup, Show } from "solid-js";
 import { Ingredient } from "~/data/ingredients";
 import { cn } from "~/utils/cn";
 import { useMemorySounds } from "../memorySounds";
@@ -28,10 +28,19 @@ export function MemoryCard({
     "pointer-events-none select-none",
   );
   const turnAround = () => pairIsDiscovered() || isRevealed();
+  let lastTurnAround: boolean | null = null;
+
+  createEffect(() => {
+    if (lastTurnAround === false && turnAround()) sounds.playUISound("flip");
+    lastTurnAround = turnAround();
+  });
+
+  onCleanup(() => (lastTurnAround = null));
+
   return (
     <button
       onMouseEnter={() =>
-        sounds.playUISound(["sniff1", "sniff2", "sniff3"], {
+        sounds.playUISound("hover1", {
           volume: 0.2,
         })
       }
@@ -45,14 +54,17 @@ export function MemoryCard({
         !rotateLeft && !pairIsDiscovered() && !isRevealed() && "hover:rotate-2",
         pairIsDiscovered() && "grayscale-100 opacity-50",
       )}
-      onClick={onToggleReveal}
+      onClick={() => {
+        sounds.playUISound("click");
+        onToggleReveal();
+      }}
     >
       <div class={cn(innerCommonClasses, !turnAround() && "rotate-y-180")}>
         <div
           class={cn(
-            "size-full aspect-square relative",
+            "size-full aspect-square relative rounded-lg",
             "flex items-center justify-center",
-            pairIsDiscovered() && "bg-background",
+            pairIsDiscovered() && "bg-white",
           )}
         >
           <img
@@ -63,14 +75,14 @@ export function MemoryCard({
           <Show when={!pairIsDiscovered()}>
             <img
               src="/memory/card-front.webp"
-              class={cn("absolute-full aspect-square rounded", "-z-20")}
+              class={cn("absolute-full aspect-square rounded-lg", "-z-20")}
               aria-hidden="true"
             />
           </Show>
           <div
             aria-hidden="true"
             class={cn(
-              "absolute-full aspect-square rounded",
+              "absolute-full aspect-square rounded-lg",
               "z-10 mix-blend-color",
               colorClass,
             )}

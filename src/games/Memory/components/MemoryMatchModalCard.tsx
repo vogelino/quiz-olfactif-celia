@@ -31,13 +31,13 @@ export function MemoryMatchModalCard(props: MemoryMatchModalCardProps) {
       <img
         src={illustration()}
         aria-title={ingredient().title}
-        class={cn("absolute-full", "size-full scale-50 opacity-70")}
+        class={cn("absolute-full scale-40", "object-contain opacity-70")}
       />
       <img
         src="/memory/card-front.webp"
         aria-hidden="true"
         class={cn(
-          "absolute-full rounded-xl",
+          "absolute-full w-auto rounded-xl object-cover",
           "-z-10 pointer-events-auto select-none",
         )}
       />

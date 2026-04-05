@@ -49,7 +49,10 @@ export function MemoryStart() {
           onClick={() => {
             setStore("status", "started");
             sounds.playUISound("click");
-            sounds.playMusicLoop("mainTheme", { volume: 0.6 });
+            sounds.playMusicLoop(
+              ["mainTheme1", "mainTheme2", "mainTheme3", "mainTheme4"],
+              { volume: 0.6 },
+            );
           }}
           class="text-lg uppercase mt-6"
         >

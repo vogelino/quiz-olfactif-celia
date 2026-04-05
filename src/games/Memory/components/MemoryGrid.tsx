@@ -18,7 +18,6 @@ export function MemoryGrid() {
 
     if (store.currentTurn.length === 2) {
       setStore("currentTurn", [ingredientId]);
-      sounds.playUISound("flip");
       return;
     }
 
@@ -35,12 +34,7 @@ export function MemoryGrid() {
           setStore("currentTurn", []);
           setStore("pairMatchId", pair1.id);
         });
-        sounds.playUISound("click");
-      } else {
-        sounds.playUISound("flip");
       }
-    } else {
-      sounds.playUISound("flip");
     }
   };
 

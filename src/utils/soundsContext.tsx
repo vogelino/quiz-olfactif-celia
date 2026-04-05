@@ -32,7 +32,7 @@ export type SoundsContextType<
   stopUISound: (source: AudioBufferSourceNode | null) => void;
   stopAllUISounds: () => void;
   playMusicLoop: (
-    key: MusicSoundKey,
+    key: MusicSoundKey | MusicSoundKey[],
     ...p: Tail<Parameters<SoundManager["playLoop"]>>
   ) => void;
   stopMusicLoop: (key: MusicSoundKey) => void;
@@ -135,21 +135,12 @@ export const SoundsProvider = <
         turnOnSounds: () => setSoundOn((prev) => ({ ...prev, soundOn: true })),
         turnOffSounds: () =>
           setSoundOn((prev) => ({ ...prev, soundOn: false })),
-        playUISound: (key, ...rest) => {
-          // If an array of keys is provided, play a random one
-          if (Array.isArray(key)) {
-            const randKey = key[Math.floor(Math.random() * key.length)];
-            if (!randKey) {
-              console.error("Could not play random sound within key", key);
-              return;
-            }
-            return guard(manager.play)(randKey, ...rest);
-          }
-          return guard(manager.play)(key, ...rest);
-        },
+        playUISound: (key, ...rest) =>
+          guard(manager.play)(normalizeKey(key), ...rest),
         stopUISound: guard(manager.stop),
         stopAllUISounds: guard(manager.stopAll),
-        playMusicLoop: guard(manager.playLoop),
+        playMusicLoop: (key, ...rest) =>
+          guard(manager.playLoop)(normalizeKey(key), ...rest),
         stopMusicLoop: guard(manager.stopAllLoops),
         stopAllMusicLoops: guard(manager.stopAllLoops),
       }}
@@ -157,6 +148,16 @@ export const SoundsProvider = <
       {props.children}
     </SoundsContext.Provider>
   );
+
+  function normalizeKey<T>(key: T) {
+    if (Array.isArray(key)) {
+      const randKey = key[Math.floor(Math.random() * key.length)];
+      if (!randKey)
+        throw new Error(`Could not play random sound within key: "${key}"`);
+      return randKey;
+    }
+    return key;
+  }
 };
 
 export const useSounds = () => {

@@ -39,7 +39,7 @@ const benzaldehyde = {
   id: "benzaldehyde",
   title: "Benzaldehyde",
   pubChemId: 240,
-  colorClass: "bg-green-500",
+  colorClass: "bg-cyan-500",
   referenceLinks: [
     {
       url: "https://pubchem.ncbi.nlm.nih.gov/compound/240",
@@ -56,7 +56,7 @@ const calone = {
   id: "calone",
   title: "Calone",
   pubChemId: 6432154,
-  colorClass: "bg-cyan-500",
+  colorClass: "bg-green-500",
   referenceLinks: [
     {
       url: "https://pubchem.ncbi.nlm.nih.gov/compound/6432154",

@@ -1,4 +1,4 @@
-import { createSignal, onCleanup, onMount, Show } from "solid-js";
+import { createEffect, createSignal, onCleanup, onMount, Show } from "solid-js";
 import confetti from "@hiseb/confetti";
 import { idToIngredient } from "~/data/ingredients";
 import { idToMemoryPair } from "~/data/memory";
@@ -19,7 +19,8 @@ export function MemoryMatchModal() {
     return pairMatchId ? idToMemoryPair[pairMatchId] : null;
   };
 
-  onMount(() => {
+  createEffect(() => {
+    if (!pairMatch()) return;
     sounds.playUISound(["match1", "match2", "match3"]);
     setTimeout(() => {
       confetti({});
@@ -70,14 +71,14 @@ export function MemoryMatchModal() {
                 <div class="size-full contain-size flex items-end justify-center relative">
                   <MemoryMatchModalCard
                     ingredientId={ingredientA().id}
-                    className="-rotate-1 w-full max-w-full max-h-full"
+                    className="-rotate-1 h-screen max-w-full max-h-full"
                   />
                 </div>
                 <div class="text-4xl font-headline translate-y-2">&</div>
                 <div class="h-full contain-size flex items-end justify-center relative">
                   <MemoryMatchModalCard
                     ingredientId={ingredientB().id}
-                    className="rotate-1 w-full max-w-full max-h-full"
+                    className="rotate-1 h-screen max-w-full max-h-full"
                   />
                 </div>
                 <span class="text-2xl text-center uppercase font-medium">

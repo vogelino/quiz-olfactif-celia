@@ -17,10 +17,14 @@ const memoryUiSounds = {
   sniff1: "/sounds/sniff-1.m4a",
   sniff2: "/sounds/sniff-2.m4a",
   sniff3: "/sounds/sniff-3.m4a",
+  hover1: "/sounds/hover-1.m4a",
 } as const satisfies Record<string, string>;
 
 const memoryMusicSounds = {
-  mainTheme: "/sounds/music-1.mp3",
+  mainTheme1: "/sounds/music-1.mp3",
+  mainTheme2: "/sounds/music-2.mp3",
+  mainTheme3: "/sounds/music-3.mp3",
+  mainTheme4: "/sounds/music-4.mp3",
 } as const satisfies Record<string, string>;
 
 type MemoryUISoundKey = keyof typeof memoryUiSounds;
