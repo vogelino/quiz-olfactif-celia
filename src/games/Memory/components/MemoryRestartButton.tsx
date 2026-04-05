@@ -1,10 +1,10 @@
 import { Button } from "~/components/ui/Button";
 import { useMemoryStore } from "../store";
-import { batch } from "solid-js";
+import { batch, ComponentProps } from "solid-js";
 import { getShuffledCards } from "../utils/cards";
 import { RefreshCcw } from "~/components/icons";
 
-export function MemoryRestartButton() {
+export function MemoryRestartButton(props: ComponentProps<typeof Button>) {
   const [, setStore] = useMemoryStore();
 
   return (
@@ -21,6 +21,7 @@ export function MemoryRestartButton() {
           setStore("status", "initial");
         });
       }}
+      {...props}
     >
       <RefreshCcw />
     </Button>

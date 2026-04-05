@@ -4,15 +4,15 @@ import { Button } from "../../../components/ui/Button";
 import { useMemoryStore } from "../store";
 import { batch, onMount } from "solid-js";
 import { getShuffledCards } from "../utils/cards";
-import { useSoundManager } from "~/utils/SoundManager";
 import { WavyUnderlinedText } from "~/components/ui/WavyUnderlinedText";
+import { useMemorySounds } from "../memorySounds";
 
 export function MemoryEnd() {
   const [, setStore] = useMemoryStore();
-  const soundManager = useSoundManager();
+  const sounds = useMemorySounds();
 
   onMount(() => {
-    soundManager.play("success");
+    sounds.playUISound("success");
     let positionList = [
       { x: window.innerWidth * 0.5, y: window.innerHeight * 0.6 },
       { x: window.innerWidth * 0.25, y: window.innerHeight * 0.4 },
@@ -21,7 +21,7 @@ export function MemoryEnd() {
     for (let i = 0; i < positionList.length; i++) {
       setTimeout(() => {
         confetti({ position: positionList[i] });
-        soundManager.play("firework");
+        sounds.playUISound("firework");
       }, i * 250);
     }
   });
@@ -53,6 +53,11 @@ export function MemoryEnd() {
           </WavyUnderlinedText>
         </span>
         <Button
+          onMouseEnter={() => {
+            sounds.playUISound(["sniff1", "sniff2", "sniff3"], {
+              volume: 0.2,
+            });
+          }}
           onClick={() => {
             batch(() => {
               setStore("cards", getShuffledCards());
@@ -61,7 +66,7 @@ export function MemoryEnd() {
               setStore("pairMatchId", null);
               setStore("status", "initial");
             });
-            soundManager.play("click");
+            sounds.playUISound("click");
           }}
           class="text-lg uppercase mt-6"
         >

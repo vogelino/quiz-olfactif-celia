@@ -3,11 +3,11 @@ import { ingredientIdToPair, memoryPairs } from "~/data/memory";
 import { MemoryCard } from "./MemoryCard";
 import { IngredientId } from "~/data/ingredients";
 import { useMemoryStore } from "../store";
-import { useSoundManager } from "~/utils/SoundManager";
+import { useMemorySounds } from "../memorySounds";
 
 export function MemoryGrid() {
   const [store, setStore] = useMemoryStore();
-  const soundManager = useSoundManager();
+  const sounds = useMemorySounds();
 
   const onCardRevealToggle = (ingredientId: IngredientId) => {
     const pair = ingredientIdToPair(ingredientId);
@@ -18,7 +18,7 @@ export function MemoryGrid() {
 
     if (store.currentTurn.length === 2) {
       setStore("currentTurn", [ingredientId]);
-      soundManager.play("flip");
+      sounds.playUISound("flip");
       return;
     }
 
@@ -35,12 +35,12 @@ export function MemoryGrid() {
           setStore("currentTurn", []);
           setStore("pairMatchId", pair1.id);
         });
-        soundManager.play("click");
+        sounds.playUISound("click");
       } else {
-        soundManager.play("flip");
+        sounds.playUISound("flip");
       }
     } else {
-      soundManager.play("flip");
+      sounds.playUISound("flip");
     }
   };
 

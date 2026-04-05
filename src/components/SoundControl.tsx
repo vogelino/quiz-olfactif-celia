@@ -1,34 +1,34 @@
-import { createEffect, createSignal, Show } from "solid-js";
+import {
+  Accessor,
+  ComponentProps,
+  createEffect,
+  createSignal,
+  Show,
+} from "solid-js";
 import { cn } from "~/utils/cn";
-import { useSoundManager } from "~/utils/SoundManager";
 import { MegaphoneOff, MegaphoneOn } from "./icons";
 import { ClassValue } from "clsx";
 import { Button } from "./ui/Button";
 
-type SoundControlProps = {
+type SoundControlProps = ComponentProps<typeof Button> & {
   className?: ClassValue;
+  soundIsOn: Accessor<boolean>;
+  onSoundOnChange: (isOn: boolean) => void;
 };
 
 export function SoundControl(props: SoundControlProps) {
-  const [soundIsOn, setSoundIsOn] = createSignal(true);
-  const soundManager = useSoundManager();
-
-  createEffect(() => {
-    if (soundIsOn()) soundManager.setMasterVolume(1);
-    if (!soundIsOn()) soundManager.setMasterVolume(0);
-  });
-
   return (
     <Button
       variant="ghost"
       size="icon"
-      onClick={() => setSoundIsOn(!soundIsOn())}
+      onClick={() => props.onSoundOnChange(!props.soundIsOn())}
+      {...props}
       class={cn("cursor-pointer", props.className)}
     >
-      <Show when={soundIsOn()}>
+      <Show when={props.soundIsOn()}>
         <MegaphoneOn />
       </Show>
-      <Show when={!soundIsOn()}>
+      <Show when={!props.soundIsOn()}>
         <MegaphoneOff />
       </Show>
     </Button>

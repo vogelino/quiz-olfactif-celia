@@ -2,6 +2,7 @@ import { ClassValue } from "clsx";
 import { Show } from "solid-js";
 import { Ingredient } from "~/data/ingredients";
 import { cn } from "~/utils/cn";
+import { useMemorySounds } from "../memorySounds";
 
 type MemoryCardProps = Ingredient & {
   colorClass: ClassValue;
@@ -20,6 +21,7 @@ export function MemoryCard({
   onToggleReveal,
   rotateLeft,
 }: MemoryCardProps) {
+  const sounds = useMemorySounds();
   const innerCommonClasses = cn(
     "absolute-full rounded aspect-square",
     "transition-transform shadow backface-hidden",
@@ -28,6 +30,11 @@ export function MemoryCard({
   const turnAround = () => pairIsDiscovered() || isRevealed();
   return (
     <button
+      onMouseEnter={() =>
+        sounds.playUISound(["sniff1", "sniff2", "sniff3"], {
+          volume: 0.2,
+        })
+      }
       class={cn(
         "relative",
         "transition",

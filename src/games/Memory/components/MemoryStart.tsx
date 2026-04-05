@@ -1,16 +1,16 @@
 import { cn } from "~/utils/cn";
 import { Button } from "../../../components/ui/Button";
 import { useMemoryStore } from "../store";
-import { useSoundManager } from "~/utils/SoundManager";
 import { onMount } from "solid-js";
 import { WavyUnderlinedText } from "~/components/ui/WavyUnderlinedText";
 import { MegaphoneOn } from "~/components/icons";
+import { useMemorySounds } from "../memorySounds";
 
 export function MemoryStart() {
   const [, setStore] = useMemoryStore();
-  const soundManager = useSoundManager();
+  const sounds = useMemorySounds();
 
-  onMount(() => soundManager.stopAllLoops());
+  onMount(() => sounds.stopAllMusicLoops());
 
   return (
     <div
@@ -41,10 +41,15 @@ export function MemoryStart() {
           <MegaphoneOn class="animate-wiggle translate-y-1 text-foreground-muted" />
         </span>
         <Button
+          onMouseEnter={() => {
+            sounds.playUISound(["sniff1", "sniff2", "sniff3"], {
+              volume: 0.2,
+            });
+          }}
           onClick={() => {
             setStore("status", "started");
-            soundManager.play("click");
-            soundManager.playLoop("music", { volume: 0.6 });
+            sounds.playUISound("click");
+            sounds.playMusicLoop("mainTheme", { volume: 0.6 });
           }}
           class="text-lg uppercase mt-6"
         >

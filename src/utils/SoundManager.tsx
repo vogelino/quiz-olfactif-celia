@@ -36,6 +36,22 @@ export class SoundManager {
     // Create master gain node for overall volume control
     this.masterGain = this.context.createGain();
     this.masterGain.connect(this.context.destination);
+
+    // Bind public methods to its instance to avoid issues
+    this.loadSounds = this.loadSounds.bind(this);
+    this.getLoadProgress = this.getLoadProgress.bind(this);
+    this.play = this.play.bind(this);
+    this.stop = this.stop.bind(this);
+    this.stopAll = this.stopAll.bind(this);
+    this.setMasterVolume = this.setMasterVolume.bind(this);
+    this.getMasterVolume = this.getMasterVolume.bind(this);
+    this.isSoundLoaded = this.isSoundLoaded.bind(this);
+    this.getLoadedSounds = this.getLoadedSounds.bind(this);
+    this.dispose = this.dispose.bind(this);
+    this.playLoop = this.playLoop.bind(this);
+    this.stopLoop = this.stopLoop.bind(this);
+    this.stopAllLoops = this.stopAllLoops.bind(this);
+    this.isLoopPlaying = this.isLoopPlaying.bind(this);
   }
 
   private async fetchWithProgress(
@@ -168,6 +184,7 @@ export class SoundManager {
       percentage,
     };
   }
+
   play(name: string, options: PlayOptions = {}): AudioBufferSourceNode | null {
     const buffer = this.buffers.get(name);
     if (!buffer) {
@@ -280,16 +297,3 @@ export class SoundManager {
     return this.loopingSources.has(name);
   }
 }
-
-const SoundManagerContext = createContext<SoundManager>(new SoundManager());
-
-export const SoundManagerProvider = (props: {
-  children: JSXElement;
-  value: SoundManager;
-}) => (
-  <SoundManagerContext.Provider value={props.value}>
-    {props.children}
-  </SoundManagerContext.Provider>
-);
-
-export const useSoundManager = () => useContext(SoundManagerContext);

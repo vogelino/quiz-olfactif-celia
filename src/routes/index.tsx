@@ -1,10 +1,10 @@
 import { Memory } from "~/games/Memory";
-import { SoundManager, SoundManagerProvider } from "~/utils/SoundManager";
+import { MemorySoundsProvider } from "~/games/Memory/memorySounds";
 
 export default function Home() {
   return (
-    <SoundManagerProvider value={new SoundManager()}>
+    <MemorySoundsProvider>
       <Memory />
-    </SoundManagerProvider>
+    </MemorySoundsProvider>
   );
 }

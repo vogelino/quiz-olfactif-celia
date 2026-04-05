@@ -7,12 +7,12 @@ import { cn } from "~/utils/cn";
 import { MemoryMatchModalCard } from "./MemoryMatchModalCard";
 import { Button } from "../../../components/ui/Button";
 import { useMemoryStore } from "../store";
-import { useSoundManager } from "~/utils/SoundManager";
 import { WavyUnderlinedText } from "~/components/ui/WavyUnderlinedText";
+import { useMemorySounds } from "../memorySounds";
 
 export function MemoryMatchModal() {
   const [store, setStore] = useMemoryStore();
-  const soundManager = useSoundManager();
+  const sounds = useMemorySounds();
 
   const pairMatch = () => {
     const pairMatchId = store.pairMatchId;
@@ -20,10 +20,10 @@ export function MemoryMatchModal() {
   };
 
   onMount(() => {
-    soundManager.play(`match${Math.floor(Math.random() * 3) + 1}`);
+    sounds.playUISound(["match1", "match2", "match3"]);
     setTimeout(() => {
       confetti({});
-      soundManager.play("firework");
+      sounds.playUISound("firework");
     }, 250);
   });
 
@@ -93,8 +93,8 @@ export function MemoryMatchModal() {
               <Button
                 onClick={() => {
                   setStore("pairMatchId", null);
-                  soundManager.play("click", { volume: 0.5 });
-                  soundManager.play("close");
+                  sounds.playUISound("click", { volume: 0.5 });
+                  sounds.playUISound("close");
                 }}
                 class="text-lg uppercase"
               >
