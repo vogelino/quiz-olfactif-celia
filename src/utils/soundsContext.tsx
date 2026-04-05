@@ -59,6 +59,8 @@ export const SoundsProvider = <
       soundOn: true,
     },
   });
+  const [isMutedByPageVisibility, setIsMutedByPageVisibility] =
+    createSignal(false);
   const [isLoading, setIsLoading] = createSignal(true);
   const [error, setError] = createSignal<string | null>(null);
   const [progress, setProgress] = createSignal<LoadProgress>({
@@ -89,6 +91,18 @@ export const SoundsProvider = <
     } finally {
       setIsLoading(false);
     }
+
+    const syncPageVisibility = () => {
+      setIsMutedByPageVisibility(
+        document.visibilityState === "hidden" && soundOn().soundOn,
+      );
+    };
+
+    syncPageVisibility();
+    document.addEventListener("visibilitychange", syncPageVisibility);
+    onCleanup(() =>
+      document.removeEventListener("visibilitychange", syncPageVisibility),
+    );
   });
 
   onCleanup(() => manager.dispose());
@@ -98,13 +112,15 @@ export const SoundsProvider = <
     <ParamT extends unknown[], ReturnT>(fn: (...p: ParamT) => ReturnT) =>
     (...params: ParamT) => {
       if (progress().percentage !== 100) return;
-      if (!soundOn()) return;
       return fn(...params);
     };
 
   createEffect(() => {
-    if (soundOn().soundOn) manager.setMasterVolume(1);
-    if (!soundOn().soundOn) manager.setMasterVolume(0);
+    if (soundOn().soundOn && !isMutedByPageVisibility()) {
+      manager.setMasterVolume(1);
+      return;
+    }
+    manager.setMasterVolume(0);
   });
 
   return (
