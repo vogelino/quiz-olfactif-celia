@@ -10,6 +10,7 @@ type MemoryCardProps = Ingredient & {
   pairIsDiscovered: () => boolean;
   onToggleReveal: () => void;
   rotateLeft?: boolean;
+  class?: ClassValue;
 };
 
 export function MemoryCard({
@@ -20,6 +21,7 @@ export function MemoryCard({
   pairIsDiscovered,
   onToggleReveal,
   rotateLeft,
+  class: className,
 }: MemoryCardProps) {
   const sounds = useMemorySounds();
   const innerCommonClasses = cn(
@@ -52,7 +54,7 @@ export function MemoryCard({
         !pairIsDiscovered() && !isRevealed() && "hover:scale-105",
         rotateLeft && !pairIsDiscovered() && !isRevealed() && "hover:-rotate-2",
         !rotateLeft && !pairIsDiscovered() && !isRevealed() && "hover:rotate-2",
-        pairIsDiscovered() && "grayscale-100 opacity-50",
+        className,
       )}
       onClick={() => {
         sounds.playUISound("click");

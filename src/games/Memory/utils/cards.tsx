@@ -9,7 +9,7 @@ export type Card = {
   rotateLeft: boolean;
 };
 
-const createCards = (source: Ingredient[]) =>
+export const createCards = (source: Ingredient[]) =>
   source.flatMap((ingredient, index) => {
     const pair = ingredientIdToPair(ingredient.id);
     if (!pair) return [];

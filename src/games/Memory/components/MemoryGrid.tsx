@@ -1,13 +1,12 @@
-import { For, batch, createEffect } from "solid-js";
+import { For, Show, batch, createEffect } from "solid-js";
 import { ingredientIdToPair, memoryPairs } from "~/data/memory";
 import { MemoryCard } from "./MemoryCard";
 import { IngredientId } from "~/data/ingredients";
 import { useMemoryStore } from "../store";
-import { useMemorySounds } from "../memorySounds";
+import { MemoryDiscoveredPairs } from "./MemoryDiscoveredPairs";
 
 export function MemoryGrid() {
   const [store, setStore] = useMemoryStore();
-  const sounds = useMemorySounds();
 
   const onCardRevealToggle = (ingredientId: IngredientId) => {
     const pair = ingredientIdToPair(ingredientId);
@@ -49,22 +48,27 @@ export function MemoryGrid() {
       class="flex h-screen w-screen items-center justify-center perspective-midrange bg-background-muted"
       inert={!!store.pairMatchId}
     >
+      <MemoryDiscoveredPairs />
       <div class="grid grid-cols-4 gap-6 w-full aspect-square max-w-4xl p-8">
         <For each={store.cards}>
           {(card) => (
-            <MemoryCard
-              {...card.ingredient}
-              colorClass={card.colorClass}
-              isRevealed={() =>
-                store.currentTurn.includes(card.ingredient.id) ||
-                store.discoveredPairs.includes(card.pairId)
-              }
-              pairIsDiscovered={() =>
-                store.discoveredPairs.includes(card.pairId)
-              }
-              onToggleReveal={() => onCardRevealToggle(card.ingredient.id)}
-              rotateLeft={card.rotateLeft}
-            />
+            <div class="aspect-square relative w-full flex">
+              <Show when={!store.discoveredPairs.includes(card.pairId)}>
+                <MemoryCard
+                  {...card.ingredient}
+                  colorClass={card.colorClass}
+                  isRevealed={() =>
+                    store.currentTurn.includes(card.ingredient.id)
+                  }
+                  pairIsDiscovered={() =>
+                    store.discoveredPairs.includes(card.pairId)
+                  }
+                  onToggleReveal={() => onCardRevealToggle(card.ingredient.id)}
+                  rotateLeft={card.rotateLeft}
+                  class="w-full"
+                />
+              </Show>
+            </div>
           )}
         </For>
       </div>
