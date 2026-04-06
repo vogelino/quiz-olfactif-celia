@@ -27,7 +27,7 @@ export function MemoryCard({
   const sounds = useMemorySounds();
   const innerCommonClasses = cn(
     "w-full rounded aspect-square max-w-full max-h-full",
-    "transition-transform shadow backface-hidden",
+    "transition-transform shadow-xl backface-hidden",
     "pointer-events-none select-none absolute top-1/2 left-1/2 -translate-1/2",
   );
   const turnAround = () => pairIsDiscovered() || isRevealed();

@@ -9,6 +9,7 @@ import { Button } from "../../../components/ui/Button";
 import { useMemoryStore } from "../store";
 import { WavyUnderlinedText } from "~/components/ui/WavyUnderlinedText";
 import { useMemorySounds } from "../memorySounds";
+import { createHotkey } from "@omniaura/solid-hotkeys";
 
 export function MemoryMatchModal() {
   const [store, setStore] = useMemoryStore();
@@ -18,6 +19,17 @@ export function MemoryMatchModal() {
     const pairMatchId = store.pairMatchId;
     return pairMatchId ? idToMemoryPair[pairMatchId] : null;
   };
+
+  const onContinue = () => {
+    document.startViewTransition(() => {
+      setStore("pairMatchId", null);
+      sounds.playUISound("click", { volume: 0.5 });
+      sounds.playUISound("close");
+    });
+  };
+
+  createHotkey("Enter", onContinue);
+  createHotkey("Space", onContinue);
 
   createEffect(() => {
     if (!pairMatch()) return;
@@ -88,16 +100,7 @@ export function MemoryMatchModal() {
                 </section>
               </div>
               <footer class="flex justify-center shrink-0 pb-16">
-                <Button
-                  onClick={() => {
-                    document.startViewTransition(() => {
-                      setStore("pairMatchId", null);
-                      sounds.playUISound("click", { volume: 0.5 });
-                      sounds.playUISound("close");
-                    });
-                  }}
-                  class="text-lg uppercase"
-                >
+                <Button onClick={onContinue} class="text-lg uppercase">
                   Find{" "}
                   <span class="text-base font-headline tracking-wider">
                     More

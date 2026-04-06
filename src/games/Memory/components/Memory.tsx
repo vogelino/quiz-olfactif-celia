@@ -1,5 +1,6 @@
 import { MemoryGrid } from "./MemoryGrid";
 import {
+  batch,
   createEffect,
   createSignal,
   Match,
@@ -22,10 +23,26 @@ import { GeneralControls } from "~/components/GeneralControls";
 import { MemoryRestartButton } from "./MemoryRestartButton";
 import { SoundControl } from "~/components/SoundControl";
 import { useMemorySounds } from "../memorySounds";
+import { createHotkey } from "@omniaura/solid-hotkeys";
+import { getShuffledCards } from "../utils/cards";
 
 function MemoryInner() {
   const [store, setStore] = useMemoryStore();
   const sounds = useMemorySounds();
+
+  createHotkey("M", () =>
+    sounds.soundIsOn() ? sounds.turnOffSounds() : sounds.turnOnSounds(),
+  );
+  createHotkey("R", () => {
+    batch(() => {
+      setStore("cards", getShuffledCards());
+      setStore("currentTurn", []);
+      setStore("discoveredPairs", []);
+      setStore("error", undefined);
+      setStore("pairMatchId", null);
+      setStore("status", "initial");
+    });
+  });
 
   createEffect(() => {
     if (!sounds.isError() && sounds.loadingProgess().percentage === 100) {

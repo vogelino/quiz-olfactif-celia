@@ -5,12 +5,25 @@ import { onMount } from "solid-js";
 import { WavyUnderlinedText } from "~/components/ui/WavyUnderlinedText";
 import { MegaphoneOn } from "~/components/icons";
 import { useMemorySounds } from "../memorySounds";
+import { createHotkey } from "@omniaura/solid-hotkeys";
 
 export function MemoryStart() {
   const [, setStore] = useMemoryStore();
   const sounds = useMemorySounds();
 
   onMount(() => sounds.stopAllMusicLoops());
+
+  const onStart = () => {
+    setStore("status", "started");
+    sounds.playUISound("click");
+    sounds.playMusicLoop(
+      ["mainTheme1", "mainTheme2", "mainTheme3", "mainTheme4"],
+      { volume: 0.6 },
+    );
+  };
+
+  createHotkey("Enter", onStart);
+  createHotkey("Space", onStart);
 
   return (
     <div
@@ -46,14 +59,7 @@ export function MemoryStart() {
               volume: 0.2,
             });
           }}
-          onClick={() => {
-            setStore("status", "started");
-            sounds.playUISound("click");
-            sounds.playMusicLoop(
-              ["mainTheme1", "mainTheme2", "mainTheme3", "mainTheme4"],
-              { volume: 0.6 },
-            );
-          }}
+          onClick={onStart}
           class="text-lg uppercase mt-6"
         >
           Get <span class="font-headline tracking-wide text-base">Started</span>
