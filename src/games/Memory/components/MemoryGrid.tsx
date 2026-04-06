@@ -28,10 +28,12 @@ export function MemoryGrid() {
       const pair2 = ingredientIdToPair(newTurn[1]);
 
       if (pair1 && pair2 && pair1.id === pair2.id) {
-        batch(() => {
-          setStore("discoveredPairs", (prev) => [...prev, pair1.id]);
-          setStore("currentTurn", []);
-          setStore("pairMatchId", pair1.id);
+        document.startViewTransition(() => {
+          batch(() => {
+            setStore("discoveredPairs", (prev) => [...prev, pair1.id]);
+            setStore("currentTurn", []);
+            setStore("pairMatchId", pair1.id);
+          });
         });
       }
     }
@@ -45,14 +47,14 @@ export function MemoryGrid() {
 
   return (
     <div
-      class="flex h-screen w-screen items-center justify-center perspective-midrange bg-background-muted"
+      class="flex h-screen w-screen items-center justify-center perspective-midrange bg-background"
       inert={!!store.pairMatchId}
     >
       <MemoryDiscoveredPairs />
       <div class="grid grid-cols-4 gap-6 w-full aspect-square max-w-4xl p-8">
         <For each={store.cards}>
           {(card) => (
-            <div class="aspect-square relative w-full flex">
+            <div class="aspect-square relative w-full flex bg-background-muted rounded-xl">
               <Show when={!store.discoveredPairs.includes(card.pairId)}>
                 <MemoryCard
                   {...card.ingredient}

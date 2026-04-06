@@ -90,9 +90,11 @@ export function MemoryMatchModal() {
               <footer class="flex justify-center shrink-0 pb-16">
                 <Button
                   onClick={() => {
-                    setStore("pairMatchId", null);
-                    sounds.playUISound("click", { volume: 0.5 });
-                    sounds.playUISound("close");
+                    document.startViewTransition(() => {
+                      setStore("pairMatchId", null);
+                      sounds.playUISound("click", { volume: 0.5 });
+                      sounds.playUISound("close");
+                    });
                   }}
                   class="text-lg uppercase"
                 >

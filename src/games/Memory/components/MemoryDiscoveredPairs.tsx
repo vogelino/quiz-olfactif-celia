@@ -15,43 +15,50 @@ export function MemoryDiscoveredPairs() {
         const ingredients = pair.ingredients.map((id) => idToIngredient[id]);
         const cards = createCards(ingredients);
         return (
-          <div class="absolute-full flex justify-center items-center">
+          <div class="absolute-full overflow-clip">
             <div
-              class="relative"
-              style={{
-                "--radius": "45vmax",
-                "--total": `${memoryPairs.length}`,
-                width: `calc(var(--radius) * 2)`,
-                height: `calc(var(--radius) * 2)`,
-              }}
+              class={cn(
+                "absolute left-1/2 top-1/2 -translate-1/2 size-[100vmax] max-w-screen max-h-screen",
+                "flex justify-center items-center ",
+              )}
             >
               <div
-                class="absolute left-1/2 top-1/2 size-48"
+                class="relative"
                 style={{
-                  "--i": `${pairIdx()}`,
-                  "--angle": `calc(360deg / var(--total) * var(--i))`,
-                  transform: `rotate(var(--angle)) translateX(var(--radius)) rotate(calc(-1 * var(--angle)))`,
+                  "--radius": "45vmax",
+                  "--total": `${memoryPairs.length}`,
+                  width: `calc(var(--radius) * 2)`,
+                  height: `calc(var(--radius) * 2)`,
                 }}
               >
-                <div class="size-48 relative">
-                  <For each={cards}>
-                    {(card, cardIdx) => (
-                      <MemoryCard
-                        {...card.ingredient}
-                        colorClass={card.colorClass}
-                        isRevealed={() => true}
-                        pairIsDiscovered={() => true}
-                        onToggleReveal={() => {}}
-                        rotateLeft={card.rotateLeft}
-                        class={cn(
-                          "size-48 absolute top-1/2 left-1/2 -translate-1/2",
-                          cardIdx() === 0
-                            ? "translate-x-[calc(-50%-4rem)]"
-                            : "translate-x-[calc(-50%+4rem)] translate-y-[calc(-50%+4rem)]",
-                        )}
-                      />
-                    )}
-                  </For>
+                <div
+                  class="absolute left-1/2 top-1/2 size-48"
+                  style={{
+                    "--i": `${pairIdx()}`,
+                    "--angle": `calc(360deg / var(--total) * var(--i))`,
+                    transform: `rotate(var(--angle)) translateX(var(--radius)) rotate(calc(-1 * var(--angle)))`,
+                  }}
+                >
+                  <div class="size-48 relative">
+                    <For each={cards}>
+                      {(card, cardIdx) => (
+                        <MemoryCard
+                          {...card.ingredient}
+                          colorClass={card.colorClass}
+                          isRevealed={() => true}
+                          pairIsDiscovered={() => true}
+                          onToggleReveal={() => {}}
+                          rotateLeft={card.rotateLeft}
+                          class={cn(
+                            "size-48 absolute top-1/2 left-1/2 -translate-1/2",
+                            cardIdx() === 0
+                              ? "translate-x-[calc(-50%-4rem)]"
+                              : "translate-x-[calc(-50%+4rem)] translate-y-[calc(-50%+4rem)]",
+                          )}
+                        />
+                      )}
+                    </For>
+                  </div>
                 </div>
               </div>
             </div>

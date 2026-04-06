@@ -27,6 +27,9 @@ export function MemoryMatchModalCard(props: MemoryMatchModalCardProps) {
         "flex items-center justify-center",
         props.className,
       )}
+      style={{
+        "view-transition-name": `memory-card-${ingredient().id}`,
+      }}
     >
       <img
         src={illustration()}

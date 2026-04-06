@@ -14,6 +14,7 @@ type MemoryCardProps = Ingredient & {
 };
 
 export function MemoryCard({
+  id,
   title,
   illustration,
   colorClass,
@@ -59,6 +60,9 @@ export function MemoryCard({
       onClick={() => {
         sounds.playUISound("click");
         onToggleReveal();
+      }}
+      style={{
+        "view-transition-name": `memory-card-${id}`,
       }}
     >
       <div class={cn(innerCommonClasses, !turnAround() && "rotate-y-180")}>

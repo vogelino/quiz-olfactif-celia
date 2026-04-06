@@ -11,13 +11,15 @@ export function MemoryDebugger() {
   const modalIsOpened = () => store.pairMatchId !== null;
   const isActive = (pairId: MemoryPairId) => store.pairMatchId === pairId;
   const onPairDiscoveryToggle = (pairId: MemoryPairId) => {
-    batch(() => {
-      setStore("status", "started");
-      setStore("discoveredPairs", (prev) =>
-        prev.includes(pairId)
-          ? prev.filter((p) => p !== pairId)
-          : [...prev, pairId],
-      );
+    document.startViewTransition(() => {
+      batch(() => {
+        setStore("status", "started");
+        setStore("discoveredPairs", (prev) =>
+          prev.includes(pairId)
+            ? prev.filter((p) => p !== pairId)
+            : [...prev, pairId],
+        );
+      });
     });
   };
   return (
@@ -59,19 +61,21 @@ export function MemoryDebugger() {
                       : "bg-background hover:bg-background-muted",
                   )}
                   onClick={() => {
-                    batch(() => {
-                      setStore("cards", () => getShuffledCards());
-                      setStore("currentTurn", []);
-                      setStore("pairMatchId", null);
-                      setStore("status", s);
-                      if (s === "complete") {
-                        setStore(
-                          "discoveredPairs",
-                          memoryPairs.map((p) => p.id),
-                        );
-                      } else {
-                        setStore("discoveredPairs", []);
-                      }
+                    document.startViewTransition(() => {
+                      batch(() => {
+                        setStore("cards", () => getShuffledCards());
+                        setStore("currentTurn", []);
+                        setStore("pairMatchId", null);
+                        setStore("status", s);
+                        if (s === "complete") {
+                          setStore(
+                            "discoveredPairs",
+                            memoryPairs.map((p) => p.id),
+                          );
+                        } else {
+                          setStore("discoveredPairs", []);
+                        }
+                      });
                     });
                   }}
                 >
