@@ -47,14 +47,14 @@ export function MemoryGrid() {
 
   return (
     <div
-      class="flex h-screen w-screen items-center justify-center perspective-midrange bg-background"
+      class="flex h-screen w-screen items-center justify-center perspective-midrange bg-background py-[15vh] px-[15vw]"
       inert={!!store.pairMatchId}
     >
       <MemoryDiscoveredPairs />
-      <div class="grid grid-cols-4 gap-6 w-full aspect-square max-w-4xl p-8">
+      <div class="grid grid-cols-4 gap-[3vmin] w-[80vmin] aspect-square absolute left-1/2 top-1/2 -translate-1/2">
         <For each={store.cards}>
           {(card) => (
-            <div class="aspect-square relative w-full flex bg-background-muted rounded-xl">
+            <div class="aspect-square relative w-full flex bg-background-muted rounded-[1vmin]">
               <Show when={!store.discoveredPairs.includes(card.pairId)}>
                 <MemoryCard
                   {...card.ingredient}

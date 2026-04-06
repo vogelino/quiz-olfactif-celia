@@ -48,7 +48,7 @@ export function MemoryCard({
         })
       }
       class={cn(
-        "relative",
+        "relative @container/card",
         "transition",
         !pairIsDiscovered() && "cursor-pointer",
         rotateLeft ? "-rotate-z-1" : "rotate-z-1",
@@ -76,7 +76,7 @@ export function MemoryCard({
           <img
             src={illustration}
             aria-label={`Illustration of ${title}`}
-            class="size-16 aspect-square object-contain opacity-70"
+            class="size-[40cqw] aspect-square object-contain opacity-70"
           />
           <Show when={!pairIsDiscovered()}>
             <img
