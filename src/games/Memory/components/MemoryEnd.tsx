@@ -44,7 +44,7 @@ export function MemoryEnd() {
           <span> </span>
           <span>them all!</span>
         </h1>
-        <p class="text-3xl max-w-xl text-center text-balance">
+        <p class="text-2xl max-w-xl text-center text-balance leading-normal">
           Well done! You've beaten the game like a professional perfumer.
         </p>
         <span class="flex gap-2">

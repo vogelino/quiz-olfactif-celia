@@ -1,99 +1,111 @@
 @import "tailwindcss";
 
 @font-face {
-    font-family: "Pouler";
-    src:
-        url("/fonts/pouler/Pouler.woff2") format("woff2"),
-        url("/fonts/pouler/Pouler.woff") format("woff"),
-        url("/fonts/pouler/Pouler.otf") format("opentype");
-    font-weight: 300-900;
-    font-style: normal, italic;
+  font-family: "Pouler";
+  src:
+    url("/fonts/pouler/Pouler.woff2") format("woff2"),
+    url("/fonts/pouler/Pouler.woff") format("woff"),
+    url("/fonts/pouler/Pouler.otf") format("opentype");
+  font-weight: 300-900;
+  font-style: normal, italic;
+}
+
+@font-face {
+  font-family: "Martian Grotesk";
+  src:
+    url("/fonts/martian-grotesk/martiangrotesk-stdlt-webfont.woff2")
+      format("woff2"),
+    url("/fonts/martian-grotesk/martiangrotesk-stdlt-webfont.woff")
+      format("woff");
+  font-weight: light;
+  font-style: normal;
 }
 
 @theme {
-    --color-background: var(--color-white);
-    --color-foreground: var(--color-black);
-    --color-background-muted: var(--color-neutral-50);
-    --color-foreground-muted: var(--color-neutral-500);
-    --color-border: var(--color-neutral-300);
-    --color-border-muted: var(--color-neutral-100);
-    --font-headline: "Pouler", sans-serif;
+  --color-background: var(--color-white);
+  --color-foreground: var(--color-black);
+  --color-background-muted: var(--color-neutral-50);
+  --color-foreground-muted: var(--color-neutral-500);
+  --color-border: var(--color-neutral-300);
+  --color-border-muted: var(--color-neutral-100);
+  --font-sans: "Martian Grotesk", sans-serif;
+  --font-headline: "Pouler", sans-serif;
 
-    --animate-marquee: marquee 50s linear infinite;
-    --animate-wiggle: wiggle 1s both infinite;
+  --animate-marquee: marquee 50s linear infinite;
+  --animate-wiggle: wiggle 1s both infinite;
 
-    @keyframes marquee {
-        to {
-            translate: -50% 0;
-        }
+  @keyframes marquee {
+    to {
+      translate: -50% 0;
+    }
+  }
+
+  @keyframes wiggle {
+    0%,
+    to {
+      transform: rotate(-3deg);
     }
 
-    @keyframes wiggle {
-        0%,
-        to {
-            transform: rotate(-3deg);
-        }
-
-        50% {
-            transform: rotate(3deg);
-        }
+    50% {
+      transform: rotate(3deg);
     }
+  }
 }
 
 @media (prefers-color-scheme: dark) {
-    :root {
-        --color-background: var(--color-black);
-        --color-foreground: var(--color-white);
-        --color-background-muted: var(--color-neutral-950);
-        --color-foreground-muted: var(--color-neutral-300);
-        --color-border: var(--color-neutral-700);
-        --color-border-muted: var(--color-neutral-900);
-    }
+  :root {
+    --color-background: var(--color-black);
+    --color-foreground: var(--color-white);
+    --color-background-muted: var(--color-neutral-950);
+    --color-foreground-muted: var(--color-neutral-300);
+    --color-border: var(--color-neutral-700);
+    --color-border-muted: var(--color-neutral-900);
+  }
 }
 
 body {
-    @apply bg-background text-foreground select-none;
+  @apply bg-background text-foreground select-none font-light font-sans;
 }
 html,
 body {
-    cursor: url("/cursor.svg"), auto;
-    --fl: 0;
-    --font-size-min: 12;
-    --font-size-max: 16;
-    --font-ratio-min: 1.618;
-    --font-ratio-max: 1.25;
-    --font-width-min: 320;
-    --font-width-max: 1500;
-    --fluid-min: calc(
-        var(--font-size-min) * pow(var(--font-ratio-min), var(--fl, 0))
-    );
-    --fluid-max: calc(
-        var(--font-size-max) * pow(var(--font-ratio-max), var(--fl, 0))
-    );
-    --fluid-preferred: calc(
-        (var(--fluid-max) - var(--fluid-min)) /
-            (var(--font-width-max) - var(--font-width-min))
-    );
-    --fluid-type: clamp(
-        (var(--fluid-min) / 16) * 1rem,
-        ((var(--fluid-min) / 16) * 1rem) -
-            (((var(--fluid-preferred) * var(--font-width-min)) / 16) * 1rem) +
-            (var(--fluid-preferred) * var(--variable-unit, 100vmin)),
-        (var(--fluid-max) / 16) * 1rem
-    );
-    font-size: var(--fluid-type);
+  cursor: url("/cursor.svg"), auto;
+  --fl: 0;
+  --font-size-min: 12;
+  --font-size-max: 16;
+  --font-ratio-min: 1.618;
+  --font-ratio-max: 1.25;
+  --font-width-min: 320;
+  --font-width-max: 1500;
+  --fluid-min: calc(
+    var(--font-size-min) * pow(var(--font-ratio-min), var(--fl, 0))
+  );
+  --fluid-max: calc(
+    var(--font-size-max) * pow(var(--font-ratio-max), var(--fl, 0))
+  );
+  --fluid-preferred: calc(
+    (var(--fluid-max) - var(--fluid-min)) /
+      (var(--font-width-max) - var(--font-width-min))
+  );
+  --fluid-type: clamp(
+    (var(--fluid-min) / 16) * 1rem,
+    ((var(--fluid-min) / 16) * 1rem) -
+      (((var(--fluid-preferred) * var(--font-width-min)) / 16) * 1rem) +
+      (var(--fluid-preferred) * var(--variable-unit, 100vmin)),
+    (var(--fluid-max) / 16) * 1rem
+  );
+  font-size: var(--fluid-type);
 }
 
 .tsparticles > canvas {
-    z-index: 51 !important;
+  z-index: 51 !important;
 }
 
 @layer utilities {
-    .absolute-full {
-        @apply absolute inset-0 size-full;
-    }
+  .absolute-full {
+    @apply absolute inset-0 size-full;
+  }
 
-    .cursor-pointer {
-        cursor: url("/cursor-smelling.svg"), pointer;
-    }
+  .cursor-pointer {
+    cursor: url("/cursor-smelling.svg"), pointer;
+  }
 }

@@ -43,7 +43,7 @@ export function MemoryStart() {
           <span> </span>
           <span>Memory Game!</span>
         </h1>
-        <p class="text-3xl max-w-xl text-center text-balance">
+        <p class="text-2xl max-w-xl text-center text-balance leading-normal">
           Find pairs of raw material cards and discover what they have in
           common!
         </p>

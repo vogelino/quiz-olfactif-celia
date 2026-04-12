@@ -15,6 +15,7 @@ app.config.timestamp_*.js
 
 # Fonts
 public/fonts/pouler
+public/fonts/martian-grotesk
 
 # IDEs and editors
 /.idea
