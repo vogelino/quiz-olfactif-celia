@@ -5,9 +5,11 @@ import { IngredientId } from "~/data/ingredients";
 import { useMemoryStore } from "../store";
 import { MemoryDiscoveredPairs } from "./MemoryDiscoveredPairs";
 import { cn } from "~/utils/cn";
+import { useMemorySounds } from "../memorySounds";
 
 export function MemoryGrid() {
   const [store, setStore] = useMemoryStore();
+  const sounds = useMemorySounds();
 
   const onCardRevealToggle = (ingredientId: IngredientId) => {
     const pair = ingredientIdToPair(ingredientId);
@@ -61,6 +63,12 @@ export function MemoryGrid() {
                 "starting:opacity-0 starting:translate-y-4 starting:-rotate-5 transition",
               )}
               style={{ "transition-delay": `${index() * 10 + 500}ms` }}
+              onTransitionStart={(evt) => {
+                if (evt.propertyName !== "opacity") return;
+                if (index() % 4 === 0) {
+                  sounds.playUISound("close", { volume: 0.1 });
+                }
+              }}
             >
               <Show when={!store.discoveredPairs.includes(card.pairId)}>
                 <MemoryCard

@@ -17,10 +17,10 @@ export function MemoryStart() {
   const onStart = () => {
     document.startViewTransition(() => {
       setStore("status", "started");
-      sounds.playUISound("click");
+      sounds.playUISound("click1");
       sounds.playMusicLoop(
         ["mainTheme1", "mainTheme2", "mainTheme3", "mainTheme4"],
-        { volume: 0.6 },
+        { volume: 0.5 },
       );
     });
   };
@@ -70,7 +70,7 @@ Memory Game!`}
             )}
           />
         </span>
-        <div class="starting:scale-90 starting:opacity-0 delay-600 transition">
+        <div class={cn("delay-1300 duration-[2s] slide-up")}>
           <Button
             onMouseEnter={() => {
               sounds.playUISound(["sniff1", "sniff2", "sniff3"], {

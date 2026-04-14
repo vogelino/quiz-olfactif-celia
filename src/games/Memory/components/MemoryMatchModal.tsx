@@ -24,7 +24,7 @@ export function MemoryMatchModal() {
   const onContinue = () => {
     document.startViewTransition(() => {
       setStore("pairMatchId", null);
-      sounds.playUISound("click", { volume: 0.5 });
+      sounds.playUISound("click1", { volume: 0.5 });
       sounds.playUISound("close");
     });
   };
@@ -34,7 +34,10 @@ export function MemoryMatchModal() {
 
   createEffect(() => {
     if (!pairMatch()) return;
-    sounds.playUISound(["match1", "match2", "match3"]);
+    sounds.playUISound("close");
+    setTimeout(() => {
+      sounds.playUISound(["match1", "match2", "match3"]);
+    }, 50);
     setTimeout(() => {
       confetti({});
       sounds.playUISound("firework");
@@ -134,7 +137,15 @@ export function MemoryMatchModal() {
                   "delay-1300 duration-[2s] slide-up",
                 )}
               >
-                <Button onClick={onContinue} class="text-lg uppercase">
+                <Button
+                  onClick={onContinue}
+                  class="text-lg uppercase"
+                  onMouseEnter={() => {
+                    sounds.playUISound(["sniff1", "sniff2", "sniff3"], {
+                      volume: 0.2,
+                    });
+                  }}
+                >
                   Find{" "}
                   <span class="text-base font-headline tracking-wider">
                     More

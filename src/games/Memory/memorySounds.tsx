@@ -6,7 +6,8 @@ import {
 } from "~/utils/soundsContext";
 
 const memoryUiSounds = {
-  click: "/sounds/click-1.mp3",
+  click1: "/sounds/click-1.mp3",
+  click2: "/sounds/click-2.m4a",
   close: "/sounds/close-1.m4a",
   match1: "/sounds/match-1.mp3",
   match2: "/sounds/match-2.mp3",

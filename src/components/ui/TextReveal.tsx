@@ -5,6 +5,7 @@ import {
 } from "@chenglou/pretext";
 import { ClassValue } from "clsx";
 import { createEffect, createSignal, For, onCleanup, onMount } from "solid-js";
+import { useMemorySounds } from "~/games/Memory/memorySounds";
 import { cn } from "~/utils/cn";
 
 type TextRevealType = {
@@ -37,6 +38,7 @@ export function TextReveal({
   segmentationUnit = "character",
   startingClass = "starting:translate-y-4 starting:opacity-0",
 }: TextRevealType) {
+  const sounds = useMemorySounds();
   const [lines, setLines] = createSignal<LayoutLineWithCharacters[]>([]);
   let containerRef!: HTMLDivElement;
   const prepared = prepareWithSegments(text, `${fontSize}px ${fontFamily}`, {
@@ -107,6 +109,16 @@ export function TextReveal({
                     {({ char, charIndex }) => {
                       return (
                         <span
+                          onTransitionStart={(evt) => {
+                            if (evt.propertyName !== "opacity") return;
+                            if (
+                              charIndex %
+                                Math.floor(text.length / lines().length / 2) !==
+                              0
+                            )
+                              return;
+                            sounds.playUISound("click2", { volume: 0.4 });
+                          }}
                           class={cn(
                             "inline-block transition whitespace-nowrap",
                             "delay-(--transition-delay) duration-500 ease-in-out",

@@ -58,7 +58,7 @@ export function MemoryCard({
         className,
       )}
       onClick={() => {
-        sounds.playUISound("click");
+        sounds.playUISound("click1");
         onToggleReveal();
       }}
       style={{
