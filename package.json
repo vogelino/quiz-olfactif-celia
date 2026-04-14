@@ -8,6 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@chenglou/pretext": "0.0.5",
     "@hiseb/confetti": "2.1.0",
     "@omniaura/solid-hotkeys": "0.1.1",
     "@solidjs/router": "^0.15.0",

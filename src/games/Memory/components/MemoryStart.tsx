@@ -6,6 +6,7 @@ import { WavyUnderlinedText } from "~/components/ui/WavyUnderlinedText";
 import { MegaphoneOn } from "~/components/icons";
 import { useMemorySounds } from "../memorySounds";
 import { createHotkey } from "@omniaura/solid-hotkeys";
+import { TextReveal } from "~/components/ui/TextReveal";
 
 export function MemoryStart() {
   const [, setStore] = useMemoryStore();
@@ -14,12 +15,14 @@ export function MemoryStart() {
   onMount(() => sounds.stopAllMusicLoops());
 
   const onStart = () => {
-    setStore("status", "started");
-    sounds.playUISound("click");
-    sounds.playMusicLoop(
-      ["mainTheme1", "mainTheme2", "mainTheme3", "mainTheme4"],
-      { volume: 0.6 },
-    );
+    document.startViewTransition(() => {
+      setStore("status", "started");
+      sounds.playUISound("click");
+      sounds.playMusicLoop(
+        ["mainTheme1", "mainTheme2", "mainTheme3", "mainTheme4"],
+        { volume: 0.6 },
+      );
+    });
   };
 
   createHotkey("Enter", onStart);
@@ -38,33 +41,49 @@ export function MemoryStart() {
           "py-16 px-20 rounded-lg",
         )}
       >
-        <h1 class="text-7xl font-bold text-center font-headline max-w-xl">
-          <span>The Olfactive</span>
-          <span> </span>
-          <span>Memory Game!</span>
+        <h1 class="text-7xl font-bold text-center font-headline w-4xl max-w-[calc(100vw-10rem)]">
+          <TextReveal
+            text={`The Olfactive
+Memory Game!`}
+            fontFamily="Pouler"
+            fontSize={72}
+            class="[--stagger-unit:10ms]"
+          />
         </h1>
-        <p class="text-2xl max-w-xl text-center text-balance leading-normal">
-          Find pairs of raw material cards and discover what they have in
-          common!
+        <p class="text-2xl w-2xl max-w-[calc(100vw-10rem)] text-center text-balance leading-normal">
+          <TextReveal
+            text="Find pairs of raw material cards and discover what they have in common!"
+            fontFamily="Martian Grotesk"
+            fontSize={24}
+            class="[--stagger-unit:2ms] [--start-delay:250ms]"
+          />
         </p>
         <span class="flex gap-2">
-          <WavyUnderlinedText class="text-lg text-foreground-muted">
+          <WavyUnderlinedText class="text-lg text-foreground-muted starting:decoration-transparent delay-500 transition-all">
             Turn you sound on!
           </WavyUnderlinedText>
-          <MegaphoneOn class="animate-wiggle translate-y-1 text-foreground-muted" />
+          <MegaphoneOn
+            class={cn(
+              "animate-wiggle translate-y-1 text-foreground-muted",
+              "starting:opacity-0 transition starting:-rotate-90 delay-500",
+              "duration-700 ease-in-out",
+            )}
+          />
         </span>
-        <Button
-          onMouseEnter={() => {
-            sounds.playUISound(["sniff1", "sniff2", "sniff3"], {
-              volume: 0.2,
-            });
-          }}
-          onClick={onStart}
-          class="text-lg uppercase mt-6"
-        >
-          Get <span class="font-headline tracking-wide text-base">Started</span>
-          !
-        </Button>
+        <div class="starting:scale-90 starting:opacity-0 delay-600 transition">
+          <Button
+            onMouseEnter={() => {
+              sounds.playUISound(["sniff1", "sniff2", "sniff3"], {
+                volume: 0.2,
+              });
+            }}
+            onClick={onStart}
+            class="text-lg uppercase mt-6"
+          >
+            Get{" "}
+            <span class="font-headline tracking-wide text-base">Started</span>!
+          </Button>
+        </div>
       </div>
     </div>
   );

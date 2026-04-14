@@ -8,6 +8,7 @@ import { idToMolecule } from "~/data/molecules";
 type MemoryMatchModalCardProps = {
   ingredientId: IngredientId;
   className?: ClassValue;
+  titleClass?: ClassValue;
 };
 
 export function MemoryMatchModalCard(props: MemoryMatchModalCardProps) {
@@ -52,8 +53,15 @@ export function MemoryMatchModalCard(props: MemoryMatchModalCardProps) {
           molecule()?.colorClass,
         )}
       />
-      <span class="absolute -bottom-16 left-1/2 -translate-x-1/2 text-3xl uppercase font-bold whitespace-nowrap">
-        {ingredient().title}
+      <span
+        class={cn(
+          "absolute -bottom-16 left-1/2 -translate-x-1/2",
+          "text-3xl uppercase font-bold whitespace-nowrap",
+        )}
+      >
+        <span class={cn("inline-block", props.titleClass)}>
+          {ingredient().title}
+        </span>
       </span>
     </div>
   );

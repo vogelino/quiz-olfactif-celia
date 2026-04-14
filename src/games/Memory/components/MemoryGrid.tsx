@@ -4,6 +4,7 @@ import { MemoryCard } from "./MemoryCard";
 import { IngredientId } from "~/data/ingredients";
 import { useMemoryStore } from "../store";
 import { MemoryDiscoveredPairs } from "./MemoryDiscoveredPairs";
+import { cn } from "~/utils/cn";
 
 export function MemoryGrid() {
   const [store, setStore] = useMemoryStore();
@@ -53,8 +54,14 @@ export function MemoryGrid() {
       <MemoryDiscoveredPairs />
       <div class="grid grid-cols-4 gap-[3vmin] w-[80vmin] aspect-square absolute left-1/2 top-1/2 -translate-1/2">
         <For each={store.cards}>
-          {(card) => (
-            <div class="aspect-square relative w-full flex bg-background-muted rounded-[1vmin]">
+          {(card, index) => (
+            <div
+              class={cn(
+                "aspect-square relative w-full flex bg-background-muted rounded-[1vmin]",
+                "starting:opacity-0 starting:translate-y-4 starting:-rotate-5 transition",
+              )}
+              style={{ "transition-delay": `${index() * 10 + 500}ms` }}
+            >
               <Show when={!store.discoveredPairs.includes(card.pairId)}>
                 <MemoryCard
                   {...card.ingredient}

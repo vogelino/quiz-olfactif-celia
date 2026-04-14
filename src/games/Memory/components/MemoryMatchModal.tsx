@@ -10,6 +10,7 @@ import { useMemoryStore } from "../store";
 import { WavyUnderlinedText } from "~/components/ui/WavyUnderlinedText";
 import { useMemorySounds } from "../memorySounds";
 import { createHotkey } from "@omniaura/solid-hotkeys";
+import { TextReveal } from "~/components/ui/TextReveal";
 
 export function MemoryMatchModal() {
   const [store, setStore] = useMemoryStore();
@@ -62,21 +63,42 @@ export function MemoryMatchModal() {
               )}
             >
               <div class="flex flex-col items-center shrink-0 gap-3">
-                <img
-                  src={`/memory/molecules/${molecule().id}.webp`}
-                  aria-title={molecule().title}
-                  class="h-12 dark:invert dark:mix-blend-screen mix-blend-multiply mb-4"
-                />
-                <h2 class="text-7xl font-bold text-center font-headline">
-                  It's a Match!
+                <div
+                  class={cn("starting:opacity-0 delay-800 transition-opacity")}
+                >
+                  <img
+                    src={`/memory/molecules/${molecule().id}.webp`}
+                    aria-title={molecule().title}
+                    class={cn(
+                      "h-12 dark:invert dark:mix-blend-screen mix-blend-multiply mb-4",
+                    )}
+                  />
+                </div>
+                <h2 class="text-7xl font-bold text-center font-headline w-4xl">
+                  <TextReveal
+                    text="It's a Match!"
+                    fontFamily="Pouler"
+                    fontSize={72}
+                    class="[--start-delay:500ms]"
+                  />
                 </h2>
-                <h3 class="text-2xl flex flex-col gap-5 items-center">
+                <h3
+                  class={cn(
+                    "text-2xl flex flex-col gap-5 items-center transition",
+                    "slide-up delay-700",
+                  )}
+                >
                   <WavyUnderlinedText class="underline-offset-8 pb-4">
                     {molecule().title}
                   </WavyUnderlinedText>
                 </h3>
-                <p class="mt-4 max-w-prose text-center text-lg text-balance">
-                  {pair().description}
+                <p class="mt-4 w-full max-w-prose text-center text-lg text-balance">
+                  <TextReveal
+                    text={pair().description}
+                    fontFamily="Martian Grotesk"
+                    fontSize={18}
+                    class="[--stagger-unit:1ms] [--start-delay:600ms] ease-out-smooth"
+                  />
                 </p>
               </div>
               <div class="flex flex-col relative items-center">
@@ -89,17 +111,29 @@ export function MemoryMatchModal() {
                   <MemoryMatchModalCard
                     ingredientId={ingredientA().id}
                     className={cn("-rotate-1 size-[25vmin]")}
+                    titleClass={cn("slide-up")}
                   />
-                  <div class="text-4xl font-headline translate-y-[13vmin]">
+                  <div
+                    class={cn(
+                      "text-4xl font-headline translate-y-[13vmin]",
+                      "delay-100 slide-up",
+                    )}
+                  >
                     &
                   </div>
                   <MemoryMatchModalCard
                     ingredientId={ingredientB().id}
                     className={cn("rotate-1 size-[25vmin]")}
+                    titleClass={cn("delay-200 slide-up")}
                   />
                 </section>
               </div>
-              <footer class="flex justify-center shrink-0 pb-16">
+              <footer
+                class={cn(
+                  "flex justify-center shrink-0 pb-16",
+                  "delay-1300 duration-[2s] slide-up",
+                )}
+              >
                 <Button onClick={onContinue} class="text-lg uppercase">
                   Find{" "}
                   <span class="text-base font-headline tracking-wider">
