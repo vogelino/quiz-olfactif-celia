@@ -15,6 +15,7 @@ const memoryUiSounds = {
   success: "/sounds/success-1.mp3",
   flip: "/sounds/flip-1.m4a",
   firework: "/sounds/firework-1.mp3",
+  particles1: "/sounds/particles-1.m4a",
   sniff1: "/sounds/sniff-1.m4a",
   sniff2: "/sounds/sniff-2.m4a",
   sniff3: "/sounds/sniff-3.m4a",

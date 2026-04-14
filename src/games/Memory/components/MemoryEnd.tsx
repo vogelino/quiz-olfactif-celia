@@ -25,6 +25,9 @@ export function MemoryEnd() {
         confetti({ position: positionList[i] });
         sounds.playUISound("firework");
       }, i * 250);
+      setTimeout(() => {
+        sounds.playUISound("particles1", { volume: 0.3 });
+      }, 300);
     }
   });
 

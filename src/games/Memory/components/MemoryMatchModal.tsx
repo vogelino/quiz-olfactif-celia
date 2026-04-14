@@ -57,6 +57,9 @@ export function MemoryMatchModal() {
       confetti({});
       sounds.playUISound("firework");
     }, 250);
+    setTimeout(() => {
+      sounds.playUISound("particles1", { volume: 0.3 });
+    }, 280);
   });
 
   return (
