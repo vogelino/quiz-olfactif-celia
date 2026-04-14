@@ -5,7 +5,6 @@ import {
   createSignal,
   Match,
   onCleanup,
-  onMount,
   Show,
   Switch,
 } from "solid-js";
@@ -29,6 +28,7 @@ import { getShuffledCards } from "../utils/cards";
 function MemoryInner() {
   const [store, setStore] = useMemoryStore();
   const sounds = useMemorySounds();
+  const [showLoadingScreen, setShowLoadingScreen] = createSignal(false);
 
   createHotkey("M", () =>
     sounds.soundIsOn() ? sounds.turnOffSounds() : sounds.turnOnSounds(),
@@ -48,6 +48,21 @@ function MemoryInner() {
     if (!sounds.isError() && sounds.loadingProgess().percentage === 100) {
       setStore("status", "initial");
     }
+  });
+
+  createEffect(() => {
+    if (store.status !== "loading") {
+      setShowLoadingScreen(false);
+      return;
+    }
+
+    const timeoutId = window.setTimeout(() => {
+      if (store.status === "loading") {
+        setShowLoadingScreen(true);
+      }
+    }, 500);
+
+    onCleanup(() => window.clearTimeout(timeoutId));
   });
 
   return (
@@ -77,7 +92,7 @@ function MemoryInner() {
       </GeneralControls>
       <Show when={!!store.error}>{store.error}</Show>
       <Switch>
-        <Match when={store.status === "loading"}>
+        <Match when={store.status === "loading" && showLoadingScreen()}>
           <MemoryLoading percentage={sounds.loadingProgess().percentage} />
         </Match>
         <Match when={store.status === "initial"}>
