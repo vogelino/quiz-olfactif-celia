@@ -1,4 +1,12 @@
-import { createEffect, createSignal, onCleanup, onMount, Show } from "solid-js";
+import {
+  createEffect,
+  createSignal,
+  Match,
+  onCleanup,
+  onMount,
+  Show,
+  Switch,
+} from "solid-js";
 import confetti from "@hiseb/confetti";
 import { idToIngredient } from "~/data/ingredients";
 import { idToMemoryPair } from "~/data/memory";
@@ -19,6 +27,13 @@ export function MemoryMatchModal() {
   const pairMatch = () => {
     const pairMatchId = store.pairMatchId;
     return pairMatchId ? idToMemoryPair[pairMatchId] : null;
+  };
+
+  const isLastMatch = () => {
+    if (!pairMatch()) return false;
+    const discoveredPairsCount = store.discoveredPairs.length;
+    const totalPairsCount = Object.keys(idToMemoryPair).length;
+    return discoveredPairsCount === totalPairsCount;
   };
 
   const onContinue = () => {
@@ -146,11 +161,16 @@ export function MemoryMatchModal() {
                     });
                   }}
                 >
-                  Find{" "}
-                  <span class="text-base font-headline tracking-wider">
-                    More
-                  </span>
-                  !
+                  <Switch>
+                    <Match when={isLastMatch()}>
+                      Well{" "}
+                      <span class="font-headline tracking-wider">Done</span>!
+                    </Match>
+                    <Match when={!isLastMatch()}>
+                      Find{" "}
+                      <span class="font-headline tracking-wider">More</span>!
+                    </Match>
+                  </Switch>
                 </Button>
               </footer>
             </div>

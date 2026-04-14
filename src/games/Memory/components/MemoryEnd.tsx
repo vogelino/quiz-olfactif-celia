@@ -82,8 +82,7 @@ Them All!`}
             }}
             class="text-lg uppercase mt-6"
           >
-            Play{" "}
-            <span class="tracking-wider font-headline text-base">again</span>!
+            Play <span class="tracking-wider font-headline">again</span>!
           </Button>
         </div>
       </div>

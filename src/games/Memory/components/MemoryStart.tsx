@@ -80,8 +80,7 @@ Memory Game!`}
             onClick={onStart}
             class="text-lg uppercase mt-6"
           >
-            Get{" "}
-            <span class="font-headline tracking-wide text-base">Started</span>!
+            Get <span class="font-headline tracking-wide">Started</span>!
           </Button>
         </div>
       </div>
