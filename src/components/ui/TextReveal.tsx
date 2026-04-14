@@ -98,7 +98,10 @@ export function TextReveal({
   onCleanup(() => resizeObserver.disconnect());
 
   return (
-    <div ref={containerRef} class={cn("whitespace-nowrap", className)}>
+    <div
+      ref={containerRef}
+      class={cn("whitespace-nowrap flex flex-col items-center", className)}
+    >
       <For each={lines()}>
         {(line, lineIdx) => (
           <div class="whitespace-nowrap">
