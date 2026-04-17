@@ -59,8 +59,10 @@ export function MemoryGrid() {
           {(card, index) => (
             <div
               class={cn(
-                "aspect-square relative w-full flex bg-background-muted rounded-[1vmin]",
+                "aspect-square relative w-full flex rounded-[1vmin]",
                 "starting:opacity-0 starting:translate-y-4 starting:-rotate-5 transition",
+                store.discoveredPairs.includes(card.pairId) &&
+                  "bg-background-muted",
               )}
               style={{ "transition-delay": `${index() * 10 + 500}ms` }}
               onTransitionStart={(evt) => {

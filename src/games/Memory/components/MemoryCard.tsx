@@ -27,7 +27,7 @@ export function MemoryCard({
   const sounds = useMemorySounds();
   const innerCommonClasses = cn(
     "w-full rounded aspect-square max-w-full max-h-full",
-    "transition-transform shadow-xl backface-hidden",
+    "transition-transform backface-hidden",
     "pointer-events-none select-none absolute top-1/2 left-1/2 -translate-1/2",
   );
   const turnAround = () => pairIsDiscovered() || isRevealed();
@@ -70,7 +70,6 @@ export function MemoryCard({
           class={cn(
             "w-full aspect-square relative rounded-lg contain-size",
             "flex items-center justify-center max-w-full max-h-full",
-            pairIsDiscovered() && "bg-white",
           )}
         >
           <img
@@ -81,7 +80,11 @@ export function MemoryCard({
           <Show when={!pairIsDiscovered()}>
             <img
               src="/memory/card-front.webp"
-              class={cn("absolute-full aspect-square rounded-lg", "-z-20")}
+              class={cn(
+                "absolute-full aspect-square rounded-lg",
+                "-z-20 drop-shadow-xl",
+                "dark:filter-[drop-shadow(2px_0_0_var(--color-foreground))_drop-shadow(0_2px_0_var(--color-foreground))_drop-shadow(-2px_0_0_var(--color-foreground))_drop-shadow(0_-2px_0_var(--color-foreground))]",
+              )}
               aria-hidden="true"
             />
           </Show>
@@ -92,12 +95,21 @@ export function MemoryCard({
               "z-10 mix-blend-color",
               colorClass,
             )}
+            style={{
+              "mask-image": `url('/memory/card-front.webp')`,
+              "mask-size": "cover",
+            }}
           />
         </div>
       </div>
       <img
         src="/memory/card-back.webp"
-        class={cn(innerCommonClasses, turnAround() && "rotate-y-180")}
+        class={cn(
+          innerCommonClasses,
+          "drop-shadow-xl",
+          "dark:filter-[drop-shadow(2px_0_0_var(--color-foreground))_drop-shadow(0_2px_0_var(--color-foreground))_drop-shadow(-2px_0_0_var(--color-foreground))_drop-shadow(0_-2px_0_var(--color-foreground))]",
+          turnAround() && "rotate-y-180",
+        )}
       />
     </button>
   );

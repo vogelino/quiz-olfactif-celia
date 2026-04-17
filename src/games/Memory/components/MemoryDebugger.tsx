@@ -1,5 +1,5 @@
-import { batch, createSignal, For, Match, Show, Switch } from "solid-js";
-import { MemoryPair, MemoryPairId, memoryPairs } from "~/data/memory";
+import { batch, For, Show } from "solid-js";
+import { MemoryPairId, memoryPairs } from "~/data/memory";
 import { statuses, useMemoryStore } from "../store";
 import { getShuffledCards } from "../utils/cards";
 import { cn } from "~/utils/cn";

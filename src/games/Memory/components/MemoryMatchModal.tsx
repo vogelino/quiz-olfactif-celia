@@ -1,12 +1,4 @@
-import {
-  createEffect,
-  createSignal,
-  Match,
-  onCleanup,
-  onMount,
-  Show,
-  Switch,
-} from "solid-js";
+import { createEffect, Match, Show, Switch } from "solid-js";
 import confetti from "@hiseb/confetti";
 import { idToIngredient } from "~/data/ingredients";
 import { idToMemoryPair } from "~/data/memory";

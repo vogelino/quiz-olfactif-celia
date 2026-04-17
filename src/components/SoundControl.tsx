@@ -1,10 +1,4 @@
-import {
-  Accessor,
-  ComponentProps,
-  createEffect,
-  createSignal,
-  Show,
-} from "solid-js";
+import { Accessor, ComponentProps, Show } from "solid-js";
 import { cn } from "~/utils/cn";
 import { MegaphoneOff, MegaphoneOn } from "./icons";
 import { ClassValue } from "clsx";

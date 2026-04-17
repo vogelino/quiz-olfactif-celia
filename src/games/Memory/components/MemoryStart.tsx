@@ -19,7 +19,8 @@ export function MemoryStart() {
       setStore("status", "started");
       sounds.playUISound("click1");
       sounds.playMusicLoop(
-        ["mainTheme1", "mainTheme2", "mainTheme3", "mainTheme4"],
+        ["mainTheme0"],
+        // ["mainTheme1", "mainTheme2", "mainTheme3", "mainTheme4"],
         { volume: 0.5 },
       );
     });
