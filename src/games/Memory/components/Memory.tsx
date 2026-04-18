@@ -91,23 +91,25 @@ function MemoryInner() {
         </Show>
       </GeneralControls>
       <Show when={!!store.error}>{store.error}</Show>
-      <Switch>
-        <Match when={store.status === "loading" && showLoadingScreen()}>
-          <MemoryLoading percentage={sounds.loadingProgess().percentage} />
-        </Match>
-        <Match when={store.status === "initial"}>
-          <MemoryStart />
-        </Match>
-        <Match when={store.status === "started" && !store.pairMatchId}>
-          <MemoryGrid />
-        </Match>
-        <Match when={store.status !== "initial" && store.pairMatchId}>
-          <MemoryMatchModal />
-        </Match>
-        <Match when={store.status === "complete" && !store.pairMatchId}>
-          <MemoryEnd />
-        </Match>
-      </Switch>
+      <Show when={store.status === "loading" && showLoadingScreen()}>
+        <MemoryLoading percentage={sounds.loadingProgess().percentage} />
+      </Show>
+      <Show when={store.status === "initial"}>
+        <MemoryStart />
+      </Show>
+      <Show
+        when={
+          ["started", "complete"].includes(store.status) && !store.pairMatchId
+        }
+      >
+        <MemoryGrid />
+      </Show>
+      <Show when={store.status !== "initial" && store.pairMatchId}>
+        <MemoryMatchModal />
+      </Show>
+      <Show when={store.status === "complete" && !store.pairMatchId}>
+        <MemoryEnd />
+      </Show>
       <Show when={import.meta.env.DEV}>
         <MemoryDebugger />
       </Show>

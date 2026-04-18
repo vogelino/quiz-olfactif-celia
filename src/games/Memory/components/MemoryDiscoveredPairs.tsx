@@ -50,26 +50,41 @@ export function MemoryDiscoveredPairs() {
                   "bottom-0 left-0 -translate-x-full translate-y-full rotate-6",
                   "left-0 top-1/2 -translate-full -rotate-3",
                 ][pairGroupIndex()],
+                store.status === "complete" &&
+                  [
+                    "translate-x-0 translate-y-1/2",
+                    "-translate-y-1/2 -translate-x-1/2",
+                    "translate-y-1/3 translate-x-0",
+                    ,
+                    "translate-x-0 -translate-y-1/2",
+                    "-translate-x-1/3 translate-y-0",
+                    "translate-x-0 -translate-y-1/2",
+                  ][pairGroupIndex()],
               )}
             >
               <For each={pairGroup}>
                 {(cards) => (
-                  <div class="size-[15vmin] relative opacity-65">
+                  <div class="size-[15vmin] relative">
                     <For each={cards}>
                       {(card, cardIdx) => (
                         <MemoryCard
                           {...card.ingredient}
-                          colorClass={card.colorClass}
+                          colorClass={() => card.colorClass}
                           isRevealed={() => true}
                           pairIsDiscovered={() => true}
                           onToggleReveal={() => {}}
                           rotateLeft={card.rotateLeft}
-                          class={cn(
-                            "size-[15vmin] absolute top-1/2 left-1/2 -translate-1/2",
-                            cardIdx() === 0
-                              ? "translate-x-[calc(-50%-4vmin)] -rotate-4"
-                              : "translate-x-[calc(-50%+4vmin)] translate-y-[calc(-50%+4vmin)]",
-                          )}
+                          class={() =>
+                            cn(
+                              "size-[15vmin] absolute top-1/2 left-1/2 -translate-1/2",
+                              cardIdx() === 0
+                                ? "translate-x-[calc(-50%-4vmin)] -rotate-4"
+                                : "translate-x-[calc(-50%+4vmin)] translate-y-[calc(-50%+4vmin)]",
+                            )
+                          }
+                          fadeWithBgClass={() =>
+                            store.status !== "complete" && "opacity-80"
+                          }
                         />
                       )}
                     </For>

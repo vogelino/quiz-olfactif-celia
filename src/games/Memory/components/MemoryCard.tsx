@@ -5,7 +5,8 @@ import { cn } from "~/utils/cn";
 import { useMemorySounds } from "../memorySounds";
 
 type MemoryCardProps = Ingredient & {
-  colorClass: ClassValue;
+  colorClass: () => ClassValue;
+  fadeWithBgClass?: () => ClassValue;
   isRevealed: () => boolean;
   pairIsDiscovered: () => boolean;
   onToggleReveal: () => void;
@@ -18,6 +19,7 @@ export function MemoryCard({
   title,
   illustration,
   colorClass,
+  fadeWithBgClass,
   isRevealed,
   pairIsDiscovered,
   onToggleReveal,
@@ -75,25 +77,41 @@ export function MemoryCard({
           <img
             src={illustration}
             aria-label={`Illustration of ${title}`}
-            class="size-[40cqw] aspect-square object-contain opacity-70"
+            class="size-[40cqw] aspect-square object-contain opacity-70 -translate-y-5"
           />
-          <Show when={!pairIsDiscovered()}>
+          <Show when={!pairIsDiscovered() || isRevealed()}>
             <img
               src="/memory/card-front.webp"
               class={cn(
                 "absolute-full aspect-square rounded-lg",
-                "-z-20 drop-shadow-xl",
+                "-z-20",
                 "dark:filter-[drop-shadow(2px_0_0_var(--color-foreground))_drop-shadow(0_2px_0_var(--color-foreground))_drop-shadow(-2px_0_0_var(--color-foreground))_drop-shadow(0_-2px_0_var(--color-foreground))]",
+                !pairIsDiscovered() && "drop-shadow-xl",
               )}
               aria-hidden="true"
             />
+            <span class="absolute inset-x-0 bottom-0 h-1/2 flex items-center justify-center text-xl font-bold text-shadow-foreground-muted font-headline tracking-widest">
+              {title}
+            </span>
           </Show>
           <div
             aria-hidden="true"
             class={cn(
               "absolute-full aspect-square rounded-lg",
               "z-10 mix-blend-color",
-              colorClass,
+              colorClass?.(),
+            )}
+            style={{
+              "mask-image": `url('/memory/card-front.webp')`,
+              "mask-size": "cover",
+            }}
+          />
+          <div
+            aria-hidden="true"
+            class={cn(
+              "absolute-full aspect-square rounded-lg",
+              "z-10 bg-background opacity-0",
+              fadeWithBgClass?.(),
             )}
             style={{
               "mask-image": `url('/memory/card-front.webp')`,

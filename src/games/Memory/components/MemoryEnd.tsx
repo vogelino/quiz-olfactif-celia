@@ -34,7 +34,7 @@ export function MemoryEnd() {
   return (
     <div
       class={cn(
-        "w-screen h-screen contain-size p-12 pb-16",
+        "w-screen h-screen inset-0 contain-size p-12 pb-16 fixed z-10",
         "flex items-center justify-center flex-col gap-6",
       )}
     >

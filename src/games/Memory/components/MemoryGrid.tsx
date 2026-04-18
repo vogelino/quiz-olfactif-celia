@@ -50,7 +50,7 @@ export function MemoryGrid() {
 
   return (
     <div
-      class="flex h-screen w-screen items-center justify-center perspective-midrange bg-background py-[15vh] px-[15vw]"
+      class="fixed z-0 inset-0 flex h-screen w-screen items-center justify-center perspective-midrange py-[15vh] px-[15vw]"
       inert={!!store.pairMatchId}
     >
       <MemoryDiscoveredPairs />
@@ -62,20 +62,21 @@ export function MemoryGrid() {
                 "aspect-square relative w-full flex rounded-[1vmin]",
                 "starting:opacity-0 starting:translate-y-4 starting:-rotate-5 transition",
                 store.discoveredPairs.includes(card.pairId) &&
+                  store.status !== "complete" &&
                   "bg-background-muted",
               )}
               style={{ "transition-delay": `${index() * 10 + 500}ms` }}
               onTransitionStart={(evt) => {
                 if (evt.propertyName !== "opacity") return;
                 if (index() % 4 === 0) {
-                  sounds.playUISound("close", { volume: 0.1 });
+                  sounds.playUISound("close", { volume: 0.3 });
                 }
               }}
             >
               <Show when={!store.discoveredPairs.includes(card.pairId)}>
                 <MemoryCard
                   {...card.ingredient}
-                  colorClass={card.colorClass}
+                  colorClass={() => card.colorClass}
                   isRevealed={() =>
                     store.currentTurn.includes(card.ingredient.id)
                   }

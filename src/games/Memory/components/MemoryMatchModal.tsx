@@ -124,7 +124,6 @@ export function MemoryMatchModal() {
                   <MemoryMatchModalCard
                     ingredientId={ingredientA().id}
                     className={cn("-rotate-1 size-[25vmin]")}
-                    titleClass={cn("slide-up")}
                   />
                   <div
                     class={cn(
@@ -137,7 +136,6 @@ export function MemoryMatchModal() {
                   <MemoryMatchModalCard
                     ingredientId={ingredientB().id}
                     className={cn("rotate-1 size-[25vmin]")}
-                    titleClass={cn("delay-200 slide-up")}
                   />
                 </section>
               </div>

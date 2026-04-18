@@ -35,7 +35,7 @@ export function MemoryMatchModalCard(props: MemoryMatchModalCardProps) {
       <img
         src={illustration()}
         aria-title={ingredient().title}
-        class={cn("absolute-full scale-40", "object-contain opacity-70")}
+        class={cn("absolute-full scale-35 -mt-6", "object-contain opacity-70")}
       />
       <img
         src="/memory/card-front.webp"
@@ -59,11 +59,11 @@ export function MemoryMatchModalCard(props: MemoryMatchModalCardProps) {
       />
       <span
         class={cn(
-          "absolute -bottom-16 left-1/2 -translate-x-1/2",
-          "text-3xl uppercase font-bold whitespace-nowrap",
+          "absolute bottom-12 left-1/2 -translate-x-1/2 font-headline",
+          "text-3xl uppercase font-bold whitespace-nowrap opacity-90",
         )}
       >
-        <span class={cn("inline-block", props.titleClass)}>
+        <span class={cn("inline-blockt tracking-widest", props.titleClass)}>
           {ingredient().title}
         </span>
       </span>
