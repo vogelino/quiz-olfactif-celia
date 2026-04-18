@@ -51,7 +51,7 @@ export function MemoryGrid() {
   return (
     <div
       class={cn(
-        "flex h-screen w-screen items-center",
+        "fixed z-0 inset-0 flex h-screen w-screen items-center",
         "justify-center perspective-midrange py-[15vh] px-[15vw]",
         "bg-background bg-texture",
       )}
@@ -62,13 +62,7 @@ export function MemoryGrid() {
         <For each={store.cards}>
           {(card, index) => (
             <div
-              class={cn(
-                "aspect-square relative w-full flex rounded-[1vmin]",
-                "starting:opacity-0 starting:translate-y-4 starting:-rotate-5 transition",
-                store.discoveredPairs.includes(card.pairId) &&
-                  store.status !== "complete" &&
-                  "bg-foreground/3",
-              )}
+              class={cn("aspect-square relative w-full flex")}
               style={{ "transition-delay": `${index() * 10 + 500}ms` }}
               onTransitionStart={(evt) => {
                 if (evt.propertyName !== "opacity") return;
@@ -77,6 +71,25 @@ export function MemoryGrid() {
                 }
               }}
             >
+              <img
+                src="/memory/card-shadow.webp"
+                class={cn(
+                  "absolute inset-0 size-full transition opacity-0",
+                  store.discoveredPairs.includes(card.pairId) &&
+                    store.status !== "complete" &&
+                    cn(
+                      "mix-blend-multiply dark:invert dark:mix-blend-screen",
+                      [
+                        "opacity-10 rotate-0",
+                        "opacity-13 rotate-12",
+                        "opacity-11 rotate-45",
+                        "opacity-8 rotate-90",
+                        "opacity-9 rotate-125",
+                        "opacity-12 rotate-180",
+                      ][index() % 6],
+                    ),
+                )}
+              />
               <Show when={!store.discoveredPairs.includes(card.pairId)}>
                 <MemoryCard
                   {...card.ingredient}
@@ -89,7 +102,11 @@ export function MemoryGrid() {
                   }
                   onToggleReveal={() => onCardRevealToggle(card.ingredient.id)}
                   rotateLeft={card.rotateLeft}
-                  class={() => "w-full"}
+                  class={() =>
+                    cn(
+                      "w-full starting:opacity-0 starting:translate-y-4 starting:-rotate-5 transition",
+                    )
+                  }
                 />
               </Show>
             </div>

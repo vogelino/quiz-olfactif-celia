@@ -44,7 +44,8 @@
 }
 
 @utility glow-ring {
-  --glow-ring-color: var(--tw-ring-color, var(--color-foreground));
+  --glow-ring-color: var(--tw-ring-color, var(--color-white));
+
   @apply filter-[drop-shadow(2px_0_0_var(--glow-ring-color))_drop-shadow(0_2px_0_var(--glow-ring-color))_drop-shadow(-2px_0_0_var(--glow-ring-color))_drop-shadow(0_-2px_0_var(--glow-ring-color))];
 }
 

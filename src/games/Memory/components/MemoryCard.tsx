@@ -71,7 +71,7 @@ export function MemoryCard({
       <div
         class={cn(
           innerCommonClasses,
-          "texture-mask",
+          "light:texture-mask",
           !turnAround() && "rotate-y-180",
         )}
       >
@@ -92,7 +92,7 @@ export function MemoryCard({
               class={cn(
                 "absolute-full aspect-square rounded-lg",
                 "-z-20",
-                !pairIsDiscovered() && "dark:glow-ring",
+                !pairIsDiscovered() && "glow-ring",
               )}
               aria-hidden="true"
             />
@@ -130,7 +130,7 @@ export function MemoryCard({
         src="/memory/card-back.webp"
         class={cn(
           innerCommonClasses,
-          "dark:glow-ring",
+          "glow-ring texture-mask",
           turnAround() && "rotate-y-180",
         )}
       />
