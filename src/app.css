@@ -132,8 +132,8 @@ body {
   font-size: var(--fluid-type);
 }
 
-.tsparticles > canvas {
-  z-index: 51 !important;
+body > canvas:last-of-type {
+  filter: grayscale(1) brightness(0.9);
 }
 
 @layer utilities {
