@@ -77,6 +77,7 @@ export function MemoryDiscoveredPairs() {
                           class={() =>
                             cn(
                               "size-[15vmin] absolute top-1/2 left-1/2 -translate-1/2",
+                              store.status === "complete" && "dark:glow-ring",
                               cardIdx() === 0
                                 ? "translate-x-[calc(-50%-4vmin)] -rotate-4"
                                 : "translate-x-[calc(-50%+4vmin)] translate-y-[calc(-50%+4vmin)]",

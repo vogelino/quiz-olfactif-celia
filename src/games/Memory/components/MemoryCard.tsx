@@ -11,7 +11,7 @@ type MemoryCardProps = Ingredient & {
   pairIsDiscovered: () => boolean;
   onToggleReveal: () => void;
   rotateLeft?: boolean;
-  class?: ClassValue;
+  class?: () => ClassValue;
 };
 
 export function MemoryCard({
@@ -57,7 +57,8 @@ export function MemoryCard({
         !pairIsDiscovered() && !isRevealed() && "hover:scale-105",
         rotateLeft && !pairIsDiscovered() && !isRevealed() && "hover:-rotate-2",
         !rotateLeft && !pairIsDiscovered() && !isRevealed() && "hover:rotate-2",
-        className,
+        pairIsDiscovered() && "cursor-default size-full",
+        className?.(),
       )}
       onClick={() => {
         sounds.playUISound("click1");
@@ -85,12 +86,11 @@ export function MemoryCard({
               class={cn(
                 "absolute-full aspect-square rounded-lg",
                 "-z-20",
-                "dark:filter-[drop-shadow(2px_0_0_var(--color-foreground))_drop-shadow(0_2px_0_var(--color-foreground))_drop-shadow(-2px_0_0_var(--color-foreground))_drop-shadow(0_-2px_0_var(--color-foreground))]",
-                !pairIsDiscovered() && "drop-shadow-xl",
+                !pairIsDiscovered() && "drop-shadow-xl dark:glow-ring",
               )}
               aria-hidden="true"
             />
-            <span class="absolute inset-x-0 bottom-0 h-1/2 flex items-center justify-center text-xl font-bold text-shadow-foreground-muted font-headline tracking-widest">
+            <span class="absolute inset-x-0 bottom-0 h-1/2 flex items-center justify-center text-xl font-bold text-black/90 font-headline tracking-widest">
               {title}
             </span>
           </Show>
@@ -110,7 +110,7 @@ export function MemoryCard({
             aria-hidden="true"
             class={cn(
               "absolute-full aspect-square rounded-lg",
-              "z-10 bg-background opacity-0",
+              "z-10 bg-background bg-texture opacity-0",
               fadeWithBgClass?.(),
             )}
             style={{
@@ -124,8 +124,7 @@ export function MemoryCard({
         src="/memory/card-back.webp"
         class={cn(
           innerCommonClasses,
-          "drop-shadow-xl",
-          "dark:filter-[drop-shadow(2px_0_0_var(--color-foreground))_drop-shadow(0_2px_0_var(--color-foreground))_drop-shadow(-2px_0_0_var(--color-foreground))_drop-shadow(0_-2px_0_var(--color-foreground))]",
+          "drop-shadow-xl dark:glow-ring",
           turnAround() && "rotate-y-180",
         )}
       />

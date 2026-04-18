@@ -65,8 +65,8 @@ export function MemoryMatchModal() {
           <dialog
             id="memory-match-modal"
             class={cn(
-              "w-screen h-screen fixed inset-0 z-10 bg-background-muted text-foreground ",
-              "overflow-y-auto flex flex-col",
+              "w-screen h-screen fixed inset-0 z-10 bg-background-muted bg-texture",
+              "overflow-y-auto flex flex-col text-foreground",
             )}
           >
             <div

@@ -32,8 +32,9 @@ export function MemoryStart() {
   return (
     <div
       class={cn(
-        "w-screen h-screen contain-size p-12 pb-16",
+        "fixed inset-0 w-screen h-screen contain-size p-12 pb-16",
         "flex items-center justify-center flex-col gap-6",
+        "bg-background bg-texture",
       )}
     >
       <div

@@ -7,7 +7,7 @@ const buttonVariants = cva(
   cn(
     "rounded cursor-pointer border border-transparent",
     "focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-offset-2",
-    "focus-visible:ring-offset-background",
+    "focus-visible:ring-offset-background focus-visible:ring-foreground",
     "hover:bg-foreground/5",
     styles.btnTransition,
   ),

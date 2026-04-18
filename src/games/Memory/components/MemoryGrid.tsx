@@ -50,7 +50,11 @@ export function MemoryGrid() {
 
   return (
     <div
-      class="fixed z-0 inset-0 flex h-screen w-screen items-center justify-center perspective-midrange py-[15vh] px-[15vw]"
+      class={cn(
+        "flex h-screen w-screen items-center",
+        "justify-center perspective-midrange py-[15vh] px-[15vw]",
+        "bg-background bg-texture",
+      )}
       inert={!!store.pairMatchId}
     >
       <MemoryDiscoveredPairs />
@@ -63,7 +67,7 @@ export function MemoryGrid() {
                 "starting:opacity-0 starting:translate-y-4 starting:-rotate-5 transition",
                 store.discoveredPairs.includes(card.pairId) &&
                   store.status !== "complete" &&
-                  "bg-background-muted",
+                  "bg-foreground/3",
               )}
               style={{ "transition-delay": `${index() * 10 + 500}ms` }}
               onTransitionStart={(evt) => {
@@ -85,7 +89,7 @@ export function MemoryGrid() {
                   }
                   onToggleReveal={() => onCardRevealToggle(card.ingredient.id)}
                   rotateLeft={card.rotateLeft}
-                  class="w-full"
+                  class={() => "w-full"}
                 />
               </Show>
             </div>

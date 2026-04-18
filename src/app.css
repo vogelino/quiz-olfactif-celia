@@ -25,6 +25,29 @@
   @apply starting:opacity-0 starting:translate-y-4 transition-[opacity,translate] duration-[300ms,1000ms] ease-[ease-in-out,cubic-bezier(.16,.55,0,1)];
 }
 
+@utility bg-texture {
+  background-image: url("/memory/bg-texture-light.png");
+  background-repeat: repeat;
+  background-size: 320px 320px;
+
+  @media (prefers-color-scheme: dark) {
+    background-image: url("/memory/bg-texture-dark.png");
+  }
+
+  &.dark {
+    background-image: url("/memory/bg-texture-dark.png");
+  }
+
+  &.light {
+    background-image: url("/memory/bg-texture-light.png");
+  }
+}
+
+@utility glow-ring {
+  --glow-ring-color: var(--tw-ring-color, var(--color-foreground));
+  @apply filter-[drop-shadow(2px_0_0_var(--glow-ring-color))_drop-shadow(0_2px_0_var(--glow-ring-color))_drop-shadow(-2px_0_0_var(--glow-ring-color))_drop-shadow(0_-2px_0_var(--glow-ring-color))];
+}
+
 @theme {
   --color-background: var(--color-white);
   --color-foreground: var(--color-black);

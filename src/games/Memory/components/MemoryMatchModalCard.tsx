@@ -43,6 +43,7 @@ export function MemoryMatchModalCard(props: MemoryMatchModalCardProps) {
         class={cn(
           "absolute-full w-auto rounded-xl object-cover",
           "-z-10 pointer-events-auto select-none drop-shadow-xl",
+          "dark:glow-ring",
         )}
       />
       <div
@@ -61,6 +62,7 @@ export function MemoryMatchModalCard(props: MemoryMatchModalCardProps) {
         class={cn(
           "absolute bottom-12 left-1/2 -translate-x-1/2 font-headline",
           "text-3xl uppercase font-bold whitespace-nowrap opacity-90",
+          "text-black/90",
         )}
       >
         <span class={cn("inline-blockt tracking-widest", props.titleClass)}>
