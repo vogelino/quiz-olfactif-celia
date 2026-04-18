@@ -17,7 +17,7 @@ const buttonVariants = cva(
         primary: cn(
           "bg-foreground text-background hover:bg-foreground/80",
           "border-foreground hover:border-foreground/80",
-          "hover:scale-105 active:scale-95",
+          "hover:scale-105 active:scale-95 texture-mask",
         ),
         secondary: cn("bg-background text-foreground border-border"),
         ghost: cn("bg-transparent"),

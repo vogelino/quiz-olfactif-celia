@@ -44,7 +44,7 @@ export function MemoryEnd() {
           "py-16 px-20 rounded-lg",
         )}
       >
-        <h1 class="text-7xl font-bold text-center font-headline w-4xl max-w-[calc(100vw-10rem)]">
+        <h1 class="text-7xl font-bold text-center font-headline w-4xl max-w-[calc(100vw-10rem)] texture-mask">
           <TextReveal
             text={`You Found
 Them All!`}

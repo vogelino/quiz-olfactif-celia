@@ -87,7 +87,7 @@ export function MemoryMatchModal() {
                     )}
                   />
                 </div>
-                <h2 class="text-7xl font-bold text-center font-headline w-4xl">
+                <h2 class="text-7xl font-bold text-center font-headline w-4xl texture-mask">
                   <TextReveal
                     text="It's a Match!"
                     fontFamily="Pouler"

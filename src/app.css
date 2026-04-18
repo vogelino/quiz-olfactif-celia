@@ -48,6 +48,12 @@
   @apply filter-[drop-shadow(2px_0_0_var(--glow-ring-color))_drop-shadow(0_2px_0_var(--glow-ring-color))_drop-shadow(-2px_0_0_var(--glow-ring-color))_drop-shadow(0_-2px_0_var(--glow-ring-color))];
 }
 
+@utility texture-mask {
+  mask-image: url("/memory/texture-mask.webp");
+  mask-repeat: repeat;
+  mask-size: 200px 200px;
+}
+
 @theme {
   --color-background: var(--color-white);
   --color-foreground: var(--color-black);

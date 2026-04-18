@@ -26,6 +26,7 @@ export function MemoryMatchModalCard(props: MemoryMatchModalCardProps) {
       class={cn(
         "aspect-square rounded-xl relative",
         "flex items-center justify-center",
+        "texture-mask",
         props.className,
       )}
       style={{
@@ -42,7 +43,7 @@ export function MemoryMatchModalCard(props: MemoryMatchModalCardProps) {
         aria-hidden="true"
         class={cn(
           "absolute-full w-auto rounded-xl object-cover",
-          "-z-10 pointer-events-auto select-none drop-shadow-xl",
+          "-z-10 pointer-events-auto select-none",
           "dark:glow-ring",
         )}
       />

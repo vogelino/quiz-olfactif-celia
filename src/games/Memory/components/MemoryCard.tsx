@@ -68,7 +68,13 @@ export function MemoryCard({
         "view-transition-name": `memory-card-${id}`,
       }}
     >
-      <div class={cn(innerCommonClasses, !turnAround() && "rotate-y-180")}>
+      <div
+        class={cn(
+          innerCommonClasses,
+          "texture-mask",
+          !turnAround() && "rotate-y-180",
+        )}
+      >
         <div
           class={cn(
             "w-full aspect-square relative rounded-lg contain-size",
@@ -86,7 +92,7 @@ export function MemoryCard({
               class={cn(
                 "absolute-full aspect-square rounded-lg",
                 "-z-20",
-                !pairIsDiscovered() && "drop-shadow-xl dark:glow-ring",
+                !pairIsDiscovered() && "dark:glow-ring",
               )}
               aria-hidden="true"
             />
@@ -124,7 +130,7 @@ export function MemoryCard({
         src="/memory/card-back.webp"
         class={cn(
           innerCommonClasses,
-          "drop-shadow-xl dark:glow-ring",
+          "dark:glow-ring",
           turnAround() && "rotate-y-180",
         )}
       />
