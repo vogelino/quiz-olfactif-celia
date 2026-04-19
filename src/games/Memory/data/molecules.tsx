@@ -13,7 +13,7 @@ const ethylButyrate = {
   id: "ethylButyrate",
   title: "Ethyl butyrate",
   pubChemId: 7762,
-  colorClass: "bg-red-500",
+  colorClass: "bg-data-viz-6",
   referenceLinks: [
     {
       url: "https://pubchem.ncbi.nlm.nih.gov/compound/7762",
@@ -26,7 +26,7 @@ const lactones = {
   id: "lactones",
   title: "Lactones",
   pubChemId: 443021,
-  colorClass: "bg-yellow-500",
+  colorClass: "bg-data-viz-5",
   referenceLinks: [
     {
       url: "https://www.scentree.co/en/Delta-octalactone.html",
@@ -39,7 +39,7 @@ const benzaldehyde = {
   id: "benzaldehyde",
   title: "Benzaldehyde",
   pubChemId: 240,
-  colorClass: "bg-cyan-500",
+  colorClass: "bg-data-viz-4",
   referenceLinks: [
     {
       url: "https://pubchem.ncbi.nlm.nih.gov/compound/240",
@@ -56,7 +56,7 @@ const calone = {
   id: "calone",
   title: "Calone",
   pubChemId: 6432154,
-  colorClass: "bg-green-500",
+  colorClass: "bg-data-viz-3",
   referenceLinks: [
     {
       url: "https://pubchem.ncbi.nlm.nih.gov/compound/6432154",
@@ -73,7 +73,7 @@ const aldehydeC10 = {
   id: "aldehydeC10",
   title: "Aldehyde C10 (Decanal)",
   pubChemId: 8175,
-  colorClass: "bg-indigo-500",
+  colorClass: "bg-data-viz-9",
   referenceLinks: [
     {
       url: "https://pubchem.ncbi.nlm.nih.gov/compound/8175",
@@ -90,7 +90,7 @@ const roseOxide = {
   id: "roseOxide",
   title: "Rose oxide",
   pubChemId: 27866,
-  colorClass: "bg-fuchsia-500",
+  colorClass: "bg-data-viz-1",
   referenceLinks: [
     {
       url: "https://pubchem.ncbi.nlm.nih.gov/compound/27866",
@@ -103,7 +103,7 @@ const anethol = {
   id: "anethol",
   title: "Anethol",
   pubChemId: 637563,
-  colorClass: "bg-slate-500",
+  colorClass: "bg-data-viz-7",
   referenceLinks: [
     {
       url: "https://pubchem.ncbi.nlm.nih.gov/compound/637563",
@@ -120,7 +120,7 @@ const ethanethiol = {
   id: "ethanethiol",
   title: "Ethanethiol (Sulfur compound)",
   pubChemId: 6343,
-  colorClass: "bg-mauve-500",
+  colorClass: "bg-data-viz-8",
   referenceLinks: [
     {
       url: "https://pubchem.ncbi.nlm.nih.gov/compound/6343",

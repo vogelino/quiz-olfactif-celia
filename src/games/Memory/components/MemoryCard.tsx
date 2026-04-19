@@ -80,12 +80,21 @@ export function MemoryCard({
             "flex justify-center max-w-full max-h-full",
           )}
         >
+          <div
+            aria-hidden="true"
+            class={cn(
+              "absolute -inset-0.75 aspect-square rounded-lg",
+              "z-0 mix-blend-screen mask-cover",
+              "mask-[url('/memory/card-front.webp')]",
+              colorClass?.(),
+            )}
+          />
           <img
             src={`/memory/ingredients/${id}.webp`}
             aria-label={`Illustration of ${title}`}
             class={cn(
               "absolute inset-x-0 top-0 w-full scale-35 h-6/7",
-              "object-contain opacity-70",
+              "object-contain",
             )}
           />
           <Show when={!pairIsDiscovered() || isRevealed()}>
@@ -101,25 +110,13 @@ export function MemoryCard({
             <span
               class={cn(
                 "absolute inset-x-0 bottom-0 h-1/2 flex items-center",
-                "justify-center text-xl font-bold text-black/90 font-headline tracking-widest",
+                "justify-center text-xl font-bold text-black font-headline tracking-widest",
                 "text-xs md:text-sm lg:text-base",
               )}
             >
               {title}
             </span>
           </Show>
-          <div
-            aria-hidden="true"
-            class={cn(
-              "absolute-full aspect-square rounded-lg",
-              "z-10 mix-blend-color",
-              colorClass?.(),
-            )}
-            style={{
-              "mask-image": `url('/memory/card-front.webp')`,
-              "mask-size": "cover",
-            }}
-          />
           <div
             aria-hidden="true"
             class={cn(

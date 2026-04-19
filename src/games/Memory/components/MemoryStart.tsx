@@ -48,7 +48,7 @@ Memory Game!`}
             class="[--stagger-unit:10ms]"
           />
         </h1>
-        <div class="text-2xl w-full text-center text-balance leading-normal">
+        <div class="text-2xl w-full max-w-2xl text-center text-balance leading-normal">
           <TextReveal
             text="Find pairs of raw material cards and discover what they have in common!"
             fontFamily="Martian Grotesk"
@@ -74,9 +74,8 @@ Memory Game!`}
               });
             }}
             onClick={onStart}
-            class="text-lg uppercase"
           >
-            Get <span class="font-headline tracking-wide">Started</span>!
+            Play <span class="font-headline tracking-wide">Now</span>!
           </Button>
         </div>
       </div>

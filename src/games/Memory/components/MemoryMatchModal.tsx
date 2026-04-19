@@ -1,5 +1,4 @@
 import confetti from "@hiseb/confetti";
-import { MemoryMatchModalCard } from "@memory/components/MemoryMatchModalCard";
 import { ShardUnderlinedText } from "@memory/components/ui/ShardUnderlinedText";
 import { idToIngredient } from "@memory/data/ingredients";
 import { idToMemoryPair } from "@memory/data/memoryPairs";
@@ -10,6 +9,7 @@ import { createHotkey } from "@omniaura/solid-hotkeys";
 import { createEffect, Match, Show, Switch } from "solid-js";
 import { Button } from "~/components/ui/Button";
 import { TextReveal } from "~/components/ui/TextReveal";
+import { MemoryCard } from "~/games/Memory/components/MemoryCard";
 import { cn } from "~/utils/cn";
 
 export function MemoryMatchModal() {
@@ -69,12 +69,37 @@ export function MemoryMatchModal() {
             )}
           >
             <div
+              id="color-frame"
+              class={cn(
+                "absolute top-3 h-[calc(100%-1.5rem)] min-h-[calc(100vh-1.5rem)]",
+                "border-shards dark:invert rounded-full left-1/2 w-[calc(100vw-2rem)] -translate-x-1/2",
+              )}
+            />
+            <div
+              id="color-bg"
+              aria-hidden="true"
+              class={cn(
+                "pointer-events-none",
+                "absolute inset-0 w-screen h-screen mix-blend-lighten",
+                molecule()?.colorClass,
+              )}
+            />
+            <div
+              id="color-stain"
+              aria-hidden="true"
+              class={cn(
+                "pointer-events-none",
+                "absolute inset-0 w-screen h-screen mix-blend-multiply opacity-20",
+                "mask-[url('/memory/bg-gradient.webp')] mask-bottom mask-no-repeat mask-cover",
+                molecule()?.colorClass,
+              )}
+            />
+            <div
               class={cn(
                 "w-[90vw] flex flex-col justify-center items-center gap-12",
                 "relative contain-inline-size py-20 mx-auto min-h-screen",
               )}
             >
-              <div class="absolute top-3 h-[calc(100%-1.5rem)] min-h-[calc(100vh-1.5rem)] border-shards dark:invert rounded-full left-1/2 w-[calc(100vw-2rem)] -translate-x-1/2" />
               <div class="w-full contain-inline-size flex flex-col items-center shrink-0 gap-3">
                 <div
                   class={cn("starting:opacity-0 delay-800 transition-opacity")}
@@ -118,9 +143,14 @@ export function MemoryMatchModal() {
                     "grid grid-cols-[1fr_auto_1fr] gap-x-8 gap-y-4 items-start",
                   )}
                 >
-                  <MemoryMatchModalCard
-                    ingredientId={ingredientA().id}
-                    className={cn("-rotate-1 size-[25vmin]")}
+                  <MemoryCard
+                    {...ingredientA()}
+                    colorClass={() => molecule().colorClass}
+                    isRevealed={() => true}
+                    pairIsDiscovered={() => false}
+                    onToggleReveal={() => {}}
+                    rotateLeft
+                    class={() => "-rotate-1 size-[25vmin]"}
                   />
                   <div
                     class={cn(
@@ -130,9 +160,13 @@ export function MemoryMatchModal() {
                   >
                     &
                   </div>
-                  <MemoryMatchModalCard
-                    ingredientId={ingredientB().id}
-                    className={cn("rotate-1 size-[25vmin]")}
+                  <MemoryCard
+                    {...ingredientB()}
+                    colorClass={() => molecule().colorClass}
+                    isRevealed={() => true}
+                    pairIsDiscovered={() => false}
+                    onToggleReveal={() => {}}
+                    class={() => "-rotate-1 size-[25vmin]"}
                   />
                 </section>
               </div>
@@ -144,7 +178,6 @@ export function MemoryMatchModal() {
               >
                 <Button
                   onClick={onContinue}
-                  class="text-lg uppercase"
                   onMouseEnter={() => {
                     sounds.playUISound(["sniff1", "sniff2", "sniff3"], {
                       volume: 0.2,

@@ -68,6 +68,17 @@
   --color-foreground-muted: var(--color-neutral-500);
   --color-border: var(--color-neutral-300);
   --color-border-muted: var(--color-neutral-100);
+
+  --color-data-viz-1: #fd7f6f;
+  --color-data-viz-2: #7eb0d5;
+  --color-data-viz-3: #b2e061;
+  --color-data-viz-4: #bd7ebe;
+  --color-data-viz-5: #ffb55a;
+  --color-data-viz-6: #ffee65;
+  --color-data-viz-7: #beb9db;
+  --color-data-viz-8: #fdcce5;
+  --color-data-viz-9: #8bd3c7;
+
   --font-sans: "Martian Grotesk", sans-serif;
   --font-headline: "Pouler", sans-serif;
 
@@ -139,7 +150,8 @@ body {
 }
 
 body > canvas:last-of-type {
-  filter: grayscale(1) brightness(0.9);
+  filter: grayscale(1) brightness(0.2);
+  mix-blend-mode: color-burn;
 }
 
 @layer utilities {

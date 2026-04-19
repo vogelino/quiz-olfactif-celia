@@ -8,16 +8,16 @@ const buttonVariants = cva(
     "rounded cursor-pointer border border-transparent",
     "focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-offset-2",
     "focus-visible:ring-offset-background focus-visible:ring-foreground",
-    "hover:bg-foreground/5 relative",
+    "hover:bg-foreground/5 relative text-2xl uppercase",
     styles.btnTransition,
   ),
   {
     variants: {
       variant: {
         primary: cn(
-          "bg-foreground text-background hover:bg-foreground/80",
-          "border-foreground hover:border-foreground/80",
-          "hover:scale-105 active:scale-95 texture-mask",
+          "bg-transparent text-foreground hover:bg-foreground/5",
+          "hover:scale-105 active:scale-95 w-[195px] h-[80px] pt-3",
+          "mask-[url('/images/button.webp')] mask-size-[195px_80px] mask-no-repeat",
         ),
         secondary: cn("bg-background text-foreground border-border"),
         ghost: cn("bg-transparent"),
@@ -49,10 +49,11 @@ export function Button({
     <button {...rest} class={buttonVariants({ variant, size, className })}>
       {safeChildren()}
       <Show when={variant === "primary"}>
-        <span
+        <img
+          src="/images/button.webp"
           class={cn(
-            "absolute -inset-4 -translate-y-0.5",
-            "pointer-events-none box-content border-shards invert z-10",
+            "absolute size-full inset-0 mix-blend-multiply dark:mix-blend-screen",
+            "pointer-events-none dark:invert z-10",
           )}
           aria-hidden="true"
         />

@@ -66,7 +66,7 @@ Them All!`}
             Can you finish faster?
           </WavyUnderlinedText>
         </span>
-        <div class={cn("delay-1300 duration-[2s] slide-up")}>
+        <div class={cn("delay-1300 duration-[2s] slide-up mt-6")}>
           <Button
             onMouseEnter={() => {
               sounds.playUISound(["sniff1", "sniff2", "sniff3"], {
@@ -83,7 +83,6 @@ Them All!`}
               });
               sounds.playUISound("click1");
             }}
-            class="text-lg uppercase mt-6"
           >
             Play <span class="tracking-wider font-headline">again</span>!
           </Button>
