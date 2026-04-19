@@ -17,7 +17,6 @@ type MemoryCardProps = Ingredient & {
 export function MemoryCard({
   id,
   title,
-  illustration,
   colorClass,
   fadeWithBgClass,
   isRevealed,
@@ -82,7 +81,7 @@ export function MemoryCard({
           )}
         >
           <img
-            src={illustration}
+            src={`/memory/ingredients/${id}.webp`}
             aria-label={`Illustration of ${title}`}
             class="size-[40cqw] aspect-square object-contain opacity-70 -translate-y-5"
           />

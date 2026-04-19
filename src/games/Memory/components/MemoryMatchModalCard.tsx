@@ -15,7 +15,6 @@ export function MemoryMatchModalCard(props: MemoryMatchModalCardProps) {
   const [store] = useMemoryStore();
   const pair = () => store.pairMatchId && idToMemoryPair[store.pairMatchId];
   const ingredient = () => idToIngredient[props.ingredientId];
-  const illustration = () => ingredient().illustration;
   const molecule = () => {
     const p = pair();
     if (!p) return;
@@ -34,7 +33,7 @@ export function MemoryMatchModalCard(props: MemoryMatchModalCardProps) {
       }}
     >
       <img
-        src={illustration()}
+        src={`/memory/ingredients/${ingredient().id}.webp`}
         aria-title={ingredient().title}
         class={cn("absolute-full scale-35 -mt-6", "object-contain opacity-70")}
       />
