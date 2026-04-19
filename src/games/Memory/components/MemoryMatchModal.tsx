@@ -80,7 +80,7 @@ export function MemoryMatchModal() {
               aria-hidden="true"
               class={cn(
                 "pointer-events-none",
-                "absolute inset-0 w-screen h-screen mix-blend-lighten",
+                "absolute inset-0 w-screen h-screen mix-blend-lighten dark:mix-blend-darken",
                 molecule()?.colorClass,
               )}
             />
@@ -89,7 +89,7 @@ export function MemoryMatchModal() {
               aria-hidden="true"
               class={cn(
                 "pointer-events-none",
-                "absolute inset-0 w-screen h-screen mix-blend-multiply opacity-20",
+                "absolute inset-0 w-screen h-screen mix-blend-multiply dark:mix-blend-screen opacity-20 dark:opacity-10",
                 "mask-[url('/memory/bg-gradient.webp')] mask-bottom mask-no-repeat mask-cover",
                 molecule()?.colorClass,
               )}
