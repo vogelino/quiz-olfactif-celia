@@ -1,8 +1,8 @@
 import { ClassValue } from "clsx";
 import { createEffect, onCleanup, Show } from "solid-js";
-import { Ingredient } from "~/data/ingredients";
+import { Ingredient } from "@memory/data/ingredients";
 import { cn } from "~/utils/cn";
-import { useMemorySounds } from "~/games/Memory/memorySounds";
+import { useMemorySounds } from "@memory/memorySounds";
 
 type MemoryCardProps = Ingredient & {
   colorClass: () => ClassValue;

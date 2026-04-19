@@ -1,6 +1,6 @@
-import { Ingredient, ingredients } from "~/data/ingredients";
-import { ingredientIdToPair, MemoryPairId } from "~/data/memory";
-import { idToMolecule } from "~/data/molecules";
+import { Ingredient, ingredients } from "@memory/data/ingredients";
+import { ingredientIdToPair, MemoryPairId } from "@memory/data/memoryPairs";
+import { idToMolecule } from "@memory/data/molecules";
 
 export type Card = {
   ingredient: Ingredient;

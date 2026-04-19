@@ -1,8 +1,8 @@
+import { IngredientId } from "@memory/data/ingredients";
+import { MemoryPairId } from "@memory/data/memoryPairs";
+import { Card, getShuffledCards } from "@memory/utils/memoryCardsUtil";
 import { createContext, JSXElement, useContext } from "solid-js";
 import { createStore } from "solid-js/store";
-import { IngredientId } from "~/data/ingredients";
-import { MemoryPairId } from "~/data/memory";
-import { Card, getShuffledCards } from "./utils/memoryCardsUtil";
 
 export const statuses = ["loading", "initial", "started", "complete"] as const;
 export type Status = (typeof statuses)[number];

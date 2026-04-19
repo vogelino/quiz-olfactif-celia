@@ -1,9 +1,9 @@
+import { idToIngredient, IngredientId } from "@memory/data/ingredients";
+import { idToMemoryPair } from "@memory/data/memoryPairs";
+import { idToMolecule } from "@memory/data/molecules";
+import { useMemoryStore } from "@memory/memoryStore";
 import { ClassValue } from "clsx";
-import { idToIngredient, IngredientId } from "~/data/ingredients";
 import { cn } from "~/utils/cn";
-import { useMemoryStore } from "~/games/Memory/memoryStore";
-import { idToMemoryPair } from "~/data/memory";
-import { idToMolecule } from "~/data/molecules";
 
 type MemoryMatchModalCardProps = {
   ingredientId: IngredientId;

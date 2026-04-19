@@ -1,5 +1,5 @@
-import { ingredients } from "~/data/ingredients";
-import { molecules } from "~/data/molecules";
+import { ingredients } from "@memory/data/ingredients";
+import { molecules } from "@memory/data/molecules";
 import { usePreloadImages } from "~/utils/preloadImages";
 
 export function usePreloadedMemoryImages() {

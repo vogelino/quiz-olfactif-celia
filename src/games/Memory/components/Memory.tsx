@@ -1,4 +1,4 @@
-import { MemoryGrid } from "./MemoryGrid";
+import { MemoryGrid } from "@memory/components/MemoryGrid";
 import {
   batch,
   createEffect,
@@ -8,22 +8,22 @@ import {
   Show,
   Switch,
 } from "solid-js";
-import { MemoryMatchModal } from "./MemoryMatchModal";
-import { MemoryStart } from "./MemoryStart";
-import { MemoryEnd } from "./MemoryEnd";
+import { MemoryMatchModal } from "@memory/components/MemoryMatchModal";
+import { MemoryStart } from "@memory/components/MemoryStart";
+import { MemoryEnd } from "@memory/components/MemoryEnd";
 import {
   createMemoryStore,
   MemoryStoreProvider,
   useMemoryStore,
-} from "~/games/Memory/memoryStore";
-import { MemoryDebugger } from "./MemoryDebugger";
-import { MemoryLoading } from "./MemoryLoading";
+} from "@memory/memoryStore";
+import { MemoryDebugger } from "@memory/components/MemoryDebugger";
+import { MemoryLoading } from "@memory/components/MemoryLoading";
 import { GeneralControls } from "~/components/GeneralControls";
-import { MemoryRestartButton } from "./MemoryRestartButton";
+import { MemoryRestartButton } from "@memory/components/MemoryRestartButton";
 import { SoundControl } from "~/components/SoundControl";
-import { useMemorySounds } from "../memorySounds";
+import { useMemorySounds } from "@memory/memorySounds";
 import { createHotkey } from "@omniaura/solid-hotkeys";
-import { getShuffledCards } from "../utils/memoryCardsUtil";
+import { getShuffledCards } from "@memory/utils/memoryCardsUtil";
 
 function MemoryInner() {
   const [store, setStore] = useMemoryStore();

@@ -1,16 +1,16 @@
-import { createEffect, Match, Show, Switch } from "solid-js";
 import confetti from "@hiseb/confetti";
-import { idToIngredient } from "~/data/ingredients";
-import { idToMemoryPair } from "~/data/memory";
-import { idToMolecule } from "~/data/molecules";
-import { cn } from "~/utils/cn";
-import { MemoryMatchModalCard } from "./MemoryMatchModalCard";
-import { Button } from "~/components/ui/Button";
-import { useMemoryStore } from "~/games/Memory/memoryStore";
-import { WavyUnderlinedText } from "~/components/ui/WavyUnderlinedText";
-import { useMemorySounds } from "~/games/Memory/memorySounds";
+import { MemoryMatchModalCard } from "@memory/components/MemoryMatchModalCard";
+import { idToIngredient } from "@memory/data/ingredients";
+import { idToMemoryPair } from "@memory/data/memoryPairs";
+import { idToMolecule } from "@memory/data/molecules";
+import { useMemorySounds } from "@memory/memorySounds";
+import { useMemoryStore } from "@memory/memoryStore";
 import { createHotkey } from "@omniaura/solid-hotkeys";
+import { createEffect, Match, Show, Switch } from "solid-js";
+import { Button } from "~/components/ui/Button";
 import { TextReveal } from "~/components/ui/TextReveal";
+import { WavyUnderlinedText } from "~/components/ui/WavyUnderlinedText";
+import { cn } from "~/utils/cn";
 
 export function MemoryMatchModal() {
   const [store, setStore] = useMemoryStore();

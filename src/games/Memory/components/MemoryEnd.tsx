@@ -1,11 +1,11 @@
 import confetti from "@hiseb/confetti";
 import { cn } from "~/utils/cn";
 import { Button } from "~/components/ui/Button";
-import { useMemoryStore } from "~/games/Memory/memoryStore";
+import { useMemoryStore } from "@memory/memoryStore";
 import { batch, onMount } from "solid-js";
-import { getShuffledCards } from "~/games/Memory/utils/memoryCardsUtil";
+import { getShuffledCards } from "@memory/utils/memoryCardsUtil";
 import { WavyUnderlinedText } from "~/components/ui/WavyUnderlinedText";
-import { useMemorySounds } from "../memorySounds";
+import { useMemorySounds } from "@memory/memorySounds";
 import { TextReveal } from "~/components/ui/TextReveal";
 
 export function MemoryEnd() {

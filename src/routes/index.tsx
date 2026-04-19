@@ -1,5 +1,5 @@
-import { Memory } from "~/games/Memory";
-import { MemorySoundsProvider } from "~/games/Memory/memorySounds";
+import { Memory } from "@memory/index";
+import { MemorySoundsProvider } from "@memory/memorySounds";
 
 export default function Home() {
   return (

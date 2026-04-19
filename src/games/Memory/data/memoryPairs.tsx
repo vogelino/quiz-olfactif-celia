@@ -3,9 +3,9 @@ import {
   fresh,
   OlfactiveFamilyId,
   oriental,
-} from "./olfactiveFamilies";
-import { idToMolecule, type MoleculeId } from "./molecules";
-import { idToIngredient, IngredientId } from "./ingredients";
+} from "@memory/data/olfactiveFamilies";
+import { idToMolecule, type MoleculeId } from "@memory/data/molecules";
+import { idToIngredient, IngredientId } from "@memory/data/ingredients";
 
 type MemoryPairSchema = {
   id: string;

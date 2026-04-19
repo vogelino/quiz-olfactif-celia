@@ -5,7 +5,7 @@ import {
 } from "@chenglou/pretext";
 import { ClassValue } from "clsx";
 import { createEffect, createSignal, For, onCleanup, onMount } from "solid-js";
-import { useMemorySounds } from "~/games/Memory/memorySounds";
+import { useMemorySounds } from "@memory/memorySounds";
 import { cn } from "~/utils/cn";
 
 type TextRevealType = {

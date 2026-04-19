@@ -1,11 +1,11 @@
+import { MemoryCard } from "@memory/components/MemoryCard";
+import { MemoryDiscoveredPairs } from "@memory/components/MemoryDiscoveredPairs";
+import { IngredientId } from "@memory/data/ingredients";
+import { ingredientIdToPair, memoryPairs } from "@memory/data/memoryPairs";
+import { useMemorySounds } from "@memory/memorySounds";
+import { useMemoryStore } from "@memory/memoryStore";
 import { For, Show, batch, createEffect } from "solid-js";
-import { ingredientIdToPair, memoryPairs } from "~/data/memory";
-import { MemoryCard } from "./MemoryCard";
-import { IngredientId } from "~/data/ingredients";
-import { useMemoryStore } from "~/games/Memory/memoryStore";
-import { MemoryDiscoveredPairs } from "./MemoryDiscoveredPairs";
 import { cn } from "~/utils/cn";
-import { useMemorySounds } from "~/games/Memory/memorySounds";
 
 export function MemoryGrid() {
   const [store, setStore] = useMemoryStore();
@@ -76,18 +76,18 @@ export function MemoryGrid() {
                 class={cn(
                   "absolute inset-0 size-full transition opacity-0",
                   store.discoveredPairs.includes(card.pairId) &&
-                    store.status !== "complete" &&
-                    cn(
-                      "mix-blend-multiply dark:invert dark:mix-blend-screen",
-                      [
-                        "opacity-10 rotate-0",
-                        "opacity-13 rotate-12",
-                        "opacity-11 rotate-45",
-                        "opacity-8 rotate-90",
-                        "opacity-9 rotate-125",
-                        "opacity-12 rotate-180",
-                      ][index() % 6],
-                    ),
+                  store.status !== "complete" &&
+                  cn(
+                    "mix-blend-multiply dark:invert dark:mix-blend-screen",
+                    [
+                      "opacity-10 rotate-0",
+                      "opacity-13 rotate-12",
+                      "opacity-11 rotate-45",
+                      "opacity-8 rotate-90",
+                      "opacity-9 rotate-125",
+                      "opacity-12 rotate-180",
+                    ][index() % 6],
+                  ),
                 )}
               />
               <Show when={!store.discoveredPairs.includes(card.pairId)}>

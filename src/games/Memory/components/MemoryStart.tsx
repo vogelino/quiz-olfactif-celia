@@ -1,10 +1,10 @@
 import { cn } from "~/utils/cn";
 import { Button } from "~/components/ui/Button";
-import { useMemoryStore } from "~/games/Memory/memoryStore";
+import { useMemoryStore } from "@memory/memoryStore";
 import { onMount } from "solid-js";
 import { WavyUnderlinedText } from "~/components/ui/WavyUnderlinedText";
 import { MegaphoneOn } from "~/components/icons";
-import { useMemorySounds } from "../memorySounds";
+import { useMemorySounds } from "@memory/memorySounds";
 import { createHotkey } from "@omniaura/solid-hotkeys";
 import { TextReveal } from "~/components/ui/TextReveal";
 
