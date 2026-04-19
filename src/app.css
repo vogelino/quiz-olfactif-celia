@@ -55,6 +55,12 @@
   mask-size: 200px 200px;
 }
 
+@utility border-shards {
+  border-style: solid;
+  border-width: 16px;
+  border-image: url("/images/shards-frame-full.webp") 32 / 22px round;
+}
+
 @theme {
   --color-background: var(--color-white);
   --color-foreground: var(--color-black);
@@ -65,7 +71,7 @@
   --font-sans: "Martian Grotesk", sans-serif;
   --font-headline: "Pouler", sans-serif;
 
-  --animate-marquee: marquee 20s linear infinite;
+  --animate-marquee: marquee 50s linear infinite;
   --animate-wiggle: wiggle 1s both infinite;
 
   --ease-out-smooth: cubic-bezier(0.43, 0.2, 0, 0.99);

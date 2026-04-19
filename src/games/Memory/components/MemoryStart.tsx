@@ -1,12 +1,12 @@
-import { cn } from "~/utils/cn";
-import { Button } from "~/components/ui/Button";
-import { useMemoryStore } from "@memory/memoryStore";
-import { onMount } from "solid-js";
-import { WavyUnderlinedText } from "~/components/ui/WavyUnderlinedText";
-import { MegaphoneOn } from "~/components/icons";
 import { useMemorySounds } from "@memory/memorySounds";
+import { useMemoryStore } from "@memory/memoryStore";
 import { createHotkey } from "@omniaura/solid-hotkeys";
+import { onMount } from "solid-js";
+import { MegaphoneOn } from "~/components/icons";
+import { Button } from "~/components/ui/Button";
 import { TextReveal } from "~/components/ui/TextReveal";
+import { ShardUnderlinedText } from "~/games/Memory/components/ui/ShardUnderlinedText";
+import { cn } from "~/utils/cn";
 
 export function MemoryStart() {
   const [, setStore] = useMemoryStore();
@@ -56,19 +56,17 @@ Memory Game!`}
             class="[--stagger-unit:2ms] [--start-delay:250ms]"
           />
         </p>
-        <span class="flex gap-2">
-          <WavyUnderlinedText class="text-lg text-foreground-muted starting:decoration-transparent delay-500 transition-all">
-            Turn you sound on!
-          </WavyUnderlinedText>
+        <ShardUnderlinedText class="flex gap-2 text-lg text-foreground delay-500 transition-all">
+          Turn you sound on!
           <MegaphoneOn
             class={cn(
-              "animate-wiggle translate-y-1 text-foreground-muted",
+              "animate-wiggle text-foreground",
               "starting:opacity-0 transition starting:-rotate-90 delay-500",
               "duration-700 ease-in-out",
             )}
           />
-        </span>
-        <div class={cn("delay-1300 duration-[2s] slide-up")}>
+        </ShardUnderlinedText>
+        <div class={cn("delay-1300 duration-[2s] slide-up mt-6")}>
           <Button
             onMouseEnter={() => {
               sounds.playUISound(["sniff1", "sniff2", "sniff3"], {
@@ -76,7 +74,7 @@ Memory Game!`}
               });
             }}
             onClick={onStart}
-            class="text-lg uppercase mt-6"
+            class="text-lg uppercase"
           >
             Get <span class="font-headline tracking-wide">Started</span>!
           </Button>

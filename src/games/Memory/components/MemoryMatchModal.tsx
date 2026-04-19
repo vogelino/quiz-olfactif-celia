@@ -1,5 +1,6 @@
 import confetti from "@hiseb/confetti";
 import { MemoryMatchModalCard } from "@memory/components/MemoryMatchModalCard";
+import { ShardUnderlinedText } from "@memory/components/ui/ShardUnderlinedText";
 import { idToIngredient } from "@memory/data/ingredients";
 import { idToMemoryPair } from "@memory/data/memoryPairs";
 import { idToMolecule } from "@memory/data/molecules";
@@ -9,7 +10,6 @@ import { createHotkey } from "@omniaura/solid-hotkeys";
 import { createEffect, Match, Show, Switch } from "solid-js";
 import { Button } from "~/components/ui/Button";
 import { TextReveal } from "~/components/ui/TextReveal";
-import { WavyUnderlinedText } from "~/components/ui/WavyUnderlinedText";
 import { cn } from "~/utils/cn";
 
 export function MemoryMatchModal() {
@@ -66,13 +66,14 @@ export function MemoryMatchModal() {
             id="memory-match-modal"
             class={cn(
               "w-screen h-screen fixed inset-0 z-10 bg-background-muted bg-texture",
-              "overflow-y-auto flex flex-col text-foreground",
+              "overflow-y-auto flex flex-col text-foreground justify-center",
             )}
           >
+            <div class="fixed inset-6 border-shards dark:invert rounded-full" />
             <div
               class={cn(
                 "w-screen h-fit flex flex-col justify-center items-center gap-12",
-                "pt-12 pb-16 px-12 relative",
+                "relative",
               )}
             >
               <div class="flex flex-col items-center shrink-0 gap-3">
@@ -97,13 +98,11 @@ export function MemoryMatchModal() {
                 </h2>
                 <h3
                   class={cn(
-                    "text-2xl flex flex-col gap-5 items-center transition",
-                    "slide-up delay-700",
+                    "text-xl flex flex-col gap-5 items-center transition",
+                    "slide-up delay-700 uppercase tracking-widest font-headline",
                   )}
                 >
-                  <WavyUnderlinedText class="underline-offset-8 pb-4">
-                    {molecule().title}
-                  </WavyUnderlinedText>
+                  <ShardUnderlinedText>{molecule().title}</ShardUnderlinedText>
                 </h3>
                 <p class="mt-4 w-full max-w-prose text-center text-lg text-balance">
                   <TextReveal
@@ -118,7 +117,6 @@ export function MemoryMatchModal() {
                 <section
                   class={cn(
                     "grid grid-cols-[1fr_auto_1fr] gap-x-8 gap-y-4 items-start",
-                    "pb-16",
                   )}
                 >
                   <MemoryMatchModalCard

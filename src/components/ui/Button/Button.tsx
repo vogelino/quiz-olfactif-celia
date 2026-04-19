@@ -1,5 +1,5 @@
 import { cva, VariantProps } from "class-variance-authority";
-import { children, ComponentProps } from "solid-js";
+import { children, ComponentProps, Show } from "solid-js";
 import { cn } from "~/utils/cn";
 import styles from "./Button.module.css";
 
@@ -8,7 +8,7 @@ const buttonVariants = cva(
     "rounded cursor-pointer border border-transparent",
     "focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-offset-2",
     "focus-visible:ring-offset-background focus-visible:ring-foreground",
-    "hover:bg-foreground/5",
+    "hover:bg-foreground/5 relative",
     styles.btnTransition,
   ),
   {
@@ -40,7 +40,7 @@ type ButtonProps = ComponentProps<"button"> & ButtonVariants;
 export function Button({
   children: child,
   class: className,
-  variant,
+  variant = "primary",
   size,
   ...rest
 }: ButtonProps) {
@@ -48,6 +48,15 @@ export function Button({
   return (
     <button {...rest} class={buttonVariants({ variant, size, className })}>
       {safeChildren()}
+      <Show when={variant === "primary"}>
+        <span
+          class={cn(
+            "absolute -inset-4 -translate-y-0.5",
+            "pointer-events-none box-content border-shards invert z-10",
+          )}
+          aria-hidden="true"
+        />
+      </Show>
     </button>
   );
 }
