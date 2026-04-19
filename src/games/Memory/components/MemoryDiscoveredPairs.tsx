@@ -51,15 +51,15 @@ export function MemoryDiscoveredPairs() {
                   "left-0 top-1/2 -translate-full -rotate-3",
                 ][pairGroupIndex()],
                 store.status === "complete" &&
-                [
-                  "translate-x-0 translate-y-1/2",
-                  "-translate-y-1/2 -translate-x-1/2",
-                  "translate-y-1/3 translate-x-0",
-                  ,
-                  "translate-x-0 -translate-y-1/2",
-                  "-translate-x-1/3 translate-y-0",
-                  "translate-x-0 -translate-y-1/2",
-                ][pairGroupIndex()],
+                  [
+                    "translate-x-0 translate-y-1/2",
+                    "-translate-y-[250%] sm:-translate-y-1/2 -translate-x-1/2",
+                    "translate-y-1/3 translate-x-0",
+                    ,
+                    "translate-x-0 -translate-y-1/2",
+                    "-translate-x-1/3 translate-y-[150%] sm:translate-y-0",
+                    "translate-x-0 -translate-y-1/2",
+                  ][pairGroupIndex()],
               )}
             >
               <For each={pairGroup}>
@@ -72,7 +72,7 @@ export function MemoryDiscoveredPairs() {
                           colorClass={() => card.colorClass}
                           isRevealed={() => true}
                           pairIsDiscovered={() => true}
-                          onToggleReveal={() => { }}
+                          onToggleReveal={() => {}}
                           rotateLeft={card.rotateLeft}
                           class={() =>
                             cn(

@@ -1,8 +1,8 @@
+import { Ingredient } from "@memory/data/ingredients";
+import { useMemorySounds } from "@memory/memorySounds";
 import { ClassValue } from "clsx";
 import { createEffect, onCleanup, Show } from "solid-js";
-import { Ingredient } from "@memory/data/ingredients";
 import { cn } from "~/utils/cn";
-import { useMemorySounds } from "@memory/memorySounds";
 
 type MemoryCardProps = Ingredient & {
   colorClass: () => ClassValue;
@@ -77,13 +77,16 @@ export function MemoryCard({
         <div
           class={cn(
             "w-full aspect-square relative rounded-lg contain-size",
-            "flex items-center justify-center max-w-full max-h-full",
+            "flex justify-center max-w-full max-h-full",
           )}
         >
           <img
             src={`/memory/ingredients/${id}.webp`}
             aria-label={`Illustration of ${title}`}
-            class="size-[40cqw] aspect-square object-contain opacity-70 -translate-y-5"
+            class={cn(
+              "absolute inset-x-0 top-0 w-full scale-35 h-6/7",
+              "object-contain opacity-70",
+            )}
           />
           <Show when={!pairIsDiscovered() || isRevealed()}>
             <img
@@ -95,7 +98,13 @@ export function MemoryCard({
               )}
               aria-hidden="true"
             />
-            <span class="absolute inset-x-0 bottom-0 h-1/2 flex items-center justify-center text-xl font-bold text-black/90 font-headline tracking-widest">
+            <span
+              class={cn(
+                "absolute inset-x-0 bottom-0 h-1/2 flex items-center",
+                "justify-center text-xl font-bold text-black/90 font-headline tracking-widest",
+                "text-xs md:text-sm lg:text-base",
+              )}
+            >
               {title}
             </span>
           </Show>
