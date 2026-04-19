@@ -18,7 +18,9 @@ export function MemoryRestartButton(props: ComponentProps<typeof Button>) {
           setStore("discoveredPairs", []);
           setStore("error", undefined);
           setStore("pairMatchId", null);
-          setStore("status", "initial");
+          setStore("status", "started");
+          setStore("turnsCount", 0);
+          setStore("pairsStreak", 0);
         });
       }}
       {...props}

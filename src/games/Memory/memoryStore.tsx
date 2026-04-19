@@ -12,6 +12,9 @@ type StoreType = {
   pairMatchId: MemoryPairId | null;
   status: Status;
   currentTurn: IngredientId[];
+  turnsCount: number;
+  pairsStreak: number;
+  pairsBestStreak: number;
   discoveredPairs: MemoryPairId[];
   debuggerStatus: "expanded" | "collapsed";
   error?: string;
@@ -22,6 +25,9 @@ export const createMemoryStore = () =>
     pairMatchId: null,
     status: "loading" as const,
     currentTurn: [],
+    turnsCount: 0,
+    pairsStreak: 0,
+    pairsBestStreak: 0,
     discoveredPairs: [],
     cards: getShuffledCards(),
     debuggerStatus: "collapsed",

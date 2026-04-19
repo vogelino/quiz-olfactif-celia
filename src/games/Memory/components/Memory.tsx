@@ -16,6 +16,7 @@ import { createHotkey } from "@omniaura/solid-hotkeys";
 import { batch, createEffect, createSignal, onCleanup, Show } from "solid-js";
 import { GeneralControls } from "~/components/GeneralControls";
 import { SoundControl } from "~/components/SoundControl";
+import { MemoryScore } from "~/games/Memory/components/MemoryScore";
 
 function MemoryInner() {
   const [store, setStore] = useMemoryStore();
@@ -101,6 +102,11 @@ function MemoryInner() {
       </Show>
       <Show when={store.status === "complete" && !store.pairMatchId}>
         <MemoryEnd />
+      </Show>
+      <Show when={store.status === "started" && !store.pairMatchId}>
+        <MemoryScore
+          class={() => "absolute top-4 left-1/2 -translate-x-1/2 z-10"}
+        />
       </Show>
       <Show when={import.meta.env.DEV}>
         <MemoryDebugger />

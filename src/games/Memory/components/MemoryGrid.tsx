@@ -20,6 +20,7 @@ export function MemoryGrid() {
 
     if (store.currentTurn.length === 2) {
       setStore("currentTurn", [ingredientId]);
+      setStore("pairsStreak", 0);
       return;
     }
 
@@ -27,6 +28,7 @@ export function MemoryGrid() {
     setStore("currentTurn", newTurn);
 
     if (newTurn.length === 2) {
+      setStore("turnsCount", (prev) => prev + 1);
       const pair1 = ingredientIdToPair(newTurn[0]);
       const pair2 = ingredientIdToPair(newTurn[1]);
 
@@ -36,6 +38,10 @@ export function MemoryGrid() {
             setStore("discoveredPairs", (prev) => [...prev, pair1.id]);
             setStore("currentTurn", []);
             setStore("pairMatchId", pair1.id);
+            setStore("pairsStreak", (prev) => prev + 1);
+            setStore("pairsBestStreak", (prev) =>
+              Math.max(prev, store.pairsStreak),
+            );
           });
         });
       }

@@ -6,6 +6,7 @@ import { getShuffledCards } from "@memory/utils/memoryCardsUtil";
 import { batch, onMount } from "solid-js";
 import { Button } from "~/components/ui/Button";
 import { TextReveal } from "~/components/ui/TextReveal";
+import { MemoryScore } from "~/games/Memory/components/MemoryScore";
 import { cn } from "~/utils/cn";
 
 export function MemoryEnd() {
@@ -61,9 +62,10 @@ Them All!`}
             class="[--stagger-unit:2ms] [--start-delay:250ms]"
           />
         </div>
-        <span class="flex gap-2">
-          <ShardUnderlinedText class="text-lg text-foreground-muted starting:decoration-transparent delay-500 transition-all">
-            Can you finish faster?
+        <span class="flex flex-col items-center gap-6 mt-6">
+          <MemoryScore />
+          <ShardUnderlinedText class="text-lg starting:decoration-transparent delay-500 transition-all">
+            Can you finish with less moves?
           </ShardUnderlinedText>
         </span>
         <div class={cn("delay-1300 duration-[2s] slide-up mt-6")}>
@@ -80,6 +82,8 @@ Them All!`}
                 setStore("discoveredPairs", []);
                 setStore("pairMatchId", null);
                 setStore("status", "started");
+                setStore("turnsCount", 0);
+                setStore("pairsStreak", 0);
               });
               sounds.playUISound("click1");
             }}
