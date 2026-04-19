@@ -106,12 +106,16 @@ export function TextReveal({
 
   return (
     <div ref={hostRef} class={cn("w-full min-w-0 max-w-full", className)}>
+      <p class="sr-only">{text}</p>
       <For each={lines()}>
         {(line) => (
-          <div class="flex justify-center whitespace-nowrap max-w-full">
+          <div
+            class="flex justify-center whitespace-nowrap max-w-full"
+            aria-hidden="true"
+          >
             <For each={line}>
               {({ chars, wordIndex }) => (
-                <span class="whitespace-nowrap inline-block">
+                <span class="whitespace-nowrap inline-block" aria-hidden="true">
                   <For each={chars}>
                     {({ char, charIndex }) => {
                       const soundStep = Math.max(
@@ -136,6 +140,7 @@ export function TextReveal({
                           style={{
                             "--transition-delay": `calc(${segmentationUnit === "word" ? wordIndex : charIndex} * var(--stagger-unit, 20ms) + var(--start-delay, 0ms))`,
                           }}
+                          aria-hidden="true"
                         >
                           {char === " " ? <>&nbsp;</> : char}
                         </span>

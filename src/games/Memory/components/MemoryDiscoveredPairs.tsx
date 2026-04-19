@@ -67,14 +67,16 @@ export function MemoryDiscoveredPairs() {
                 <For each={pairGroup}>
                   {(cards) => (
                     <div class="size-[15vmin] relative">
-                      <div
-                        class={cn(
-                          "absolute top-1/2 left-1/2 -translate-1/2 size-[45vmin] bg-black",
-                          "mask-[url('/memory/card-shadow.webp')] mask-cover mask-no-repeat",
-                          "-z-10 mix-blend-multiply opacity-20",
-                          pairGroup[0][0].colorClass,
-                        )}
-                      />
+                      <Show when={store.status === "complete"}>
+                        <div
+                          class={cn(
+                            "absolute top-1/2 left-1/2 -translate-1/2 size-[45vmin] bg-black",
+                            "mask-[url('/memory/card-shadow.webp')] mask-cover mask-no-repeat",
+                            "-z-10 mix-blend-multiply opacity-20",
+                            pairGroup[0][0].colorClass,
+                          )}
+                        />
+                      </Show>
                       <For each={cards}>
                         {(card, cardIdx) => (
                           <MemoryCard
@@ -94,7 +96,7 @@ export function MemoryDiscoveredPairs() {
                               )
                             }
                             fadeWithBgClass={() =>
-                              store.status !== "complete" && "opacity-80"
+                              store.status !== "complete" && "opacity-50"
                             }
                           />
                         )}

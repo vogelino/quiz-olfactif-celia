@@ -59,6 +59,7 @@ Memory Game!`}
         <ShardUnderlinedText class="flex gap-2 text-lg text-foreground delay-500 transition-all">
           Turn you sound on!
           <MegaphoneOn
+            aria-hidden="true"
             class={cn(
               "animate-wiggle text-foreground",
               "starting:opacity-0 transition starting:-rotate-90 delay-500",

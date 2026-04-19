@@ -5,7 +5,7 @@ import { getShuffledCards } from "@memory/utils/memoryCardsUtil";
 import { batch, onMount } from "solid-js";
 import { Button } from "~/components/ui/Button";
 import { TextReveal } from "~/components/ui/TextReveal";
-import { WavyUnderlinedText } from "~/components/ui/WavyUnderlinedText";
+import { ShardUnderlinedText } from "@memory/components/ui/ShardUnderlinedText";
 import { cn } from "~/utils/cn";
 
 export function MemoryEnd() {
@@ -62,9 +62,9 @@ Them All!`}
           />
         </div>
         <span class="flex gap-2">
-          <WavyUnderlinedText class="text-lg text-foreground-muted starting:decoration-transparent delay-500 transition-all">
+          <ShardUnderlinedText class="text-lg text-foreground-muted starting:decoration-transparent delay-500 transition-all">
             Can you finish faster?
-          </WavyUnderlinedText>
+          </ShardUnderlinedText>
         </span>
         <div class={cn("delay-1300 duration-[2s] slide-up mt-6")}>
           <Button
