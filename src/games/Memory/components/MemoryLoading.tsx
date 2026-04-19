@@ -1,5 +1,5 @@
 import { cn } from "~/utils/cn";
-import { usePreloadedMemoryImages } from "../utils/usePreloadedMemoryImages";
+import { usePreloadedMemoryImages } from "~/games/Memory/hooks/usePreloadedMemoryImages";
 
 type MemoryLoadingProps = {
   percentage: number;

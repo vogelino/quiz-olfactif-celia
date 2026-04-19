@@ -1,7 +1,7 @@
 import { batch, For, Show } from "solid-js";
 import { MemoryPairId, memoryPairs } from "~/data/memory";
-import { statuses, useMemoryStore } from "../store";
-import { getShuffledCards } from "../utils/cards";
+import { statuses, useMemoryStore } from "~/games/Memory/memoryStore";
+import { getShuffledCards } from "~/games/Memory/utils/memoryCardsUtil";
 import { cn } from "~/utils/cn";
 
 export function MemoryDebugger() {

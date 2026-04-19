@@ -2,7 +2,7 @@ import { ClassValue } from "clsx";
 import { createEffect, onCleanup, Show } from "solid-js";
 import { Ingredient } from "~/data/ingredients";
 import { cn } from "~/utils/cn";
-import { useMemorySounds } from "../memorySounds";
+import { useMemorySounds } from "~/games/Memory/memorySounds";
 
 type MemoryCardProps = Ingredient & {
   colorClass: () => ClassValue;

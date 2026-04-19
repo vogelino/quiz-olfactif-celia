@@ -1,7 +1,7 @@
 import { ClassValue } from "clsx";
 import { idToIngredient, IngredientId } from "~/data/ingredients";
 import { cn } from "~/utils/cn";
-import { useMemoryStore } from "../store";
+import { useMemoryStore } from "~/games/Memory/memoryStore";
 import { idToMemoryPair } from "~/data/memory";
 import { idToMolecule } from "~/data/molecules";
 

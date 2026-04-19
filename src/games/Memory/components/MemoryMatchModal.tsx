@@ -5,10 +5,10 @@ import { idToMemoryPair } from "~/data/memory";
 import { idToMolecule } from "~/data/molecules";
 import { cn } from "~/utils/cn";
 import { MemoryMatchModalCard } from "./MemoryMatchModalCard";
-import { Button } from "../../../components/ui/Button";
-import { useMemoryStore } from "../store";
+import { Button } from "~/components/ui/Button";
+import { useMemoryStore } from "~/games/Memory/memoryStore";
 import { WavyUnderlinedText } from "~/components/ui/WavyUnderlinedText";
-import { useMemorySounds } from "../memorySounds";
+import { useMemorySounds } from "~/games/Memory/memorySounds";
 import { createHotkey } from "@omniaura/solid-hotkeys";
 import { TextReveal } from "~/components/ui/TextReveal";
 

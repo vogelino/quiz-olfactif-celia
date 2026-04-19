@@ -1,6 +1,6 @@
 import { cn } from "~/utils/cn";
-import { Button } from "../../../components/ui/Button";
-import { useMemoryStore } from "../store";
+import { Button } from "~/components/ui/Button";
+import { useMemoryStore } from "~/games/Memory/memoryStore";
 import { onMount } from "solid-js";
 import { WavyUnderlinedText } from "~/components/ui/WavyUnderlinedText";
 import { MegaphoneOn } from "~/components/icons";

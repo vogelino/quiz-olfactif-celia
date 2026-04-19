@@ -1,7 +1,7 @@
 import { For } from "solid-js";
-import { useMemoryStore } from "../store";
+import { useMemoryStore } from "~/games/Memory/memoryStore";
 import { idToMemoryPair, memoryPairs } from "~/data/memory";
-import { Card, createCards } from "../utils/cards";
+import { Card, createCards } from "~/games/Memory/utils/memoryCardsUtil";
 import { idToIngredient } from "~/data/ingredients";
 import { MemoryCard } from "./MemoryCard";
 import { cn } from "~/utils/cn";

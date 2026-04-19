@@ -2,10 +2,10 @@ import { For, Show, batch, createEffect } from "solid-js";
 import { ingredientIdToPair, memoryPairs } from "~/data/memory";
 import { MemoryCard } from "./MemoryCard";
 import { IngredientId } from "~/data/ingredients";
-import { useMemoryStore } from "../store";
+import { useMemoryStore } from "~/games/Memory/memoryStore";
 import { MemoryDiscoveredPairs } from "./MemoryDiscoveredPairs";
 import { cn } from "~/utils/cn";
-import { useMemorySounds } from "../memorySounds";
+import { useMemorySounds } from "~/games/Memory/memorySounds";
 
 export function MemoryGrid() {
   const [store, setStore] = useMemoryStore();

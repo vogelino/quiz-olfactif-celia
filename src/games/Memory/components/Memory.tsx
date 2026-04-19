@@ -15,7 +15,7 @@ import {
   createMemoryStore,
   MemoryStoreProvider,
   useMemoryStore,
-} from "../store";
+} from "~/games/Memory/memoryStore";
 import { MemoryDebugger } from "./MemoryDebugger";
 import { MemoryLoading } from "./MemoryLoading";
 import { GeneralControls } from "~/components/GeneralControls";
@@ -23,7 +23,7 @@ import { MemoryRestartButton } from "./MemoryRestartButton";
 import { SoundControl } from "~/components/SoundControl";
 import { useMemorySounds } from "../memorySounds";
 import { createHotkey } from "@omniaura/solid-hotkeys";
-import { getShuffledCards } from "../utils/cards";
+import { getShuffledCards } from "../utils/memoryCardsUtil";
 
 function MemoryInner() {
   const [store, setStore] = useMemoryStore();

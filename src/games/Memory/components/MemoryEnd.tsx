@@ -1,9 +1,9 @@
 import confetti from "@hiseb/confetti";
 import { cn } from "~/utils/cn";
-import { Button } from "../../../components/ui/Button";
-import { useMemoryStore } from "../store";
+import { Button } from "~/components/ui/Button";
+import { useMemoryStore } from "~/games/Memory/memoryStore";
 import { batch, onMount } from "solid-js";
-import { getShuffledCards } from "../utils/cards";
+import { getShuffledCards } from "~/games/Memory/utils/memoryCardsUtil";
 import { WavyUnderlinedText } from "~/components/ui/WavyUnderlinedText";
 import { useMemorySounds } from "../memorySounds";
 import { TextReveal } from "~/components/ui/TextReveal";
