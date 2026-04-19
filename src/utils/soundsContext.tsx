@@ -6,7 +6,6 @@ import {
   JSXElement,
   onCleanup,
   onMount,
-  Signal,
   useContext,
 } from "solid-js";
 import { LoadProgress, SoundManager } from "~/utils/SoundManager";

@@ -1,6 +1,5 @@
 import { JSXElement } from "solid-js";
 import { cn } from "~/utils/cn";
-import { SoundControl } from "./SoundControl";
 
 type GeneralControlsProps = {
   children: JSXElement;

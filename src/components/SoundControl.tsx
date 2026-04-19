@@ -1,7 +1,7 @@
+import { ClassValue } from "clsx";
 import { Accessor, ComponentProps, Show } from "solid-js";
 import { cn } from "~/utils/cn";
 import { MegaphoneOff, MegaphoneOn } from "./icons";
-import { ClassValue } from "clsx";
 import { Button } from "./ui/Button";
 
 type SoundControlProps = ComponentProps<typeof Button> & {

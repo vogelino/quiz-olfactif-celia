@@ -72,9 +72,10 @@ export function MemoryGrid() {
               }}
             >
               <img
+                aria-hidden="true"
                 src="/memory/card-shadow.webp"
                 class={cn(
-                  "absolute inset-0 size-full transition opacity-0",
+                  "absolute inset-0 size-full transition opacity-0 pointer-events-none",
                   store.discoveredPairs.includes(card.pairId) &&
                     store.status !== "complete" &&
                     cn(

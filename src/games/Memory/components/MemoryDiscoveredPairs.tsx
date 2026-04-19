@@ -3,7 +3,7 @@ import { idToIngredient } from "@memory/data/ingredients";
 import { idToMemoryPair, memoryPairs } from "@memory/data/memoryPairs";
 import { useMemoryStore } from "@memory/memoryStore";
 import { Card, createCards } from "@memory/utils/memoryCardsUtil";
-import { For } from "solid-js";
+import { For, Show } from "solid-js";
 import { cn } from "~/utils/cn";
 
 type PairEdges = [

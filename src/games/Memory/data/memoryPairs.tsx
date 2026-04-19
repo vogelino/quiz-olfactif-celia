@@ -1,11 +1,11 @@
+import { idToIngredient, IngredientId } from "@memory/data/ingredients";
+import { idToMolecule, type MoleculeId } from "@memory/data/molecules";
 import {
   floral,
   fresh,
   OlfactiveFamilyId,
   oriental,
 } from "@memory/data/olfactiveFamilies";
-import { idToMolecule, type MoleculeId } from "@memory/data/molecules";
-import { idToIngredient, IngredientId } from "@memory/data/ingredients";
 
 type MemoryPairSchema = {
   id: string;
@@ -120,8 +120,9 @@ const ingredientPairEntries = memoryPairs.flatMap((pair) =>
   pair.ingredients.map((ingredientId) => [ingredientId, pair] as const),
 );
 
-const ingredientToPair = Object.fromEntries(
-  ingredientPairEntries,
-) as Record<IngredientId, MemoryPair>;
+const ingredientToPair = Object.fromEntries(ingredientPairEntries) as Record<
+  IngredientId,
+  MemoryPair
+>;
 
 export const ingredientIdToPair = (id: IngredientId) => ingredientToPair[id];

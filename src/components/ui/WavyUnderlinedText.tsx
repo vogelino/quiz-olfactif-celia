@@ -1,5 +1,4 @@
 import { ClassValue } from "clsx";
-import { JSXElement } from "solid-js";
 import { cn } from "~/utils/cn";
 
 type WavyUnderlinedTextProps = {

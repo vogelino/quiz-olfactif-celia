@@ -1,5 +1,3 @@
-import { createContext, JSXElement, useContext } from "solid-js";
-
 interface PlayOptions {
   volume?: number;
   loop?: boolean;
