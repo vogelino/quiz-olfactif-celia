@@ -86,6 +86,7 @@ Them All!`}
                 setStore("pairsStreak", 0);
               });
               sounds.playUISound("click1");
+              sounds.playMusicLoop("mainTheme", { volume: 0.5 });
             }}
           >
             Play <span class="tracking-wider font-headline">again</span>!
