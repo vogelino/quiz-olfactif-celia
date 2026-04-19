@@ -28,7 +28,7 @@ export function MemoryStart() {
   return (
     <div
       class={cn(
-        "fixed inset-0 w-screen h-screen contain-size p-12 pb-16",
+        "fixed inset-0 w-screen h-screen contain-size pb-16",
         "flex items-center justify-center flex-col gap-6",
         "bg-background bg-texture",
       )}
@@ -36,10 +36,10 @@ export function MemoryStart() {
       <div
         class={cn(
           "flex items-center justify-center flex-col gap-4",
-          "py-16 px-20 rounded-lg",
+          "py-16 rounded-lg w-[90vw]",
         )}
       >
-        <h1 class="text-7xl font-bold text-center font-headline w-4xl max-w-[calc(100vw-10rem)] texture-mask">
+        <h1 class="text-7xl font-bold text-center font-headline w-full texture-mask">
           <TextReveal
             text={`The Olfactive
 Memory Game!`}
@@ -48,14 +48,14 @@ Memory Game!`}
             class="[--stagger-unit:10ms]"
           />
         </h1>
-        <p class="text-2xl w-2xl max-w-[calc(100vw-10rem)] text-center text-balance leading-normal">
+        <div class="text-2xl w-full text-center text-balance leading-normal">
           <TextReveal
             text="Find pairs of raw material cards and discover what they have in common!"
             fontFamily="Martian Grotesk"
             fontSize={24}
             class="[--stagger-unit:2ms] [--start-delay:250ms]"
           />
-        </p>
+        </div>
         <ShardUnderlinedText class="flex gap-2 text-lg text-foreground delay-500 transition-all">
           Turn you sound on!
           <MegaphoneOn

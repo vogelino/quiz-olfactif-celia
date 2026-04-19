@@ -62,21 +62,20 @@ export function MemoryMatchModal() {
         const molecule = () => idToMolecule[pair().molecule];
 
         return (
-          <dialog
-            id="memory-match-modal"
+          <div
             class={cn(
               "w-screen h-screen fixed inset-0 z-10 bg-background-muted bg-texture",
-              "overflow-y-auto flex flex-col text-foreground justify-center",
+              "overflow-y-auto text-foreground @container",
             )}
           >
-            <div class="fixed inset-6 border-shards dark:invert rounded-full" />
             <div
               class={cn(
-                "w-screen h-fit flex flex-col justify-center items-center gap-12",
-                "relative",
+                "w-[90vw] flex flex-col justify-center items-center gap-12",
+                "relative contain-inline-size py-20 mx-auto min-h-screen",
               )}
             >
-              <div class="flex flex-col items-center shrink-0 gap-3">
+              <div class="absolute top-3 h-[calc(100%-1.5rem)] min-h-[calc(100vh-1.5rem)] border-shards dark:invert rounded-full left-1/2 w-[calc(100vw-2rem)] -translate-x-1/2" />
+              <div class="w-full contain-inline-size flex flex-col items-center shrink-0 gap-3">
                 <div
                   class={cn("starting:opacity-0 delay-800 transition-opacity")}
                 >
@@ -88,7 +87,7 @@ export function MemoryMatchModal() {
                     )}
                   />
                 </div>
-                <h2 class="text-7xl font-bold text-center font-headline w-4xl texture-mask">
+                <h2 class="text-7xl font-bold text-center font-headline w-full texture-mask">
                   <TextReveal
                     text="It's a Match!"
                     fontFamily="Pouler"
@@ -104,14 +103,14 @@ export function MemoryMatchModal() {
                 >
                   <ShardUnderlinedText>{molecule().title}</ShardUnderlinedText>
                 </h3>
-                <p class="mt-4 w-full max-w-prose text-center text-lg text-balance">
+                <div class="mt-4 w-full max-w-prose text-center text-lg text-balance">
                   <TextReveal
                     text={pair().description}
                     fontFamily="Martian Grotesk"
                     fontSize={18}
                     class="[--stagger-unit:1ms] [--start-delay:600ms] ease-out-smooth"
                   />
-                </p>
+                </div>
               </div>
               <div class="flex flex-col relative items-center">
                 <section
@@ -139,7 +138,7 @@ export function MemoryMatchModal() {
               </div>
               <footer
                 class={cn(
-                  "flex justify-center shrink-0 pb-16",
+                  "flex justify-center shrink-0",
                   "delay-1300 duration-[2s] slide-up",
                 )}
               >
@@ -165,7 +164,7 @@ export function MemoryMatchModal() {
                 </Button>
               </footer>
             </div>
-          </dialog>
+          </div>
         );
       }}
     </Show>

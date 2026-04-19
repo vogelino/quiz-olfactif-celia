@@ -34,14 +34,14 @@ export function MemoryEnd() {
   return (
     <div
       class={cn(
-        "w-screen h-screen inset-0 contain-size p-12 pb-16 fixed z-10",
+        "w-screen h-screen inset-0 contain-size pb-16 fixed z-10",
         "flex items-center justify-center flex-col gap-6",
       )}
     >
       <div
         class={cn(
           "flex items-center justify-center flex-col gap-4",
-          "py-16 px-20 rounded-lg",
+          "py-16 rounded-lg",
         )}
       >
         <h1 class="text-7xl font-bold text-center font-headline w-4xl max-w-[calc(100vw-10rem)] texture-mask">
@@ -53,14 +53,14 @@ Them All!`}
             class="[--stagger-unit:10ms]"
           />
         </h1>
-        <p class="text-2xl w-2xl max-w-[calc(100vw-10rem)] text-center text-balance leading-normal">
+        <div class="text-2xl w-2xl max-w-[calc(100vw-10rem)] text-center text-balance leading-normal">
           <TextReveal
             text="Well done! You've beaten the game like a professional perfumer."
             fontFamily="Martian Grotesk"
             fontSize={24}
             class="[--stagger-unit:2ms] [--start-delay:250ms]"
           />
-        </p>
+        </div>
         <span class="flex gap-2">
           <WavyUnderlinedText class="text-lg text-foreground-muted starting:decoration-transparent delay-500 transition-all">
             Can you finish faster?

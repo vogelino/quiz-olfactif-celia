@@ -1,11 +1,7 @@
-import {
-  prepareWithSegments,
-  layoutWithLines,
-  LayoutLine,
-} from "@chenglou/pretext";
+import { layoutWithLines, prepareWithSegments } from "@chenglou/pretext";
+import { useMemorySounds } from "@memory/memorySounds";
 import { ClassValue } from "clsx";
 import { createEffect, createSignal, For, onCleanup, onMount } from "solid-js";
-import { useMemorySounds } from "@memory/memorySounds";
 import { cn } from "~/utils/cn";
 
 type TextRevealType = {
@@ -40,21 +36,20 @@ export function TextReveal({
 }: TextRevealType) {
   const sounds = useMemorySounds();
   const [lines, setLines] = createSignal<LayoutLineWithCharacters[]>([]);
-  let containerRef!: HTMLDivElement;
-  const prepared = prepareWithSegments(text, `${fontSize}px ${fontFamily}`, {
-    whiteSpace: "pre-wrap",
-    wordBreak: "keep-all",
-  });
-
-  const resizeObserver = new ResizeObserver(calculateLayout);
+  let hostRef!: HTMLDivElement;
+  let resizeObserver: ResizeObserver | undefined;
 
   function calculateLayout() {
-    if (!containerRef) return;
-    const layout = layoutWithLines(
-      prepared,
-      containerRef.getBoundingClientRect().width,
-      fontSize * 1.2,
-    );
+    if (!hostRef) return;
+    const width = Math.floor(hostRef.getBoundingClientRect().width);
+
+    if (width <= 0) return;
+
+    const prepared = prepareWithSegments(text, `${fontSize}px ${fontFamily}`, {
+      whiteSpace: "pre-wrap",
+      wordBreak: "keep-all",
+    });
+    const layout = layoutWithLines(prepared, width, fontSize * 1.2);
     const linesWithWordsAndChars = layout.lines.map((l) =>
       toWordsArr(l.text).map((w) => toCharsArr(w)),
     );
@@ -91,35 +86,46 @@ export function TextReveal({
   }
 
   onMount(() => {
-    resizeObserver.observe(containerRef);
+    resizeObserver = new ResizeObserver(calculateLayout);
+    resizeObserver.observe(hostRef);
+    if (hostRef.parentElement) {
+      resizeObserver.observe(hostRef.parentElement);
+    }
+    calculateLayout();
+    void document.fonts?.ready.then(calculateLayout);
+  });
+
+  createEffect(() => {
+    text;
+    fontSize;
+    fontFamily;
     calculateLayout();
   });
 
-  onCleanup(() => resizeObserver.disconnect());
+  onCleanup(() => resizeObserver?.disconnect());
 
   return (
-    <div
-      ref={containerRef}
-      class={cn("whitespace-nowrap flex flex-col items-center", className)}
-    >
+    <div ref={hostRef} class={cn("w-full min-w-0 max-w-full", className)}>
       <For each={lines()}>
-        {(line, lineIdx) => (
-          <div class="whitespace-nowrap">
+        {(line) => (
+          <div class="flex justify-center whitespace-nowrap max-w-full">
             <For each={line}>
               {({ chars, wordIndex }) => (
                 <span class="whitespace-nowrap inline-block">
                   <For each={chars}>
                     {({ char, charIndex }) => {
+                      const soundStep = Math.max(
+                        1,
+                        Math.floor(
+                          text.length / Math.max(lines().length, 1) / 2,
+                        ),
+                      );
+
                       return (
                         <span
                           onTransitionStart={(evt) => {
                             if (evt.propertyName !== "opacity") return;
-                            if (
-                              charIndex %
-                                Math.floor(text.length / lines().length / 2) !==
-                              0
-                            )
-                              return;
+                            if (charIndex % soundStep !== 0) return;
                             sounds.playUISound("click2", { volume: 0.4 });
                           }}
                           class={cn(
