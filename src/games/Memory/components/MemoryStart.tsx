@@ -53,7 +53,7 @@ Memory Game!`}
             text="Find pairs of raw material cards and discover what they have in common!"
             fontFamily="Martian Grotesk"
             fontSize={24}
-            class="[--stagger-unit:2ms] [--start-delay:250ms]"
+            class="[--stagger-unit:2ms] [--start-delay:250ms] max-w-2xl"
           />
         </div>
         <ShardUnderlinedText class="flex gap-2 text-lg text-foreground delay-500 transition-all">
