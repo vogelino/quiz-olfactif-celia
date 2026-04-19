@@ -23,11 +23,7 @@ const memoryUiSounds = {
 } as const satisfies Record<string, string>;
 
 const memoryMusicSounds = {
-  mainTheme0: "/sounds/main-theme.mp3",
-  // mainTheme1: "/sounds/music-1.mp3",
-  // mainTheme2: "/sounds/music-2.mp3",
-  // mainTheme3: "/sounds/music-3.mp3",
-  // mainTheme4: "/sounds/music-4.mp3",
+  mainTheme: "/sounds/main-theme.mp3",
 } as const satisfies Record<string, string>;
 
 type MemoryUISoundKey = keyof typeof memoryUiSounds;

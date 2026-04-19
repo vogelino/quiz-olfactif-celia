@@ -18,11 +18,7 @@ export function MemoryStart() {
     document.startViewTransition(() => {
       setStore("status", "started");
       sounds.playUISound("click1");
-      sounds.playMusicLoop(
-        ["mainTheme0"],
-        // ["mainTheme1", "mainTheme2", "mainTheme3", "mainTheme4"],
-        { volume: 0.5 },
-      );
+      sounds.playMusicLoop("mainTheme", { volume: 0.5 });
     });
   };
 

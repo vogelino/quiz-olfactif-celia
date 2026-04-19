@@ -26,20 +26,20 @@
 }
 
 @utility bg-texture {
-  background-image: url("/memory/bg-texture-light.png");
+  background-image: url("/images/bg-texture-light.png");
   background-repeat: repeat;
   background-size: 320px 320px;
 
   @media (prefers-color-scheme: dark) {
-    background-image: url("/memory/bg-texture-dark.png");
+    background-image: url("/images/bg-texture-dark.png");
   }
 
   &.dark {
-    background-image: url("/memory/bg-texture-dark.png");
+    background-image: url("/images/bg-texture-dark.png");
   }
 
   &.light {
-    background-image: url("/memory/bg-texture-light.png");
+    background-image: url("/images/bg-texture-light.png");
   }
 }
 
@@ -50,7 +50,7 @@
 }
 
 @utility texture-mask {
-  mask-image: url("/memory/texture-mask.webp");
+  mask-image: url("/images/texture-mask.webp");
   mask-repeat: repeat;
   mask-size: 200px 200px;
 }
@@ -104,7 +104,7 @@ body {
 }
 html,
 body {
-  cursor: url("/cursor.svg"), auto;
+  cursor: url("/memory/cursor.svg"), auto;
   --fl: 0;
   --font-size-min: 12;
   --font-size-max: 16;
@@ -142,6 +142,6 @@ body > canvas:last-of-type {
   }
 
   .cursor-pointer {
-    cursor: url("/cursor-smelling.svg"), pointer;
+    cursor: url("/memory/cursor-smelling.svg"), pointer;
   }
 }
