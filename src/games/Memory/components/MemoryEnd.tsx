@@ -1,12 +1,12 @@
 import confetti from "@hiseb/confetti";
-import { cn } from "~/utils/cn";
-import { Button } from "~/components/ui/Button";
-import { useMemoryStore } from "@memory/memoryStore";
-import { batch, onMount } from "solid-js";
-import { getShuffledCards } from "@memory/utils/memoryCardsUtil";
-import { WavyUnderlinedText } from "~/components/ui/WavyUnderlinedText";
 import { useMemorySounds } from "@memory/memorySounds";
+import { useMemoryStore } from "@memory/memoryStore";
+import { getShuffledCards } from "@memory/utils/memoryCardsUtil";
+import { batch, onMount } from "solid-js";
+import { Button } from "~/components/ui/Button";
 import { TextReveal } from "~/components/ui/TextReveal";
+import { WavyUnderlinedText } from "~/components/ui/WavyUnderlinedText";
+import { cn } from "~/utils/cn";
 
 export function MemoryEnd() {
   const [, setStore] = useMemoryStore();
@@ -79,7 +79,7 @@ Them All!`}
                 setStore("currentTurn", []);
                 setStore("discoveredPairs", []);
                 setStore("pairMatchId", null);
-                setStore("status", "initial");
+                setStore("status", "started");
               });
               sounds.playUISound("click1");
             }}
