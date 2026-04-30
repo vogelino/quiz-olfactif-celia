@@ -50,6 +50,7 @@ export function Button({
       {safeChildren()}
       <Show when={variant === "primary"}>
         <img
+          alt=""
           src="/images/button.webp"
           class={cn(
             "absolute size-full inset-0 mix-blend-multiply dark:mix-blend-screen",

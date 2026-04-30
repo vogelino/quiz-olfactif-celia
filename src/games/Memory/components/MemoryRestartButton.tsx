@@ -25,6 +25,7 @@ export function MemoryRestartButton(props: ComponentProps<typeof Button>) {
       }}
       {...props}
     >
+      <span class="sr-only">Restart game</span>
       <RefreshCcw />
     </Button>
   );

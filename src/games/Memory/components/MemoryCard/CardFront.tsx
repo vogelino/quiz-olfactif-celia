@@ -1,4 +1,5 @@
 import { ClassValue } from "clsx";
+import { ComponentProps } from "solid-js";
 import { CardColorOverlay } from "~/games/Memory/components/MemoryCard/CardColorOverlay";
 import { CardFrontImage } from "~/games/Memory/components/MemoryCard/CardFrontImage";
 import { CardIllustration } from "~/games/Memory/components/MemoryCard/CardIllustration";
@@ -7,7 +8,7 @@ import { CardIngredientTitle } from "~/games/Memory/components/MemoryCard/CardIn
 import { IngredientId } from "~/games/Memory/data/ingredients";
 import { cn } from "~/utils/cn";
 
-type CardFrontProps = {
+type CardFrontProps = Omit<ComponentProps<"div">, "id" | "title" | "class"> & {
   id: () => IngredientId;
   title: () => string;
   class?: () => ClassValue;
@@ -21,9 +22,11 @@ export function CardFront({
   id,
   colorClass,
   title,
+  ...rest
 }: CardFrontProps) {
   return (
     <div
+      {...rest}
       class={cn(
         "w-full rounded aspect-square max-w-full max-h-full",
         "transition-transform backface-hidden relative",

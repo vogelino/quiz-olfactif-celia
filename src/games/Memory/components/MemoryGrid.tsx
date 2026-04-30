@@ -55,7 +55,8 @@ export function MemoryGrid() {
   });
 
   return (
-    <div
+    <section
+      aria-label="Memory game grid"
       class={cn(
         "fixed z-0 inset-0 flex h-screen w-screen items-center",
         "justify-center perspective-midrange py-[15vh] px-[15vw]",
@@ -63,6 +64,7 @@ export function MemoryGrid() {
       )}
       inert={!!store.pairMatchId}
     >
+      <h1 class="sr-only">Memory Game - Find the pairs of cards with the same ingredient</h1>
       <MemoryDiscoveredPairs />
       <div class="grid grid-cols-4 gap-[3vmin] w-[80vmin] aspect-square absolute left-1/2 top-1/2 -translate-1/2">
         <For each={store.cards}>
@@ -78,23 +80,23 @@ export function MemoryGrid() {
               }}
             >
               <img
-                aria-hidden="true"
+                alt=""
                 src="/memory/card-shadow.webp"
                 class={cn(
                   "absolute inset-0 size-full transition opacity-0 pointer-events-none",
                   store.discoveredPairs.includes(card.pairId) &&
-                    store.status !== "complete" &&
-                    cn(
-                      "mix-blend-multiply dark:invert dark:mix-blend-screen",
-                      [
-                        "opacity-10 rotate-0",
-                        "opacity-13 rotate-12",
-                        "opacity-11 rotate-45",
-                        "opacity-8 rotate-90",
-                        "opacity-9 rotate-125",
-                        "opacity-12 rotate-180",
-                      ][index() % 6],
-                    ),
+                  store.status !== "complete" &&
+                  cn(
+                    "mix-blend-multiply dark:invert dark:mix-blend-screen",
+                    [
+                      "opacity-10 rotate-0",
+                      "opacity-13 rotate-12",
+                      "opacity-11 rotate-45",
+                      "opacity-8 rotate-90",
+                      "opacity-9 rotate-125",
+                      "opacity-12 rotate-180",
+                    ][index() % 6],
+                  ),
                 )}
               />
               <Show when={!store.discoveredPairs.includes(card.pairId)}>
@@ -114,12 +116,19 @@ export function MemoryGrid() {
                       "w-full starting:opacity-0 starting:translate-y-4 starting:-rotate-5 transition",
                     )
                   }
+                  ariaLabelSuffix={getAriaLabelSuffix(index())}
                 />
               </Show>
             </div>
           )}
         </For>
       </div>
-    </div>
+    </section>
   );
+}
+
+function getAriaLabelSuffix(index: number, gridSize = 4) {
+  const row = Math.floor(index / gridSize) + 1;
+  const col = "ABCD".charAt(index % gridSize);
+  return `In position ${col}/${row}`;
 }

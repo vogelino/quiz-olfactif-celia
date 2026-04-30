@@ -10,9 +10,10 @@ export function MemoryScore({ class: className }: MemoryScoreProps) {
   const [store] = useMemoryStore();
 
   return (
-    <div
+    <dl
+      aria-label="Memory game score"
       class={cn(
-        "flex justify-center gap-x-6 slide-up delay-200 [corner-shape:scoop] rounded-lg",
+        "flex justify-center gap-x-2 slide-up delay-200 [corner-shape:scoop] rounded-lg",
         "bg-background bg-texture text-foreground px-6 pt-3 pb-2 texture-mask border-dashed",
         "border border-foreground max-sm:flex-col",
         className?.(),
@@ -27,7 +28,7 @@ export function MemoryScore({ class: className }: MemoryScoreProps) {
         label={() => "Discovered:"}
         value={() => store.discoveredPairs.length}
       />
-    </div>
+    </dl>
   );
 }
 
@@ -40,13 +41,13 @@ const formatter = new Intl.NumberFormat();
 
 function ScoreItem({ label, value }: ScoreItemProps) {
   return (
-    <div class="flex items-center justify-between gap-x-3">
-      <span class="font-headline tracking-widest text-lg uppercase whitespace-nowrap">
+    <>
+      <dt class="font-headline tracking-widest text-lg uppercase whitespace-nowrap">
         {label()}
-      </span>
-      <span class="text-xl -translate-y-0.5 inline-block">
+      </dt>
+      <dd class="text-xl -translate-y-0.5 inline-block pr-4 last-of-type:pr-0">
         {formatter.format(value())}
-      </span>
-    </div>
+      </dd>
+    </>
   );
 }

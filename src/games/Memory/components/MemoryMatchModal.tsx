@@ -106,7 +106,7 @@ export function MemoryMatchModal() {
                 >
                   <img
                     src={`/memory/molecules/${molecule().id}.webp`}
-                    aria-title={molecule().title}
+                    alt={`Molecular symbol for molecule: ${molecule().title}`}
                     class={cn(
                       "h-12 dark:invert dark:mix-blend-screen mix-blend-multiply mb-4",
                     )}
@@ -148,9 +148,11 @@ export function MemoryMatchModal() {
                     colorClass={() => molecule().colorClass}
                     isRevealed={() => true}
                     pairIsDiscovered={() => false}
-                    onToggleReveal={() => {}}
+                    onToggleReveal={() => { }}
                     rotateLeft
                     class={() => "-rotate-1 size-[25vmin]"}
+                    ariaLabelSuffix={`Card A`}
+                    disabled
                   />
                   <div
                     class={cn(
@@ -165,8 +167,10 @@ export function MemoryMatchModal() {
                     colorClass={() => molecule().colorClass}
                     isRevealed={() => true}
                     pairIsDiscovered={() => false}
-                    onToggleReveal={() => {}}
+                    onToggleReveal={() => { }}
                     class={() => "-rotate-1 size-[25vmin]"}
+                    ariaLabelSuffix={`Card B`}
+                    disabled
                   />
                 </section>
               </div>

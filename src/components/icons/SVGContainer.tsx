@@ -12,6 +12,8 @@ export function SVGContainer(props: ComponentProps<"svg">) {
       stroke-width="2"
       stroke-linecap="round"
       stroke-linejoin="round"
+      role="img"
+      aria-label="Icon"
       {...props}
     >
       {props.children}

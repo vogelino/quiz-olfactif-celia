@@ -1,13 +1,15 @@
 import { ClassValue } from "clsx";
+import { ComponentProps } from "solid-js";
 import { cn } from "~/utils/cn";
 
-type CardBackProps = {
+type CardBackProps = Omit<ComponentProps<"img">, "class"> & {
   class?: () => ClassValue;
 };
 
 export function CardBack({ class: className }: CardBackProps) {
   return (
     <img
+      alt=""
       src="/memory/card-back.webp"
       class={cn(
         "glow-ring texture-mask",

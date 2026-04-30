@@ -59,30 +59,39 @@ function MemoryInner() {
   });
 
   return (
-    <>
-      <GeneralControls>
-        <Show when={["started", "complete"].includes(store.status)}>
-          <MemoryRestartButton
-            onMouseEnter={() =>
-              sounds.playUISound(["sniff1", "sniff2", "sniff3"], {
-                volume: 0.2,
-              })
-            }
-          />
-          <SoundControl
-            soundIsOn={sounds.soundIsOn}
-            onSoundOnChange={(isNowOn) => {
-              if (isNowOn) return sounds.turnOnSounds();
-              sounds.turnOffSounds();
-            }}
-            onMouseEnter={() =>
-              sounds.playUISound(["sniff1", "sniff2", "sniff3"], {
-                volume: 0.2,
-              })
-            }
-          />
-        </Show>
-      </GeneralControls>
+    <main class="contents">
+      <Show when={store.status === "started" && !store.pairMatchId}>
+        <MemoryScore
+          class={() => "absolute top-4 left-1/2 -translate-x-1/2 z-10"}
+        />
+      </Show>
+      <Show when={["started", "complete"].includes(store.status)}>
+        <GeneralControls>
+          <li class="contents">
+            <MemoryRestartButton
+              onMouseEnter={() =>
+                sounds.playUISound(["sniff1", "sniff2", "sniff3"], {
+                  volume: 0.2,
+                })
+              }
+            />
+          </li>
+          <li class="contents">
+            <SoundControl
+              soundIsOn={sounds.soundIsOn}
+              onSoundOnChange={(isNowOn) => {
+                if (isNowOn) return sounds.turnOnSounds();
+                sounds.turnOffSounds();
+              }}
+              onMouseEnter={() =>
+                sounds.playUISound(["sniff1", "sniff2", "sniff3"], {
+                  volume: 0.2,
+                })
+              }
+            />
+          </li>
+        </GeneralControls>
+      </Show>
       <Show when={!!store.error}>{store.error}</Show>
       <Show when={store.status === "loading" && showLoadingScreen()}>
         <MemoryLoading percentage={sounds.loadingProgess().percentage} />
@@ -103,15 +112,10 @@ function MemoryInner() {
       <Show when={store.status === "complete" && !store.pairMatchId}>
         <MemoryEnd />
       </Show>
-      <Show when={store.status === "started" && !store.pairMatchId}>
-        <MemoryScore
-          class={() => "absolute top-4 left-1/2 -translate-x-1/2 z-10"}
-        />
-      </Show>
       <Show when={import.meta.env.DEV}>
         <MemoryDebugger />
       </Show>
-    </>
+    </main>
   );
 }
 

@@ -106,7 +106,7 @@ export function TextReveal({
 
   return (
     <div ref={hostRef} class={cn("w-full min-w-0 max-w-full", className)}>
-      <p class="sr-only">{text}</p>
+      <span class="sr-only">{text}</span>
       <For each={lines()}>
         {(line) => (
           <div

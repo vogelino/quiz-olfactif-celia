@@ -19,6 +19,9 @@ export function SoundControl(props: SoundControlProps) {
       {...props}
       class={cn("cursor-pointer", props.className)}
     >
+      <span class="sr-only">
+        {props.soundIsOn() ? "Turn off sounds" : "Turn on sounds"}
+      </span>
       <Show when={props.soundIsOn()}>
         <MegaphoneOn />
       </Show>

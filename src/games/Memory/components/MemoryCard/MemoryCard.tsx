@@ -14,6 +14,8 @@ type MemoryCardProps = Ingredient & {
   onToggleReveal: () => void;
   rotateLeft?: boolean;
   class?: () => ClassValue;
+  ariaLabelSuffix: string;
+  disabled?: boolean;
 };
 
 export function MemoryCard({
@@ -26,6 +28,8 @@ export function MemoryCard({
   onToggleReveal,
   rotateLeft,
   class: className,
+  ariaLabelSuffix,
+  disabled = false,
 }: MemoryCardProps) {
   const sounds = useMemorySounds();
   const turnAround = () => pairIsDiscovered() || isRevealed();
@@ -46,8 +50,9 @@ export function MemoryCard({
         })
       }
       class={cn(
-        "relative @container/card",
-        "transition",
+        "relative @container/card transition",
+        "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2",
+        "focus-visible:outline-foreground focus-visible:rounded-xl",
         !pairIsDiscovered() && "cursor-pointer",
         rotateLeft ? "-rotate-z-1" : "rotate-z-1",
         !pairIsDiscovered() && !isRevealed() && "hover:scale-105",
@@ -63,7 +68,16 @@ export function MemoryCard({
       style={{
         "view-transition-name": `memory-card-${id}`,
       }}
+      disabled={disabled}
     >
+      <span class="sr-only">
+        {getAriaLabelByState({
+          title,
+          isRevealed: isRevealed(),
+          pairIsDiscovered: pairIsDiscovered(),
+          suffix: ariaLabelSuffix,
+        })}
+      </span>
       <CardFront
         id={() => id}
         colorClass={colorClass}
@@ -75,8 +89,25 @@ export function MemoryCard({
             !pairIsDiscovered() && "glow-ring",
           )
         }
+        aria-hidden={!turnAround()}
       />
-      <CardBack class={() => cn(turnAround() && "rotate-y-180")} />
+      <CardBack class={() => cn(turnAround() && "rotate-y-180")} aria-hidden={turnAround()} />
     </button>
   );
+}
+
+function getAriaLabelByState({
+  title,
+  isRevealed,
+  pairIsDiscovered,
+  suffix,
+}: {
+  title: string;
+  isRevealed: boolean;
+  pairIsDiscovered: boolean;
+  suffix: string;
+}) {
+  if (pairIsDiscovered) return `${title} card (${suffix}): Pair discovered`;
+  if (isRevealed) return `${title} card (${suffix}): Revealed`;
+  return `Memory card (${suffix}): Unrevealed`;
 }
