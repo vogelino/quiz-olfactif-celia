@@ -15,7 +15,7 @@ export function KeyIndicator(props: KeyIndicatorProps) {
   return (
     <kbd
       class={cn(
-        "bg-foreground/0 text-muted-foreground font-system font-medium text-sm px-1.5 rounded",
+        "bg-background text-muted-foreground font-system font-medium text-sm px-1.5 rounded",
         "border border-border shadow-[0_2px_0_0_var(--color-border)] transition duration-100",
         isHeld() &&
           cn(

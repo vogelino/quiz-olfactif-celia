@@ -47,11 +47,13 @@ export function Button(_props: ButtonProps) {
   return (
     <button
       {...rest}
-      class={buttonVariants({
-        variant: props.variant,
-        size: props.size,
-        class: props.class,
-      })}
+      class={cn(
+        buttonVariants({
+          variant: props.variant,
+          size: props.size,
+        }),
+        props.class,
+      )}
     >
       <Show when={props.variant === "primary"}>
         <img

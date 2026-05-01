@@ -8,6 +8,7 @@ import { useMemoryStore } from "../memoryStore";
 import { MemoryDebugger } from "./MemoryDebugger";
 import { MemoryRestartButton } from "./MemoryRestartButton";
 import { MemoryScore } from "./MemoryScore";
+import { MemoryShortcutsButton } from "./MemoryShortcuts";
 
 type MemoryLayoutProps = {
   children: JSXElement;
@@ -45,6 +46,9 @@ export function MemoryLayout(props: MemoryLayoutProps) {
                 })
               }
             />
+          </li>
+          <li class="contents">
+            <MemoryShortcutsButton />
           </li>
         </GeneralControls>
       </Show>
