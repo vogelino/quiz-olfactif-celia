@@ -1,8 +1,10 @@
-import { Ingredient } from "@memory/data/ingredients";
-import { useMemorySounds } from "@memory/memorySounds";
 import { ClassValue } from "clsx";
 import { createEffect, mergeProps, onCleanup } from "solid-js";
+
+import { Ingredient } from "@memory/data/ingredients";
+import { useMemorySounds } from "@memory/memorySounds";
 import { cn } from "~/utils/cn";
+
 import { CardBack } from "./CardBack";
 import { CardFront } from "./CardFront";
 

@@ -1,12 +1,13 @@
 import confetti from "@hiseb/confetti";
+import { createHotkey } from "@omniaura/solid-hotkeys";
+import { Match, onMount, Show, Switch } from "solid-js";
+
 import { ShardUnderlinedText } from "@memory/components/ui/ShardUnderlinedText";
 import { idToIngredient } from "@memory/data/ingredients";
 import { idToMemoryPair } from "@memory/data/memoryPairs";
 import { idToMolecule } from "@memory/data/molecules";
 import { useMemorySounds } from "@memory/memorySounds";
 import { useMemoryStore } from "@memory/memoryStore";
-import { createHotkey } from "@omniaura/solid-hotkeys";
-import { Match, onMount, Show, Switch } from "solid-js";
 import { Button } from "~/components/ui/Button";
 import { TextReveal } from "~/components/ui/TextReveal";
 import { MemoryCard } from "~/games/Memory/components/MemoryCard";

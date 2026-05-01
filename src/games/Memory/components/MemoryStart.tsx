@@ -1,7 +1,8 @@
-import { useMemorySounds } from "@memory/memorySounds";
-import { useMemoryStore } from "@memory/memoryStore";
 import { createHotkey } from "@omniaura/solid-hotkeys";
 import { onMount } from "solid-js";
+
+import { useMemorySounds } from "@memory/memorySounds";
+import { useMemoryStore } from "@memory/memoryStore";
 import { MegaphoneOn } from "~/components/icons";
 import { Button } from "~/components/ui/Button";
 import { TextReveal } from "~/components/ui/TextReveal";

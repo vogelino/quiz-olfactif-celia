@@ -1,4 +1,5 @@
 import { ComponentProps } from "solid-js";
+
 import { SVGContainer } from "./SVGContainer";
 
 export function MegaphoneOn(props: ComponentProps<"svg">) {

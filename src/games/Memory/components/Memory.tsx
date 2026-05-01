@@ -1,3 +1,6 @@
+import { createHotkey } from "@omniaura/solid-hotkeys";
+import { batch, createEffect, createSignal, onCleanup, Show } from "solid-js";
+
 import { MemoryEnd } from "@memory/components/MemoryEnd";
 import { MemoryGrid } from "@memory/components/MemoryGrid";
 import { MemoryLoading } from "@memory/components/MemoryLoading";
@@ -6,8 +9,7 @@ import { MemoryStart } from "@memory/components/MemoryStart";
 import { useMemorySounds } from "@memory/memorySounds";
 import { createMemoryStore, MemoryStoreProvider, useMemoryStore } from "@memory/memoryStore";
 import { getShuffledCards } from "@memory/utils/memoryCardsUtil";
-import { createHotkey } from "@omniaura/solid-hotkeys";
-import { batch, createEffect, createSignal, onCleanup, Show } from "solid-js";
+
 import { MemoryLayout } from "./MemoryLayout";
 
 function MemoryInner() {

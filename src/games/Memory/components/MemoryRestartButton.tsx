@@ -1,6 +1,7 @@
+import { batch, ComponentProps } from "solid-js";
+
 import { useMemoryStore } from "@memory/memoryStore";
 import { getShuffledCards } from "@memory/utils/memoryCardsUtil";
-import { batch, ComponentProps } from "solid-js";
 import { RefreshCcw } from "~/components/icons";
 import { Button } from "~/components/ui/Button";
 

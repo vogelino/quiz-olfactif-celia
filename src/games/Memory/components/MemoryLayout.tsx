@@ -1,11 +1,13 @@
 import { JSXElement, Show } from "solid-js";
-import { useMemoryStore } from "../memoryStore";
-import { useMemorySounds } from "../memorySounds";
-import { MemoryScore } from "./MemoryScore";
+
 import { GeneralControls } from "~/components/GeneralControls";
-import { MemoryRestartButton } from "./MemoryRestartButton";
 import { SoundControl } from "~/components/SoundControl";
+
+import { useMemorySounds } from "../memorySounds";
+import { useMemoryStore } from "../memoryStore";
 import { MemoryDebugger } from "./MemoryDebugger";
+import { MemoryRestartButton } from "./MemoryRestartButton";
+import { MemoryScore } from "./MemoryScore";
 
 type MemoryLayoutProps = {
   children: JSXElement;

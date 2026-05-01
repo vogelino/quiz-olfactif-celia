@@ -1,7 +1,8 @@
 import { layoutWithLines, prepareWithSegments } from "@chenglou/pretext";
-import { useMemorySounds } from "@memory/memorySounds";
 import { ClassValue } from "clsx";
 import { createEffect, createSignal, For, onCleanup, onMount } from "solid-js";
+
+import { useMemorySounds } from "@memory/memorySounds";
 import { cn } from "~/utils/cn";
 
 type TextRevealType = {
