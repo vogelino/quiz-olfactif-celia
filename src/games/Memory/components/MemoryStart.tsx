@@ -12,7 +12,11 @@ export function MemoryStart() {
   const [, setStore] = useMemoryStore();
   const sounds = useMemorySounds();
 
-  onMount(() => sounds.stopAllMusicLoops());
+  onMount(() => {
+    sounds.stopAllMusicLoops()
+    const startButton = document.getElementById("start-button");
+    startButton?.focus();
+  });
 
   const onStart = () => {
     document.startViewTransition(() => {
@@ -69,6 +73,7 @@ Memory Game!`}
         </ShardUnderlinedText>
         <div class={cn("delay-1300 duration-[2s] slide-up mt-6")}>
           <Button
+            id="start-button"
             onMouseEnter={() => {
               sounds.playUISound(["sniff1", "sniff2", "sniff3"], {
                 volume: 0.2,
