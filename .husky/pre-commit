@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+if command -v pnpm >/dev/null 2>&1; then
+  pnpm lint-staged
+elif [ -x "$HOME/Library/pnpm/pnpm" ]; then
+  "$HOME/Library/pnpm/pnpm" lint-staged
+else
+  echo "pnpm is required to run the pre-commit hook." >&2
+  exit 1
+fi

@@ -1,0 +1,6 @@
+.nitro
+.output
+.vercel
+dist
+node_modules
+pnpm-lock.yaml
