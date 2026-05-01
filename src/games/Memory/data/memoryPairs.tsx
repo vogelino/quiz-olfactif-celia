@@ -1,11 +1,6 @@
 import { idToIngredient, IngredientId } from "@memory/data/ingredients";
 import { idToMolecule, type MoleculeId } from "@memory/data/molecules";
-import {
-  floral,
-  fresh,
-  OlfactiveFamilyId,
-  oriental,
-} from "@memory/data/olfactiveFamilies";
+import { floral, fresh, OlfactiveFamilyId, oriental } from "@memory/data/olfactiveFamilies";
 
 type MemoryPairSchema = {
   id: string;
@@ -109,9 +104,7 @@ export const idToMemoryPair = {
   [pair8.id]: pair8,
 } as const satisfies Record<string, MemoryPairSchema>;
 
-export const memoryPairs = Object.values(
-  idToMemoryPair,
-) satisfies MemoryPairSchema[];
+export const memoryPairs = Object.values(idToMemoryPair) satisfies MemoryPairSchema[];
 
 export type MemoryPairId = keyof typeof idToMemoryPair;
 export type MemoryPair = (typeof memoryPairs)[number];

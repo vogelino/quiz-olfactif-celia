@@ -51,16 +51,11 @@ export function Button({
         <img
           alt=""
           src="/images/button.webp"
-          class={cn(
-            "absolute size-full inset-0",
-            "pointer-events-none dark:invert",
-          )}
+          class={cn("absolute size-full inset-0", "pointer-events-none dark:invert")}
           aria-hidden="true"
         />
       </Show>
-      <span class={cn("relative z-10")}>
-        {safeChildren()}
-      </span>
+      <span class={cn("relative z-10")}>{safeChildren()}</span>
     </button>
   );
 }

@@ -20,14 +20,8 @@ export function MemoryScore({ class: className }: MemoryScoreProps) {
       )}
     >
       <ScoreItem label={() => "Turns:"} value={() => store.turnsCount} />
-      <ScoreItem
-        label={() => "Best Streak:"}
-        value={() => store.pairsBestStreak}
-      />
-      <ScoreItem
-        label={() => "Discovered:"}
-        value={() => store.discoveredPairs.length}
-      />
+      <ScoreItem label={() => "Best Streak:"} value={() => store.pairsBestStreak} />
+      <ScoreItem label={() => "Discovered:"} value={() => store.discoveredPairs.length} />
     </dl>
   );
 }
@@ -42,9 +36,7 @@ const formatter = new Intl.NumberFormat();
 function ScoreItem({ label, value }: ScoreItemProps) {
   return (
     <>
-      <dt class="font-headline tracking-widest text-lg uppercase whitespace-nowrap">
-        {label()}
-      </dt>
+      <dt class="font-headline tracking-widest text-lg uppercase whitespace-nowrap">{label()}</dt>
       <dd class="text-xl -translate-y-0.5 inline-block pr-4 last-of-type:pr-0">
         {formatter.format(value())}
       </dd>

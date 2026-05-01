@@ -17,7 +17,7 @@ type MemoryCardProps = Ingredient & {
   ariaLabelSuffix: string;
   disabled?: boolean;
   onFocus?: () => void;
-  'data-card-position'?: string;
+  "data-card-position"?: string;
 };
 
 export function MemoryCard({
@@ -33,7 +33,7 @@ export function MemoryCard({
   ariaLabelSuffix,
   disabled = false,
   onFocus,
-  'data-card-position': dataCardPosition,
+  "data-card-position": dataCardPosition,
 }: MemoryCardProps) {
   const sounds = useMemorySounds();
   const turnAround = () => pairIsDiscovered() || isRevealed();
@@ -88,12 +88,7 @@ export function MemoryCard({
         colorClass={colorClass}
         title={() => title}
         fadeWithBgClass={fadeWithBgClass}
-        class={() =>
-          cn(
-            !turnAround() && "rotate-y-180",
-            !pairIsDiscovered() && "glow-ring",
-          )
-        }
+        class={() => cn(!turnAround() && "rotate-y-180", !pairIsDiscovered() && "glow-ring")}
         aria-hidden={!turnAround()}
       />
       <CardBack class={() => cn(turnAround() && "rotate-y-180")} aria-hidden={turnAround()} />

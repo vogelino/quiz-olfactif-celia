@@ -26,8 +26,7 @@ export class SoundManager {
   private totalSounds: number = 0;
 
   constructor() {
-    this.context = new (window.AudioContext ||
-      (window as any).webkitAudioContext)();
+    this.context = new (window.AudioContext || (window as any).webkitAudioContext)();
     this.buffers = new Map();
     this.activeSources = new Set();
 
@@ -130,31 +129,24 @@ export class SoundManager {
     // Second pass: load sounds with progress
     const promises = soundUrls.map(async ([name, url], index) => {
       try {
-        const arrayBuffer = await this.fetchWithProgress(
-          url,
-          (loaded, total) => {
-            // Update progress
-            const previousLoaded = sizes
-              .slice(0, index)
-              .reduce((sum, size) => sum + size, 0);
-            this.bytesLoaded = previousLoaded + loaded;
+        const arrayBuffer = await this.fetchWithProgress(url, (loaded, total) => {
+          // Update progress
+          const previousLoaded = sizes.slice(0, index).reduce((sum, size) => sum + size, 0);
+          this.bytesLoaded = previousLoaded + loaded;
 
-            if (onProgress) {
-              const percentage =
-                this.totalBytes > 0
-                  ? Math.round((this.bytesLoaded / this.totalBytes) * 100)
-                  : 0;
+          if (onProgress) {
+            const percentage =
+              this.totalBytes > 0 ? Math.round((this.bytesLoaded / this.totalBytes) * 100) : 0;
 
-              onProgress({
-                soundsCompleted: this.soundsCompleted,
-                totalSounds: this.totalSounds,
-                bytesLoaded: this.bytesLoaded,
-                totalBytes: this.totalBytes,
-                percentage,
-              });
-            }
-          },
-        );
+            onProgress({
+              soundsCompleted: this.soundsCompleted,
+              totalSounds: this.totalSounds,
+              bytesLoaded: this.bytesLoaded,
+              totalBytes: this.totalBytes,
+              percentage,
+            });
+          }
+        });
 
         const audioBuffer = await this.context.decodeAudioData(arrayBuffer);
         this.buffers.set(name, audioBuffer);
@@ -170,9 +162,7 @@ export class SoundManager {
 
   getLoadProgress(): LoadProgress {
     const percentage =
-      this.totalBytes > 0
-        ? Math.round((this.bytesLoaded / this.totalBytes) * 100)
-        : 0;
+      this.totalBytes > 0 ? Math.round((this.bytesLoaded / this.totalBytes) * 100) : 0;
 
     return {
       soundsCompleted: this.soundsCompleted,
@@ -259,10 +249,7 @@ export class SoundManager {
     this.buffers.clear();
   }
 
-  playLoop(
-    name: string,
-    options: PlayOptions = {},
-  ): AudioBufferSourceNode | null {
+  playLoop(name: string, options: PlayOptions = {}): AudioBufferSourceNode | null {
     // Stop existing loop if already playing
     const existingSource = this.loopingSources.get(name);
     if (existingSource) {

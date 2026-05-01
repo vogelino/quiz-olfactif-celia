@@ -102,9 +102,7 @@ export const idToIngredient = {
   gas,
 } as const satisfies Record<string, IngredientSchema>;
 
-export const ingredients = Object.values(
-  idToIngredient,
-) satisfies IngredientSchema[];
+export const ingredients = Object.values(idToIngredient) satisfies IngredientSchema[];
 
 export type IngredientId = keyof typeof idToIngredient;
 export type Ingredient = (typeof ingredients)[number];

@@ -51,7 +51,7 @@ export function MemoryDiscoveredPairs() {
               "translate-x-0 translate-y-1/2",
               "-translate-y-[250%] sm:-translate-y-1/2 -translate-x-1/2",
               "translate-y-1/3 translate-x-0",
-              ,
+              undefined,
               "translate-x-0 -translate-y-1/2",
               "-translate-x-1/3 translate-y-[150%] sm:translate-y-0",
               "translate-x-0 -translate-y-1/2",
@@ -67,7 +67,10 @@ export function MemoryDiscoveredPairs() {
               >
                 <For each={pairGroup}>
                   {(cards) => (
-                    <li class="size-[15vmin] relative" aria-label={`Discovered pair: ${cards[0][0]?.ingredient.name} and ${cards[1][0]?.ingredient.name}`}>
+                    <li
+                      class="size-[15vmin] relative"
+                      aria-label={`Discovered pair: ${cards[0][0]?.ingredient.name} and ${cards[1][0]?.ingredient.name}`}
+                    >
                       <Show when={store.status === "complete"}>
                         <div
                           class={cn(
@@ -96,9 +99,7 @@ export function MemoryDiscoveredPairs() {
                                   : "translate-x-[calc(-50%+4vmin)] translate-y-[calc(-50%+4vmin)]",
                               )
                             }
-                            fadeWithBgClass={() =>
-                              store.status !== "complete" && "opacity-50"
-                            }
+                            fadeWithBgClass={() => store.status !== "complete" && "opacity-50"}
                             ariaLabelSuffix={`Card ${cardIdx() === 0 ? "A" : "B"}`}
                             disabled
                           />

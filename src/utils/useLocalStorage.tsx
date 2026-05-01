@@ -9,17 +9,13 @@ export default function useLocalStorage<T extends object>({
   storageType?: "local" | "session";
   defaultValue: T;
 }): [Accessor<T>, Setter<T>] {
-  const storage =
-    storageType === "local" ? window.localStorage : window.sessionStorage;
-  const initialValue: T | undefined = JSON.parse(
-    storage.getItem(key) ?? "{}",
-  ).value;
+  const storage = storageType === "local" ? window.localStorage : window.sessionStorage;
+  const initialValue: T | undefined = JSON.parse(storage.getItem(key) ?? "{}").value;
 
   const [value, setValue] = createSignal<T>(initialValue ?? defaultValue);
 
   const newSetValue = (newValue: T | ((v: T) => T)): T => {
-    const _val: T =
-      typeof newValue === "function" ? newValue(value()) : newValue;
+    const _val: T = typeof newValue === "function" ? newValue(value()) : newValue;
 
     setValue(_val as any);
     storage.setItem(key, JSON.stringify({ value: _val }));

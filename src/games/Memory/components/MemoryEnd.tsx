@@ -16,7 +16,7 @@ export function MemoryEnd() {
   onMount(() => {
     sounds.stopAllMusicLoops();
     sounds.playUISound("success");
-    let positionList = [
+    const positionList = [
       { x: window.innerWidth * 0.5, y: window.innerHeight * 0.6 },
       { x: window.innerWidth * 0.25, y: window.innerHeight * 0.4 },
       { x: window.innerWidth * 0.75, y: window.innerHeight * 0.3 },
@@ -41,12 +41,7 @@ export function MemoryEnd() {
         "flex items-center justify-center flex-col gap-6",
       )}
     >
-      <div
-        class={cn(
-          "flex items-center justify-center flex-col gap-4",
-          "py-16 rounded-lg",
-        )}
-      >
+      <div class={cn("flex items-center justify-center flex-col gap-4", "py-16 rounded-lg")}>
         <h1 class="text-7xl font-bold text-center font-headline w-4xl max-w-[calc(100vw-10rem)] texture-mask">
           <TextReveal
             text={`You Found

@@ -10,7 +10,10 @@ export default createHandler(() => (
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <link rel="icon" href="/favicon.ico" />
           <title>Olfactive Memory Game - Celia Maurel</title>
-          <meta name="description" content="Discover different raw materials that share a common scent by plaing the olfactive memory game, by Celia Maurel." />
+          <meta
+            name="description"
+            content="Discover different raw materials that share a common scent by plaing the olfactive memory game, by Celia Maurel."
+          />
           {assets}
         </head>
         <body>

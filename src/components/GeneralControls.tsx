@@ -7,10 +7,11 @@ type GeneralControlsProps = {
 
 export function GeneralControls(props: GeneralControlsProps) {
   return (
-    <nav class={cn("fixed top-4 right-4 z-50", "flex gap-2 items-center")} aria-label="General controls">
-      <ul class="contents">
-        {props.children}
-      </ul>
+    <nav
+      class={cn("fixed top-4 right-4 z-50", "flex gap-2 items-center")}
+      aria-label="General controls"
+    >
+      <ul class="contents">{props.children}</ul>
     </nav>
   );
 }

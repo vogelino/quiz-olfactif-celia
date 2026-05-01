@@ -101,15 +101,11 @@ export function MemoryMatchModal() {
               )}
             >
               <div class="w-full contain-inline-size flex flex-col items-center shrink-0 gap-3">
-                <div
-                  class={cn("starting:opacity-0 delay-800 transition-opacity")}
-                >
+                <div class={cn("starting:opacity-0 delay-800 transition-opacity")}>
                   <img
                     src={`/memory/molecules/${molecule().id}.webp`}
                     alt={`Molecular symbol for molecule: ${molecule().title}`}
-                    class={cn(
-                      "h-12 dark:invert dark:mix-blend-screen mix-blend-multiply mb-4",
-                    )}
+                    class={cn("h-12 dark:invert dark:mix-blend-screen mix-blend-multiply mb-4")}
                   />
                 </div>
                 <h2 class="text-7xl font-bold text-center font-headline w-full texture-mask">
@@ -138,27 +134,20 @@ export function MemoryMatchModal() {
                 </div>
               </div>
               <div class="flex flex-col relative items-center">
-                <section
-                  class={cn(
-                    "grid grid-cols-[1fr_auto_1fr] gap-x-8 gap-y-4 items-start",
-                  )}
-                >
+                <section class={cn("grid grid-cols-[1fr_auto_1fr] gap-x-8 gap-y-4 items-start")}>
                   <MemoryCard
                     {...ingredientA()}
                     colorClass={() => molecule().colorClass}
                     isRevealed={() => true}
                     pairIsDiscovered={() => false}
-                    onToggleReveal={() => { }}
+                    onToggleReveal={() => {}}
                     rotateLeft
                     class={() => "-rotate-1 size-[25vmin]"}
                     ariaLabelSuffix={`Card A`}
                     disabled
                   />
                   <div
-                    class={cn(
-                      "text-4xl font-headline translate-y-[13vmin]",
-                      "delay-100 slide-up",
-                    )}
+                    class={cn("text-4xl font-headline translate-y-[13vmin]", "delay-100 slide-up")}
                   >
                     &
                   </div>
@@ -167,7 +156,7 @@ export function MemoryMatchModal() {
                     colorClass={() => molecule().colorClass}
                     isRevealed={() => true}
                     pairIsDiscovered={() => false}
-                    onToggleReveal={() => { }}
+                    onToggleReveal={() => {}}
                     class={() => "-rotate-1 size-[25vmin]"}
                     ariaLabelSuffix={`Card B`}
                     disabled
@@ -175,10 +164,7 @@ export function MemoryMatchModal() {
                 </section>
               </div>
               <footer
-                class={cn(
-                  "flex justify-center shrink-0",
-                  "delay-1300 duration-[2s] slide-up",
-                )}
+                class={cn("flex justify-center shrink-0", "delay-1300 duration-[2s] slide-up")}
               >
                 <Button
                   onClick={onContinue}
@@ -190,12 +176,10 @@ export function MemoryMatchModal() {
                 >
                   <Switch>
                     <Match when={isLastMatch()}>
-                      Well{" "}
-                      <span class="font-headline tracking-wider">Done</span>!
+                      Well <span class="font-headline tracking-wider">Done</span>!
                     </Match>
                     <Match when={!isLastMatch()}>
-                      Find{" "}
-                      <span class="font-headline tracking-wider">More</span>!
+                      Find <span class="font-headline tracking-wider">More</span>!
                     </Match>
                   </Switch>
                 </Button>

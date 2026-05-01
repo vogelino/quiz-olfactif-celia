@@ -41,9 +41,7 @@ export function MemoryGrid() {
             setStore("currentTurn", []);
             setStore("pairMatchId", pair1.id);
             setStore("pairsStreak", (prev) => prev + 1);
-            setStore("pairsBestStreak", (prev) =>
-              Math.max(prev, store.pairsStreak),
-            );
+            setStore("pairsBestStreak", (prev) => Math.max(prev, store.pairsStreak));
           });
         });
       }
@@ -54,9 +52,7 @@ export function MemoryGrid() {
     if (memoryPairs.length === store.discoveredPairs.length) {
       setStore("status", "complete");
     } else {
-      const firstRemainingCard = document.querySelector<HTMLElement>(
-        `[data-card-position]`,
-      );
+      const firstRemainingCard = document.querySelector<HTMLElement>(`[data-card-position]`);
       firstRemainingCard?.focus();
     }
   });
@@ -74,9 +70,7 @@ export function MemoryGrid() {
 
   const focusCard = (row: number, col: number) => {
     const position = getCardPosition({ rowIdx: row, colIdx: col });
-    const cardElement = document.querySelector<HTMLElement>(
-      `[data-card-position="${position}"]`,
-    );
+    const cardElement = document.querySelector<HTMLElement>(`[data-card-position="${position}"]`);
 
     if (!cardElement) return;
 
@@ -136,30 +130,26 @@ export function MemoryGrid() {
                 class={cn(
                   "absolute inset-0 size-full transition opacity-0 pointer-events-none",
                   store.discoveredPairs.includes(card.pairId) &&
-                  store.status !== "complete" &&
-                  cn(
-                    "mix-blend-multiply dark:invert dark:mix-blend-screen",
-                    [
-                      "opacity-10 rotate-0",
-                      "opacity-13 rotate-12",
-                      "opacity-11 rotate-45",
-                      "opacity-8 rotate-90",
-                      "opacity-9 rotate-125",
-                      "opacity-12 rotate-180",
-                    ][index() % 6],
-                  ),
+                    store.status !== "complete" &&
+                    cn(
+                      "mix-blend-multiply dark:invert dark:mix-blend-screen",
+                      [
+                        "opacity-10 rotate-0",
+                        "opacity-13 rotate-12",
+                        "opacity-11 rotate-45",
+                        "opacity-8 rotate-90",
+                        "opacity-9 rotate-125",
+                        "opacity-12 rotate-180",
+                      ][index() % 6],
+                    ),
                 )}
               />
               <Show when={!store.discoveredPairs.includes(card.pairId)}>
                 <MemoryCard
                   {...card.ingredient}
                   colorClass={() => card.colorClass}
-                  isRevealed={() =>
-                    store.currentTurn.includes(card.ingredient.id)
-                  }
-                  pairIsDiscovered={() =>
-                    store.discoveredPairs.includes(card.pairId)
-                  }
+                  isRevealed={() => store.currentTurn.includes(card.ingredient.id)}
+                  pairIsDiscovered={() => store.discoveredPairs.includes(card.pairId)}
                   onToggleReveal={() => onCardRevealToggle(card.ingredient.id)}
                   rotateLeft={card.rotateLeft}
                   class={() =>

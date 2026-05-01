@@ -13,10 +13,8 @@
 @font-face {
   font-family: "Martian Grotesk";
   src:
-    url("/fonts/martian-grotesk/martiangrotesk-stdlt-webfont.woff2")
-      format("woff2"),
-    url("/fonts/martian-grotesk/martiangrotesk-stdlt-webfont.woff")
-      format("woff");
+    url("/fonts/martian-grotesk/martiangrotesk-stdlt-webfont.woff2") format("woff2"),
+    url("/fonts/martian-grotesk/martiangrotesk-stdlt-webfont.woff") format("woff");
   font-weight: light;
   font-style: normal;
 }
@@ -140,15 +138,10 @@
     --font-ratio-max: 1.25;
     --font-width-min: 320;
     --font-width-max: 1500;
-    --fluid-min: calc(
-      var(--font-size-min) * pow(var(--font-ratio-min), var(--fl, 0))
-    );
-    --fluid-max: calc(
-      var(--font-size-max) * pow(var(--font-ratio-max), var(--fl, 0))
-    );
+    --fluid-min: calc(var(--font-size-min) * pow(var(--font-ratio-min), var(--fl, 0)));
+    --fluid-max: calc(var(--font-size-max) * pow(var(--font-ratio-max), var(--fl, 0)));
     --fluid-preferred: calc(
-      (var(--fluid-max) - var(--fluid-min)) /
-        (var(--font-width-max) - var(--font-width-min))
+      (var(--fluid-max) - var(--fluid-min)) / (var(--font-width-max) - var(--font-width-min))
     );
     --fluid-type: clamp(
       (var(--fluid-min) / 16) * 1rem,
