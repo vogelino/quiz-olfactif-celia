@@ -8,6 +8,7 @@ type UseGridRevealHotkeysProps = {
 };
 
 const columns = ["A", "B", "C", "D"] as const;
+const rows = ["1", "2", "3", "4"] as const;
 
 export function useGridRevealHotkeys({
   onReveal,
@@ -20,7 +21,7 @@ export function useGridRevealHotkeys({
   for (let column = 0; column < coordinateGridSize; column += 1) {
     for (let row = 0; row < coordinateGridSize; row += 1) {
       createHotkeySequence(
-        [columns[column], String(row + 1)],
+        [columns[column], rows[row]],
         (event) => {
           event.preventDefault();
 

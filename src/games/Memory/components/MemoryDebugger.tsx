@@ -1,6 +1,7 @@
 import { MemoryPairId, memoryPairs } from "@memory/data/memoryPairs";
 import { statuses, useMemoryStore } from "@memory/memoryStore";
 import { getShuffledCards } from "@memory/utils/memoryCardsUtil";
+import { createHotkey, createHotkeySequence } from "@omniaura/solid-hotkeys";
 import { batch, For, Show } from "solid-js";
 import { cn } from "~/utils/cn";
 
@@ -22,9 +23,15 @@ export function MemoryDebugger() {
       });
     });
   };
+
+  createHotkeySequence(["D", "D"], () =>
+    setStore("debuggerStatus", (p) =>
+      p === "expanded" ? "collapsed" : "expanded",
+    ),
+  );
+
   return (
     <div
-      aria-hidden="true"
       class={cn(
         "fixed bottom-4 right-4 z-50 flex flex-col rounded-lg",
         "bg-background text-xs shadow-lg backdrop-blur-sm w-52",
@@ -100,7 +107,7 @@ export function MemoryDebugger() {
                         "rounded px-2 py-0.5 text-left text-xs transition-colors truncate",
                         "bg-background hover:bg-background-muted cursor-pointer",
                         isActive(pair.id) &&
-                          "bg-foreground text-background hover:bg-foreground border-foreground",
+                        "bg-foreground text-background hover:bg-foreground border-foreground",
                       )}
                       onClick={() => {
                         batch(() => {
@@ -121,7 +128,7 @@ export function MemoryDebugger() {
                           "rounded px-2 py-0.5 text-center text-xs transition-colors",
                           "bg-background hover:bg-background-muted cursor-pointer",
                           isDiscovered(pair.id) &&
-                            "bg-foreground text-background hover:bg-foreground border-foreground",
+                          "bg-foreground text-background hover:bg-foreground border-foreground",
                         )}
                         onClick={() => onPairDiscoveryToggle(pair.id)}
                       >
