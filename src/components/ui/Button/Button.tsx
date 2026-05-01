@@ -6,8 +6,8 @@ import styles from "./Button.module.css";
 const buttonVariants = cva(
   cn(
     "rounded cursor-pointer border border-transparent",
-    "focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-offset-2",
-    "focus-visible:ring-offset-background focus-visible:ring-foreground",
+    "focus-visible:outline focus-visible:outline-2",
+    "focus-visible:outline-foreground focus-visible:rounded-xl",
     "hover:bg-foreground/5 relative text-2xl uppercase",
     styles.btnTransition,
   ),
@@ -16,8 +16,9 @@ const buttonVariants = cva(
       variant: {
         primary: cn(
           "bg-transparent text-foreground hover:bg-foreground/5",
-          "hover:scale-105 active:scale-95 w-[195px] h-[80px] pt-3",
+          "hover:scale-105 active:scale-95 w-[195px] h-[80px]",
           "mask-[url('/images/button.webp')] mask-size-[195px_80px] mask-no-repeat",
+          "focus-visible:mask-none focus-visible:bg-background"
         ),
         secondary: cn("bg-background text-foreground border-border"),
         ghost: cn("bg-transparent"),

@@ -6,7 +6,7 @@ import { idToMolecule } from "@memory/data/molecules";
 import { useMemorySounds } from "@memory/memorySounds";
 import { useMemoryStore } from "@memory/memoryStore";
 import { createHotkey } from "@omniaura/solid-hotkeys";
-import { createEffect, Match, Show, Switch } from "solid-js";
+import { Match, onMount, Show, Switch } from "solid-js";
 import { Button } from "~/components/ui/Button";
 import { TextReveal } from "~/components/ui/TextReveal";
 import { MemoryCard } from "~/games/Memory/components/MemoryCard";
@@ -39,7 +39,7 @@ export function MemoryMatchModal() {
   createHotkey("Enter", onContinue);
   createHotkey("Space", onContinue);
 
-  createEffect(() => {
+  onMount(() => {
     if (!pairMatch()) return;
     sounds.playUISound("close");
     setTimeout(() => {

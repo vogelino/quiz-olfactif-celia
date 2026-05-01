@@ -3,7 +3,7 @@ import { ShardUnderlinedText } from "@memory/components/ui/ShardUnderlinedText";
 import { useMemorySounds } from "@memory/memorySounds";
 import { useMemoryStore } from "@memory/memoryStore";
 import { getShuffledCards } from "@memory/utils/memoryCardsUtil";
-import { batch, onMount } from "solid-js";
+import { batch, createEffect, onMount } from "solid-js";
 import { Button } from "~/components/ui/Button";
 import { TextReveal } from "~/components/ui/TextReveal";
 import { MemoryScore } from "~/games/Memory/components/MemoryScore";
@@ -30,6 +30,8 @@ export function MemoryEnd() {
         sounds.playUISound("particles1", { volume: 0.3 });
       }, 300);
     }
+    const startAgainButton = document.getElementById("start-again-button");
+    startAgainButton?.focus();
   });
 
   return (
@@ -70,6 +72,7 @@ Them All!`}
         </span>
         <div class={cn("delay-1300 duration-[2s] slide-up mt-6")}>
           <Button
+            id="start-again-button"
             onMouseEnter={() => {
               sounds.playUISound(["sniff1", "sniff2", "sniff3"], {
                 volume: 0.2,
