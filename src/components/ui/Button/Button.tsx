@@ -15,10 +15,9 @@ const buttonVariants = cva(
     variants: {
       variant: {
         primary: cn(
-          "bg-transparent text-foreground hover:bg-foreground/5",
+          "bg-transparent text-foreground hover:bg-transparent",
           "hover:scale-105 active:scale-95 w-[195px] h-[80px]",
-          "mask-[url('/images/button.webp')] mask-size-[195px_80px] mask-no-repeat",
-          "focus-visible:mask-none focus-visible:bg-background"
+          "focus-visible:outline-none focus-visible:glow-ring-double",
         ),
         secondary: cn("bg-background text-foreground border-border"),
         ghost: cn("bg-transparent"),
@@ -48,18 +47,20 @@ export function Button({
   const safeChildren = children(() => child);
   return (
     <button {...rest} class={buttonVariants({ variant, size, className })}>
-      {safeChildren()}
       <Show when={variant === "primary"}>
         <img
           alt=""
           src="/images/button.webp"
           class={cn(
-            "absolute size-full inset-0 mix-blend-multiply dark:mix-blend-screen",
-            "pointer-events-none dark:invert z-10",
+            "absolute size-full inset-0",
+            "pointer-events-none dark:invert",
           )}
           aria-hidden="true"
         />
       </Show>
+      <span class={cn("relative z-10")}>
+        {safeChildren()}
+      </span>
     </button>
   );
 }

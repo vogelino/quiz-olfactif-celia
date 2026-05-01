@@ -44,9 +44,19 @@
 }
 
 @utility glow-ring {
-  --glow-ring-color: var(--tw-ring-color, var(--color-white));
+  --glow-ring: 2px;
+  --glow-ring-color: var(--color-background);
 
-  @apply filter-[drop-shadow(2px_0_0_var(--glow-ring-color))_drop-shadow(0_2px_0_var(--glow-ring-color))_drop-shadow(-2px_0_0_var(--glow-ring-color))_drop-shadow(0_-2px_0_var(--glow-ring-color))];
+  @apply ring-0 filter-[drop-shadow(var(--glow-ring)_0_0_var(--glow-ring-color))_drop-shadow(0_var(--glow-ring)_0_var(--glow-ring-color))_drop-shadow(calc(var(--glow-ring)*-1)_0_0_var(--glow-ring-color))_drop-shadow(0_calc(var(--glow-ring)*-1)_0_var(--glow-ring-color))];
+}
+
+@utility glow-ring-double {
+  --glow-ring: 2px;
+  --glow-ring-color: var(--color-foreground);
+  --glow-ring-offset: 2px;
+  --glow-ring-offset-color: var(--color-background);
+
+  @apply ring-0 filter-[drop-shadow(var(--glow-ring-offset)_0_0_var(--glow-ring-offset-color))_drop-shadow(0_var(--glow-ring-offset)_0_var(--glow-ring-offset-color))_drop-shadow(calc(var(--glow-ring-offset)*-1)_0_0_var(--glow-ring-offset-color))_drop-shadow(0_calc(var(--glow-ring-offset)*-1)_0_var(--glow-ring-offset-color))_drop-shadow(var(--glow-ring)_0_0_var(--glow-ring-color))_drop-shadow(0_var(--glow-ring)_0_var(--glow-ring-color))_drop-shadow(calc(var(--glow-ring)*-1)_0_0_var(--glow-ring-color))_drop-shadow(0_calc(var(--glow-ring)*-1)_0_var(--glow-ring-color))];
 }
 
 @utility texture-mask {

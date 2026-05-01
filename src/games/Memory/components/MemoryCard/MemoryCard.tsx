@@ -56,8 +56,7 @@ export function MemoryCard({
       }
       class={cn(
         "relative @container/card transition",
-        "focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2",
-        "focus-visible:outline-foreground focus-visible:rounded-xl",
+        "focus-visible:outline-none focus-visible:glow-ring-double",
         !pairIsDiscovered() && "cursor-pointer",
         rotateLeft ? "-rotate-z-1" : "rotate-z-1",
         !pairIsDiscovered() && !isRevealed() && "hover:scale-105",
