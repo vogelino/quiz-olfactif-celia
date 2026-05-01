@@ -89,6 +89,9 @@
 
   --font-sans: "Martian Grotesk", sans-serif;
   --font-headline: "Pouler", sans-serif;
+  --font-system:
+    "Mona Sans VF", -apple-system, "system-ui", "Segoe UI", "Noto Sans", Helvetica, Arial,
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
 
   --animate-marquee: marquee 50s linear infinite;
   --animate-wiggle: wiggle 1s both infinite;
