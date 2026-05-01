@@ -18,10 +18,10 @@ export function useGridRevealHotkeys({
 }: UseGridRevealHotkeysProps) {
   const coordinateGridSize = Math.min(gridSize, columns.length);
 
-  for (let column = 0; column < coordinateGridSize; column += 1) {
-    for (let row = 0; row < coordinateGridSize; row += 1) {
+  columns.slice(0, coordinateGridSize).forEach((columnKey, column) => {
+    rows.slice(0, coordinateGridSize).forEach((rowKey, row) => {
       createHotkeySequence(
-        [columns[column], rows[row]],
+        [columnKey, rowKey],
         (event) => {
           event.preventDefault();
 
@@ -31,6 +31,6 @@ export function useGridRevealHotkeys({
         },
         { timeout },
       );
-    }
-  }
+    });
+  });
 }
