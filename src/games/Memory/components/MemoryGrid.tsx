@@ -7,6 +7,7 @@ import { useMemoryStore } from "@memory/memoryStore";
 import { For, Show, batch, createEffect, createSignal } from "solid-js";
 import { cn } from "~/utils/cn";
 import { useGridNavigation } from "../hooks/useGridNavigation";
+import { useGridRevealHotkeys } from "../hooks/useGridRevealHotkeys";
 
 export function MemoryGrid() {
   const [store, setStore] = useMemoryStore();
@@ -71,20 +72,35 @@ export function MemoryGrid() {
     return !!card && !store.discoveredPairs.includes(card.pairId);
   };
 
+  const focusCard = (row: number, col: number) => {
+    const position = getCardPosition({ rowIdx: row, colIdx: col });
+    const cardElement = document.querySelector<HTMLElement>(
+      `[data-card-position="${position}"]`,
+    );
+
+    if (!cardElement) return;
+
+    setCurrentlyFocusedCard({ row, col });
+    cardElement.focus();
+  };
+
   useGridNavigation({
     currentColumn: () => currentlyFocusedCard()?.col ?? 0,
     currentRow: () => currentlyFocusedCard()?.row ?? 0,
     isCellAvailable: isCardAvailable,
-    onNavigate: (row, col) => {
-      const position = getCardPosition({ rowIdx: row, colIdx: col });
-      const cardElement = document.querySelector<HTMLElement>(
-        `[data-card-position="${position}"]`,
-      );
+    onNavigate: focusCard,
+    gridSize,
+  });
 
-      if (!cardElement) return;
+  useGridRevealHotkeys({
+    isCellAvailable: isCardAvailable,
+    onReveal: (row, col) => {
+      const card = store.cards[row * gridSize + col];
 
-      setCurrentlyFocusedCard({ row, col });
-      cardElement.focus();
+      if (!card) return;
+
+      focusCard(row, col);
+      onCardRevealToggle(card.ingredient.id);
     },
     gridSize,
   });
