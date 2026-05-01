@@ -52,8 +52,6 @@ export function MemoryMatchModal() {
     setTimeout(() => {
       sounds.playUISound("particles1", { volume: 0.3 });
     }, 280);
-    const continueButton = document.getElementById("continue-button");
-    continueButton?.focus();
   });
 
   return (
@@ -183,7 +181,6 @@ export function MemoryMatchModal() {
                 )}
               >
                 <Button
-                  id="continue-button"
                   onClick={onContinue}
                   onMouseEnter={() => {
                     sounds.playUISound(["sniff1", "sniff2", "sniff3"], {

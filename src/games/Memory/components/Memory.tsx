@@ -1,9 +1,7 @@
-import { MemoryDebugger } from "@memory/components/MemoryDebugger";
 import { MemoryEnd } from "@memory/components/MemoryEnd";
 import { MemoryGrid } from "@memory/components/MemoryGrid";
 import { MemoryLoading } from "@memory/components/MemoryLoading";
 import { MemoryMatchModal } from "@memory/components/MemoryMatchModal";
-import { MemoryRestartButton } from "@memory/components/MemoryRestartButton";
 import { MemoryStart } from "@memory/components/MemoryStart";
 import { useMemorySounds } from "@memory/memorySounds";
 import {
@@ -14,9 +12,7 @@ import {
 import { getShuffledCards } from "@memory/utils/memoryCardsUtil";
 import { createHotkey } from "@omniaura/solid-hotkeys";
 import { batch, createEffect, createSignal, onCleanup, Show } from "solid-js";
-import { GeneralControls } from "~/components/GeneralControls";
-import { SoundControl } from "~/components/SoundControl";
-import { MemoryScore } from "~/games/Memory/components/MemoryScore";
+import { MemoryLayout } from "./MemoryLayout";
 
 function MemoryInner() {
   const [store, setStore] = useMemoryStore();
@@ -59,39 +55,7 @@ function MemoryInner() {
   });
 
   return (
-    <main class="contents">
-      <Show when={store.status === "started" && !store.pairMatchId}>
-        <MemoryScore
-          class={() => "absolute top-4 left-1/2 -translate-x-1/2 z-10"}
-        />
-      </Show>
-      <Show when={["started", "complete"].includes(store.status)}>
-        <GeneralControls>
-          <li class="contents">
-            <MemoryRestartButton
-              onMouseEnter={() =>
-                sounds.playUISound(["sniff1", "sniff2", "sniff3"], {
-                  volume: 0.2,
-                })
-              }
-            />
-          </li>
-          <li class="contents">
-            <SoundControl
-              soundIsOn={sounds.soundIsOn}
-              onSoundOnChange={(isNowOn) => {
-                if (isNowOn) return sounds.turnOnSounds();
-                sounds.turnOffSounds();
-              }}
-              onMouseEnter={() =>
-                sounds.playUISound(["sniff1", "sniff2", "sniff3"], {
-                  volume: 0.2,
-                })
-              }
-            />
-          </li>
-        </GeneralControls>
-      </Show>
+    <MemoryLayout>
       <Show when={!!store.error}>{store.error}</Show>
       <Show when={store.status === "loading" && showLoadingScreen()}>
         <MemoryLoading percentage={sounds.loadingProgess().percentage} />
@@ -112,10 +76,7 @@ function MemoryInner() {
       <Show when={store.status === "complete" && !store.pairMatchId}>
         <MemoryEnd />
       </Show>
-      <Show when={import.meta.env.DEV}>
-        <MemoryDebugger />
-      </Show>
-    </main>
+    </MemoryLayout>
   );
 }
 
