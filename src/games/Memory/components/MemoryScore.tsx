@@ -21,8 +21,14 @@ export function MemoryScore(props: MemoryScoreProps) {
       )}
     >
       <ScoreItem label={() => "Turns:"} value={() => store.turnsCount} />
-      <ScoreItem label={() => "Best Streak:"} value={() => store.pairsBestStreak} />
-      <ScoreItem label={() => "Discovered:"} value={() => store.discoveredPairs.length} />
+      <ScoreItem
+        label={() => "Best Streak:"}
+        value={() => store.pairsBestStreak}
+      />
+      <ScoreItem
+        label={() => "Discovered:"}
+        value={() => store.discoveredPairs.length}
+      />
     </dl>
   );
 }

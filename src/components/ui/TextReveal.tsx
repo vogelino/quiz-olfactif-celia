@@ -22,8 +22,10 @@ type LayoutLineWithCharacters = {
 
 const charSegmenter = new Intl.Segmenter([], { granularity: "grapheme" });
 const wordSegmenter = new Intl.Segmenter([], { granularity: "word" });
-const toCharsArr = (t: string) => Array.from(charSegmenter.segment(t)).map((c) => c.segment);
-const toWordsArr = (t: string) => Array.from(wordSegmenter.segment(t)).map((c) => c.segment);
+const toCharsArr = (t: string) =>
+  Array.from(charSegmenter.segment(t)).map((c) => c.segment);
+const toWordsArr = (t: string) =>
+  Array.from(wordSegmenter.segment(t)).map((c) => c.segment);
 
 export function TextReveal(props: TextRevealType) {
   const sounds = useMemorySounds();
@@ -37,10 +39,14 @@ export function TextReveal(props: TextRevealType) {
 
     if (width <= 0) return;
 
-    const prepared = prepareWithSegments(props.text, `${props.fontSize}px ${props.fontFamily}`, {
-      whiteSpace: "pre-wrap",
-      wordBreak: "keep-all",
-    });
+    const prepared = prepareWithSegments(
+      props.text,
+      `${props.fontSize}px ${props.fontFamily}`,
+      {
+        whiteSpace: "pre-wrap",
+        wordBreak: "keep-all",
+      },
+    );
     const layout = layoutWithLines(prepared, width, props.fontSize * 1.2);
     const linesWithWordsAndChars = layout.lines.map((l) =>
       toWordsArr(l.text).map((w) => toCharsArr(w)),
@@ -50,7 +56,12 @@ export function TextReveal(props: TextRevealType) {
         word: wordChars.join(""),
         wordIndex: getCharOrWordCountBefore(linesWithWordsAndChars, lIdx, wIdx),
         chars: wordChars.map((c, cIdx) => {
-          const countBefore = getCharOrWordCountBefore(linesWithWordsAndChars, lIdx, wIdx, cIdx);
+          const countBefore = getCharOrWordCountBefore(
+            linesWithWordsAndChars,
+            lIdx,
+            wIdx,
+            cIdx,
+          );
           return { char: c, charIndex: countBefore };
         }),
       })),
@@ -93,7 +104,10 @@ export function TextReveal(props: TextRevealType) {
       <span class="sr-only">{props.text}</span>
       <For each={lines()}>
         {(line) => (
-          <div class="flex justify-center whitespace-nowrap max-w-full" aria-hidden="true">
+          <div
+            class="flex justify-center whitespace-nowrap max-w-full"
+            aria-hidden="true"
+          >
             <For each={line}>
               {({ chars, wordIndex }) => (
                 <span class="whitespace-nowrap inline-block" aria-hidden="true">
@@ -101,7 +115,9 @@ export function TextReveal(props: TextRevealType) {
                     {({ char, charIndex }) => {
                       const soundStep = Math.max(
                         1,
-                        Math.floor(props.text.length / Math.max(lines().length, 1) / 2),
+                        Math.floor(
+                          props.text.length / Math.max(lines().length, 1) / 2,
+                        ),
                       );
 
                       return (
@@ -114,7 +130,8 @@ export function TextReveal(props: TextRevealType) {
                           class={cn(
                             "inline-block transition whitespace-nowrap",
                             "delay-(--transition-delay) duration-500 ease-in-out",
-                            props.startingClass ?? "starting:translate-y-4 starting:opacity-0",
+                            props.startingClass ??
+                              "starting:translate-y-4 starting:opacity-0",
                           )}
                           style={{
                             "--transition-delay": `calc(${
@@ -147,9 +164,12 @@ function getCharOrWordCountBefore(
   charIndex?: number,
 ): number {
   const sumWord = (word: string[]) => word.length;
-  const sumWords = (words: string[][]) => words.reduce((sum, w) => sum + sumWord(w), 0);
+  const sumWords = (words: string[][]) =>
+    words.reduce((sum, w) => sum + sumWord(w), 0);
 
-  const prevLinesCount = lines.slice(0, lineIndex).reduce((sum, line) => sum + sumWords(line), 0);
+  const prevLinesCount = lines
+    .slice(0, lineIndex)
+    .reduce((sum, line) => sum + sumWords(line), 0);
 
   const prevWordsCount = sumWords(lines[lineIndex].slice(0, wordIndex));
 

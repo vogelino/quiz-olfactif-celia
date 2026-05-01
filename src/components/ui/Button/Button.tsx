@@ -1,5 +1,11 @@
 import { cva, VariantProps } from "class-variance-authority";
-import { children, ComponentProps, mergeProps, Show, splitProps } from "solid-js";
+import {
+  children,
+  ComponentProps,
+  mergeProps,
+  Show,
+  splitProps,
+} from "solid-js";
 
 import { cn } from "~/utils/cn";
 
@@ -40,8 +46,16 @@ type ButtonVariants = VariantProps<typeof buttonVariants>;
 type ButtonProps = ComponentProps<"button"> & ButtonVariants;
 
 export function Button(_props: ButtonProps) {
-  const mergedProps = mergeProps({ variant: "primary" } satisfies ButtonProps, _props);
-  const [props, rest] = splitProps(mergedProps, ["children", "class", "variant", "size"]);
+  const mergedProps = mergeProps(
+    { variant: "primary" } satisfies ButtonProps,
+    _props,
+  );
+  const [props, rest] = splitProps(mergedProps, [
+    "children",
+    "class",
+    "variant",
+    "size",
+  ]);
   const safeChildren = children(() => props.children);
 
   return (
@@ -59,7 +73,10 @@ export function Button(_props: ButtonProps) {
         <img
           alt=""
           src="/images/button.webp"
-          class={cn("absolute size-full inset-0", "pointer-events-none dark:invert")}
+          class={cn(
+            "absolute size-full inset-0",
+            "pointer-events-none dark:invert",
+          )}
           aria-hidden="true"
         />
       </Show>

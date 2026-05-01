@@ -1,6 +1,10 @@
 import { JSXElement } from "solid-js";
 
-import { SoundsContextType, SoundsProvider, useSounds } from "~/utils/soundsContext";
+import {
+  SoundsContextType,
+  SoundsProvider,
+  useSounds,
+} from "~/utils/soundsContext";
 
 const memoryUiSounds = {
   click1: "/sounds/click-1.mp3",
@@ -36,4 +40,7 @@ export const MemorySoundsProvider = (props: { children: JSXElement }) => {
 
 // Casting the context because of default values set in the sounds context
 export const useMemorySounds = () =>
-  useSounds() as unknown as SoundsContextType<MemoryUISoundKey, MemoryMusicSoundKey>;
+  useSounds() as unknown as SoundsContextType<
+    MemoryUISoundKey,
+    MemoryMusicSoundKey
+  >;

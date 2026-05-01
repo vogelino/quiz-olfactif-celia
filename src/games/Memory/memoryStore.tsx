@@ -38,8 +38,13 @@ type StoreReturn = ReturnType<typeof createMemoryStore>;
 
 const MemoryStoreContext = createContext<StoreReturn>();
 
-export const MemoryStoreProvider = (props: { children: JSXElement; value: StoreReturn }) => (
-  <MemoryStoreContext.Provider value={props.value}>{props.children}</MemoryStoreContext.Provider>
+export const MemoryStoreProvider = (props: {
+  children: JSXElement;
+  value: StoreReturn;
+}) => (
+  <MemoryStoreContext.Provider value={props.value}>
+    {props.children}
+  </MemoryStoreContext.Provider>
 );
 
 export const useMemoryStore = () => useContext(MemoryStoreContext)!;

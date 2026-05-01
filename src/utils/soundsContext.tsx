@@ -13,7 +13,10 @@ import { LoadProgress, SoundManager } from "~/utils/SoundManager";
 import { Tail } from "~/utils/typeUtils";
 import useLocalStorage from "~/utils/useLocalStorage";
 
-export type SoundsContextType<UISoundKey extends string, MusicSoundKey extends string> = {
+export type SoundsContextType<
+  UISoundKey extends string,
+  MusicSoundKey extends string,
+> = {
   isLoading: Accessor<boolean>;
   isError: Accessor<boolean>;
   manager: SoundManager;
@@ -38,7 +41,10 @@ export type SoundsContextType<UISoundKey extends string, MusicSoundKey extends s
 
 const SoundsContext = createContext<SoundsContextType<"A", "B"> | null>(null);
 
-export const SoundsProvider = <UISoundKey extends string, MusicSoundKey extends string>(props: {
+export const SoundsProvider = <
+  UISoundKey extends string,
+  MusicSoundKey extends string,
+>(props: {
   children: JSXElement;
   uiSounds: Record<UISoundKey, string>;
   musicSounds: Record<MusicSoundKey, string>;
@@ -53,7 +59,8 @@ export const SoundsProvider = <UISoundKey extends string, MusicSoundKey extends 
       soundOn: true,
     },
   });
-  const [isMutedByPageVisibility, setIsMutedByPageVisibility] = createSignal(false);
+  const [isMutedByPageVisibility, setIsMutedByPageVisibility] =
+    createSignal(false);
   const [isLoading, setIsLoading] = createSignal(true);
   const [error, setError] = createSignal<string | null>(null);
   const [progress, setProgress] = createSignal<LoadProgress>({
@@ -86,12 +93,16 @@ export const SoundsProvider = <UISoundKey extends string, MusicSoundKey extends 
     }
 
     const syncPageVisibility = () => {
-      setIsMutedByPageVisibility(document.visibilityState === "hidden" && soundOn().soundOn);
+      setIsMutedByPageVisibility(
+        document.visibilityState === "hidden" && soundOn().soundOn,
+      );
     };
 
     syncPageVisibility();
     document.addEventListener("visibilitychange", syncPageVisibility);
-    onCleanup(() => document.removeEventListener("visibilitychange", syncPageVisibility));
+    onCleanup(() =>
+      document.removeEventListener("visibilitychange", syncPageVisibility),
+    );
   });
 
   onCleanup(() => manager.dispose());
@@ -122,11 +133,14 @@ export const SoundsProvider = <UISoundKey extends string, MusicSoundKey extends 
         loadingProgess: progress,
         soundIsOn: () => soundOn().soundOn,
         turnOnSounds: () => setSoundOn((prev) => ({ ...prev, soundOn: true })),
-        turnOffSounds: () => setSoundOn((prev) => ({ ...prev, soundOn: false })),
-        playUISound: (key, ...rest) => guard(manager.play)(normalizeKey(key), ...rest),
+        turnOffSounds: () =>
+          setSoundOn((prev) => ({ ...prev, soundOn: false })),
+        playUISound: (key, ...rest) =>
+          guard(manager.play)(normalizeKey(key), ...rest),
         stopUISound: guard(manager.stop),
         stopAllUISounds: guard(manager.stopAll),
-        playMusicLoop: (key, ...rest) => guard(manager.playLoop)(normalizeKey(key), ...rest),
+        playMusicLoop: (key, ...rest) =>
+          guard(manager.playLoop)(normalizeKey(key), ...rest),
         stopMusicLoop: guard(manager.stopAllLoops),
         stopAllMusicLoops: guard(manager.stopAllLoops),
       }}
@@ -138,7 +152,8 @@ export const SoundsProvider = <UISoundKey extends string, MusicSoundKey extends 
   function normalizeKey<T>(key: T) {
     if (Array.isArray(key)) {
       const randKey = key[Math.floor(Math.random() * key.length)];
-      if (!randKey) throw new Error(`Could not play random sound within key: "${key}"`);
+      if (!randKey)
+        throw new Error(`Could not play random sound within key: "${key}"`);
       return randKey;
     }
     return key;

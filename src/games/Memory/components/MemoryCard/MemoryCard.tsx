@@ -49,8 +49,14 @@ export function MemoryCard(_props: MemoryCardProps) {
         !props.pairIsDiscovered() && "cursor-pointer",
         props.rotateLeft ? "-rotate-z-1" : "rotate-z-1",
         !props.pairIsDiscovered() && !props.isRevealed() && "hover:scale-105",
-        props.rotateLeft && !props.pairIsDiscovered() && !props.isRevealed() && "hover:-rotate-2",
-        !props.rotateLeft && !props.pairIsDiscovered() && !props.isRevealed() && "hover:rotate-2",
+        props.rotateLeft &&
+          !props.pairIsDiscovered() &&
+          !props.isRevealed() &&
+          "hover:-rotate-2",
+        !props.rotateLeft &&
+          !props.pairIsDiscovered() &&
+          !props.isRevealed() &&
+          "hover:rotate-2",
         props.pairIsDiscovered() && "cursor-default size-full",
         props.class?.(),
       )}
@@ -77,10 +83,18 @@ export function MemoryCard(_props: MemoryCardProps) {
         colorClass={props.colorClass}
         title={() => props.title}
         fadeWithBgClass={props.fadeWithBgClass}
-        class={() => cn(!turnAround() && "rotate-y-180", !props.pairIsDiscovered() && "glow-ring")}
+        class={() =>
+          cn(
+            !turnAround() && "rotate-y-180",
+            !props.pairIsDiscovered() && "glow-ring",
+          )
+        }
         aria-hidden={!turnAround()}
       />
-      <CardBack class={() => cn(turnAround() && "rotate-y-180")} aria-hidden={turnAround()} />
+      <CardBack
+        class={() => cn(turnAround() && "rotate-y-180")}
+        aria-hidden={turnAround()}
+      />
     </button>
   );
 }

@@ -100,7 +100,9 @@ export function MemoryDiscoveredPairs() {
                                   : "translate-x-[calc(-50%+4vmin)] translate-y-[calc(-50%+4vmin)]",
                               )
                             }
-                            fadeWithBgClass={() => store.status !== "complete" && "opacity-50"}
+                            fadeWithBgClass={() =>
+                              store.status !== "complete" && "opacity-50"
+                            }
                             ariaLabelSuffix={`Card ${cardIdx() === 0 ? "A" : "B"}`}
                             disabled
                           />

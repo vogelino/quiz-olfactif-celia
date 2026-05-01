@@ -39,7 +39,10 @@ export function MemoryStart() {
       )}
     >
       <div
-        class={cn("flex items-center justify-center flex-col gap-4", "py-16 rounded-lg w-[90vw]")}
+        class={cn(
+          "flex items-center justify-center flex-col gap-4",
+          "py-16 rounded-lg w-[90vw]",
+        )}
       >
         <h1 class="text-7xl font-bold text-center font-headline w-full texture-mask">
           <TextReveal

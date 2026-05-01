@@ -37,7 +37,8 @@ export function useGridNavigation({
         columnDelta,
       }),
     );
-    const candidates = directionalCells.length > 0 ? directionalCells : availableCells;
+    const candidates =
+      directionalCells.length > 0 ? directionalCells : availableCells;
     const [nextCell] = candidates.sort((a, b) =>
       compareCellsInDirection({
         a,
@@ -163,11 +164,21 @@ function compareCellsInDirection({
   return a.row - b.row || a.column - b.column;
 }
 
-function isCellOnSameAxis(cell: GridCell, current: GridCell, columnDelta: number) {
-  return columnDelta === 0 ? cell.column === current.column : cell.row === current.row;
+function isCellOnSameAxis(
+  cell: GridCell,
+  current: GridCell,
+  columnDelta: number,
+) {
+  return columnDelta === 0
+    ? cell.column === current.column
+    : cell.row === current.row;
 }
 
-function getOffAxisDistance(cell: GridCell, current: GridCell, columnDelta: number) {
+function getOffAxisDistance(
+  cell: GridCell,
+  current: GridCell,
+  columnDelta: number,
+) {
   return columnDelta === 0
     ? Math.abs(cell.column - current.column)
     : Math.abs(cell.row - current.row);

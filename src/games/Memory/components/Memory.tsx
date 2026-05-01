@@ -7,7 +7,11 @@ import { MemoryLoading } from "@memory/components/MemoryLoading";
 import { MemoryMatchModal } from "@memory/components/MemoryMatchModal";
 import { MemoryStart } from "@memory/components/MemoryStart";
 import { useMemorySounds } from "@memory/memorySounds";
-import { createMemoryStore, MemoryStoreProvider, useMemoryStore } from "@memory/memoryStore";
+import {
+  createMemoryStore,
+  MemoryStoreProvider,
+  useMemoryStore,
+} from "@memory/memoryStore";
 import { getShuffledCards } from "@memory/utils/memoryCardsUtil";
 
 import { MemoryLayout } from "./MemoryLayout";
@@ -17,7 +21,9 @@ function MemoryInner() {
   const sounds = useMemorySounds();
   const [showLoadingScreen, setShowLoadingScreen] = createSignal(false);
 
-  createHotkey("M", () => (sounds.soundIsOn() ? sounds.turnOffSounds() : sounds.turnOnSounds()));
+  createHotkey("M", () =>
+    sounds.soundIsOn() ? sounds.turnOffSounds() : sounds.turnOnSounds(),
+  );
   createHotkey("R", () => {
     batch(() => {
       setStore("cards", getShuffledCards());
@@ -59,7 +65,11 @@ function MemoryInner() {
       <Show when={store.status === "initial"}>
         <MemoryStart />
       </Show>
-      <Show when={["started", "complete"].includes(store.status) && !store.pairMatchId}>
+      <Show
+        when={
+          ["started", "complete"].includes(store.status) && !store.pairMatchId
+        }
+      >
         <MemoryGrid />
       </Show>
       <Show when={store.status !== "initial" && store.pairMatchId}>

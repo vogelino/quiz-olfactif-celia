@@ -8,7 +8,8 @@ import { cn } from "~/utils/cn";
 
 export function MemoryDebugger() {
   const [store, setStore] = useMemoryStore();
-  const isDiscovered = (pairId: MemoryPairId) => store.discoveredPairs.includes(pairId);
+  const isDiscovered = (pairId: MemoryPairId) =>
+    store.discoveredPairs.includes(pairId);
   const modalIsOpened = () => store.pairMatchId !== null;
   const isActive = (pairId: MemoryPairId) => store.pairMatchId === pairId;
   const onPairDiscoveryToggle = (pairId: MemoryPairId) => {
@@ -16,14 +17,18 @@ export function MemoryDebugger() {
       batch(() => {
         setStore("status", "started");
         setStore("discoveredPairs", (prev) =>
-          prev.includes(pairId) ? prev.filter((p) => p !== pairId) : [...prev, pairId],
+          prev.includes(pairId)
+            ? prev.filter((p) => p !== pairId)
+            : [...prev, pairId],
         );
       });
     });
   };
 
   createHotkeySequence(["D", "D"], () =>
-    setStore("debuggerStatus", (p) => (p === "expanded" ? "collapsed" : "expanded")),
+    setStore("debuggerStatus", (p) =>
+      p === "expanded" ? "collapsed" : "expanded",
+    ),
   );
 
   return (
@@ -36,7 +41,9 @@ export function MemoryDebugger() {
     >
       <button
         onClick={() =>
-          setStore("debuggerStatus", (p) => (p === "expanded" ? "collapsed" : "expanded"))
+          setStore("debuggerStatus", (p) =>
+            p === "expanded" ? "collapsed" : "expanded",
+          )
         }
         class={cn(
           "font-bold uppercase tracking-wide cursor-pointer",
@@ -106,7 +113,10 @@ export function MemoryDebugger() {
                       onClick={() => {
                         batch(() => {
                           setStore("status", "started");
-                          setStore("pairMatchId", isActive(pair.id) ? null : pair.id);
+                          setStore(
+                            "pairMatchId",
+                            isActive(pair.id) ? null : pair.id,
+                          );
                         });
                       }}
                     >

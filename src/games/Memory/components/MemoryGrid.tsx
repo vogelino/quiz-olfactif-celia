@@ -43,7 +43,9 @@ export function MemoryGrid() {
             setStore("currentTurn", []);
             setStore("pairMatchId", pair1.id);
             setStore("pairsStreak", (prev) => prev + 1);
-            setStore("pairsBestStreak", (prev) => Math.max(prev, store.pairsStreak));
+            setStore("pairsBestStreak", (prev) =>
+              Math.max(prev, store.pairsStreak),
+            );
           });
         });
       }
@@ -54,7 +56,8 @@ export function MemoryGrid() {
     if (memoryPairs.length === store.discoveredPairs.length) {
       setStore("status", "complete");
     } else {
-      const firstRemainingCard = document.querySelector<HTMLElement>(`[data-card-position]`);
+      const firstRemainingCard =
+        document.querySelector<HTMLElement>(`[data-card-position]`);
       firstRemainingCard?.focus();
     }
   });
@@ -72,7 +75,9 @@ export function MemoryGrid() {
 
   const focusCard = (row: number, col: number) => {
     const position = getCardPosition({ rowIdx: row, colIdx: col });
-    const cardElement = document.querySelector<HTMLElement>(`[data-card-position="${position}"]`);
+    const cardElement = document.querySelector<HTMLElement>(
+      `[data-card-position="${position}"]`,
+    );
 
     if (!cardElement) return;
 
@@ -111,7 +116,9 @@ export function MemoryGrid() {
       )}
       inert={!!store.pairMatchId}
     >
-      <h1 class="sr-only">Memory Game - Find the pairs of cards with the same ingredient</h1>
+      <h1 class="sr-only">
+        Memory Game - Find the pairs of cards with the same ingredient
+      </h1>
       <MemoryDiscoveredPairs />
       <div class="grid grid-cols-4 gap-[3vmin] w-[80vmin] aspect-square absolute left-1/2 top-1/2 -translate-1/2">
         <For each={store.cards}>
@@ -150,8 +157,12 @@ export function MemoryGrid() {
                 <MemoryCard
                   {...card.ingredient}
                   colorClass={() => card.colorClass}
-                  isRevealed={() => store.currentTurn.includes(card.ingredient.id)}
-                  pairIsDiscovered={() => store.discoveredPairs.includes(card.pairId)}
+                  isRevealed={() =>
+                    store.currentTurn.includes(card.ingredient.id)
+                  }
+                  pairIsDiscovered={() =>
+                    store.discoveredPairs.includes(card.pairId)
+                  }
                   onToggleReveal={() => onCardRevealToggle(card.ingredient.id)}
                   rotateLeft={card.rotateLeft}
                   class={() =>

@@ -19,7 +19,9 @@ export function ShortcutsList(props: {
                     <Show when={index() > 0}>
                       <span class="font-mono text-sm px-2">+</span>
                     </Show>
-                    <KeyIndicator key={part.hotkeyPart}>{part.part}</KeyIndicator>
+                    <KeyIndicator key={part.hotkeyPart}>
+                      {part.part}
+                    </KeyIndicator>
                     {part.type === "sequence" && <span class="mx-1">then</span>}
                   </>
                 )}
@@ -84,5 +86,8 @@ function keywordToSymbol(key: string) {
 }
 
 function isMacOS() {
-  return typeof navigator !== "undefined" && /Mac|iPod|iPhone|iPad/.test(navigator.platform);
+  return (
+    typeof navigator !== "undefined" &&
+    /Mac|iPod|iPhone|iPad/.test(navigator.platform)
+  );
 }

@@ -29,7 +29,12 @@ export const fresh = {
 export const floral = {
   id: "floral",
   title: "Floral",
-  subfamilies: ["Soft Floral", "Floriental", "Floral Fruity", "Floral Woody Musk"],
+  subfamilies: [
+    "Soft Floral",
+    "Floriental",
+    "Floral Fruity",
+    "Floral Woody Musk",
+  ],
   descriptors: [
     "Romantic",
     "Elegant",
@@ -46,7 +51,13 @@ export const floral = {
 export const oriental = {
   id: "oriental",
   title: "Oriental",
-  subfamilies: ["Soft Oriental", "Spicy Oriental", "Woody Oriental", "Amber", "Gourmand"],
+  subfamilies: [
+    "Soft Oriental",
+    "Spicy Oriental",
+    "Woody Oriental",
+    "Amber",
+    "Gourmand",
+  ],
   descriptors: [
     "Warm",
     "Sensual",
@@ -63,7 +74,13 @@ export const oriental = {
 export const woody = {
   id: "woody",
   title: "Woody",
-  subfamilies: ["Dry Woods", "Mossy Woods (Chypre)", "Soft Woods", "Leather", "Vetiver"],
+  subfamilies: [
+    "Dry Woods",
+    "Mossy Woods (Chypre)",
+    "Soft Woods",
+    "Leather",
+    "Vetiver",
+  ],
   descriptors: [
     "Earthy",
     "Warm",

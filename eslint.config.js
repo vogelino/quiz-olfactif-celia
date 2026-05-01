@@ -10,7 +10,14 @@ const solidTypeScript = solid.configs["flat/typescript"];
 
 export default tseslint.config(
   {
-    ignores: [".nitro", ".output", ".vercel", "dist", "node_modules", "eslint.config.js"],
+    ignores: [
+      ".nitro",
+      ".output",
+      ".vercel",
+      "dist",
+      "node_modules",
+      "eslint.config.js",
+    ],
   },
   js.configs.recommended,
   ...tseslint.configs.recommended,
