@@ -16,6 +16,8 @@ type MemoryCardProps = Ingredient & {
   class?: () => ClassValue;
   ariaLabelSuffix: string;
   disabled?: boolean;
+  onFocus?: () => void;
+  'data-card-position'?: string;
 };
 
 export function MemoryCard({
@@ -30,6 +32,8 @@ export function MemoryCard({
   class: className,
   ariaLabelSuffix,
   disabled = false,
+  onFocus,
+  'data-card-position': dataCardPosition,
 }: MemoryCardProps) {
   const sounds = useMemorySounds();
   const turnAround = () => pairIsDiscovered() || isRevealed();
@@ -44,6 +48,7 @@ export function MemoryCard({
 
   return (
     <button
+      onFocus={onFocus}
       onMouseEnter={() =>
         sounds.playUISound("hover1", {
           volume: 0.2,
@@ -69,6 +74,7 @@ export function MemoryCard({
         "view-transition-name": `memory-card-${id}`,
       }}
       disabled={disabled}
+      data-card-position={dataCardPosition}
     >
       <span class="sr-only">
         {getAriaLabelByState({

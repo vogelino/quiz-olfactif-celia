@@ -4,8 +4,9 @@ import { IngredientId } from "@memory/data/ingredients";
 import { ingredientIdToPair, memoryPairs } from "@memory/data/memoryPairs";
 import { useMemorySounds } from "@memory/memorySounds";
 import { useMemoryStore } from "@memory/memoryStore";
-import { For, Show, batch, createEffect } from "solid-js";
+import { For, Show, batch, createEffect, createSignal } from "solid-js";
 import { cn } from "~/utils/cn";
+import { useGridNavigation } from "../hooks/useGridNavigation";
 
 export function MemoryGrid() {
   const [store, setStore] = useMemoryStore();
@@ -51,7 +52,41 @@ export function MemoryGrid() {
   createEffect(() => {
     if (memoryPairs.length === store.discoveredPairs.length) {
       setStore("status", "complete");
+    } else {
+      const firstRemainingCard = document.querySelector<HTMLElement>(
+        `[data-card-position]`,
+      );
+      firstRemainingCard?.focus();
     }
+  });
+
+  const [currentlyFocusedCard, setCurrentlyFocusedCard] = createSignal<{
+    row: number;
+    col: number;
+  } | null>(null);
+  const gridSize = 4;
+
+  const isCardAvailable = (row: number, col: number) => {
+    const card = store.cards[row * gridSize + col];
+    return !!card && !store.discoveredPairs.includes(card.pairId);
+  };
+
+  useGridNavigation({
+    currentColumn: () => currentlyFocusedCard()?.col ?? 0,
+    currentRow: () => currentlyFocusedCard()?.row ?? 0,
+    isCellAvailable: isCardAvailable,
+    onNavigate: (row, col) => {
+      const position = getCardPosition({ rowIdx: row, colIdx: col });
+      const cardElement = document.querySelector<HTMLElement>(
+        `[data-card-position="${position}"]`,
+      );
+
+      if (!cardElement) return;
+
+      setCurrentlyFocusedCard({ row, col });
+      cardElement.focus();
+    },
+    gridSize,
   });
 
   return (
@@ -117,6 +152,17 @@ export function MemoryGrid() {
                     )
                   }
                   ariaLabelSuffix={getAriaLabelSuffix(index())}
+                  onFocus={() =>
+                    setCurrentlyFocusedCard({
+                      row: Math.floor(index() / gridSize),
+                      col: index() % gridSize,
+                    })
+                  }
+                  data-card-position={getCardPosition({
+                    rowIdx: Math.floor(index() / gridSize),
+                    colIdx: index() % gridSize,
+                    gridSize,
+                  })}
                 />
               </Show>
             </div>
@@ -127,8 +173,23 @@ export function MemoryGrid() {
   );
 }
 
+function getCardPosition({
+  rowIdx,
+  colIdx,
+  gridSize = 4,
+}: {
+  rowIdx: number;
+  colIdx: number;
+  gridSize?: number;
+}) {
+  const col = "ABCD".charAt(colIdx % gridSize);
+  return `${col}${rowIdx + 1}`;
+}
+
 function getAriaLabelSuffix(index: number, gridSize = 4) {
-  const row = Math.floor(index / gridSize) + 1;
-  const col = "ABCD".charAt(index % gridSize);
-  return `In position ${col}/${row}`;
+  return `In position ${getCardPosition({
+    rowIdx: Math.floor(index / gridSize),
+    colIdx: index % gridSize,
+    gridSize,
+  })}`;
 }
