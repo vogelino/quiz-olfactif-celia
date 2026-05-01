@@ -4,7 +4,7 @@ type CardIngredientTitleProps = {
   title: () => string;
 };
 
-export function CardIngredientTitle({ title }: CardIngredientTitleProps) {
+export function CardIngredientTitle(props: CardIngredientTitleProps) {
   return (
     <span
       class={cn(
@@ -13,7 +13,7 @@ export function CardIngredientTitle({ title }: CardIngredientTitleProps) {
         "text-xs md:text-sm lg:text-base",
       )}
     >
-      {title()}
+      {props.title()}
     </span>
   );
 }

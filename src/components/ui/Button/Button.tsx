@@ -1,5 +1,5 @@
 import { cva, VariantProps } from "class-variance-authority";
-import { children, ComponentProps, Show } from "solid-js";
+import { children, ComponentProps, mergeProps, Show, splitProps } from "solid-js";
 import { cn } from "~/utils/cn";
 import styles from "./Button.module.css";
 
@@ -37,17 +37,21 @@ type ButtonVariants = VariantProps<typeof buttonVariants>;
 
 type ButtonProps = ComponentProps<"button"> & ButtonVariants;
 
-export function Button({
-  children: child,
-  class: className,
-  variant = "primary",
-  size,
-  ...rest
-}: ButtonProps) {
-  const safeChildren = children(() => child);
+export function Button(_props: ButtonProps) {
+  const mergedProps = mergeProps({ variant: "primary" } satisfies ButtonProps, _props);
+  const [props, rest] = splitProps(mergedProps, ["children", "class", "variant", "size"]);
+  const safeChildren = children(() => props.children);
+
   return (
-    <button {...rest} class={buttonVariants({ variant, size, className })}>
-      <Show when={variant === "primary"}>
+    <button
+      {...rest}
+      class={buttonVariants({
+        variant: props.variant,
+        size: props.size,
+        class: props.class,
+      })}
+    >
+      <Show when={props.variant === "primary"}>
         <img
           alt=""
           src="/images/button.webp"

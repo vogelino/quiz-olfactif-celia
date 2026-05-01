@@ -6,7 +6,7 @@ type CardBackProps = Omit<ComponentProps<"img">, "class"> & {
   class?: () => ClassValue;
 };
 
-export function CardBack({ class: className }: CardBackProps) {
+export function CardBack(props: CardBackProps) {
   return (
     <img
       alt=""
@@ -16,7 +16,7 @@ export function CardBack({ class: className }: CardBackProps) {
         "w-full rounded aspect-square max-w-full max-h-full",
         "transition-transform backface-hidden relative",
         "pointer-events-none absolute top-1/2 left-1/2 -translate-1/2",
-        className?.(),
+        props.class?.(),
       )}
     />
   );

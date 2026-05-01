@@ -6,12 +6,12 @@ type CardIllustrationProps = {
   title: () => ClassValue;
 };
 
-export function CardIllustration({ id, title }: CardIllustrationProps) {
+export function CardIllustration(props: CardIllustrationProps) {
   return (
     <img
       data-id="card-front-illustration"
-      src={`/memory/ingredients/${id()}.webp`}
-      alt={`Illustration of ${title()}`}
+      src={`/memory/ingredients/${props.id()}.webp`}
+      alt={`Illustration of ${props.title()}`}
       class={cn("absolute inset-x-0 top-0 w-full scale-35 h-6/7", "object-contain")}
     />
   );

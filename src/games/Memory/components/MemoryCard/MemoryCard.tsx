@@ -1,7 +1,7 @@
 import { Ingredient } from "@memory/data/ingredients";
 import { useMemorySounds } from "@memory/memorySounds";
 import { ClassValue } from "clsx";
-import { createEffect, onCleanup } from "solid-js";
+import { createEffect, mergeProps, onCleanup } from "solid-js";
 import { cn } from "~/utils/cn";
 import { CardBack } from "./CardBack";
 import { CardFront } from "./CardFront";
@@ -20,23 +20,10 @@ type MemoryCardProps = Ingredient & {
   "data-card-position"?: string;
 };
 
-export function MemoryCard({
-  id,
-  title,
-  colorClass,
-  fadeWithBgClass,
-  isRevealed,
-  pairIsDiscovered,
-  onToggleReveal,
-  rotateLeft,
-  class: className,
-  ariaLabelSuffix,
-  disabled = false,
-  onFocus,
-  "data-card-position": dataCardPosition,
-}: MemoryCardProps) {
+export function MemoryCard(_props: MemoryCardProps) {
+  const props = mergeProps({ disabled: false }, _props);
   const sounds = useMemorySounds();
-  const turnAround = () => pairIsDiscovered() || isRevealed();
+  const turnAround = () => props.pairIsDiscovered() || props.isRevealed();
   let lastTurnAround: boolean | null = null;
 
   createEffect(() => {
@@ -48,7 +35,7 @@ export function MemoryCard({
 
   return (
     <button
-      onFocus={onFocus}
+      onFocus={() => props.onFocus?.()}
       onMouseEnter={() =>
         sounds.playUISound("hover1", {
           volume: 0.2,
@@ -57,38 +44,38 @@ export function MemoryCard({
       class={cn(
         "relative @container/card transition",
         "focus-visible:outline-none focus-visible:glow-ring-double",
-        !pairIsDiscovered() && "cursor-pointer",
-        rotateLeft ? "-rotate-z-1" : "rotate-z-1",
-        !pairIsDiscovered() && !isRevealed() && "hover:scale-105",
-        rotateLeft && !pairIsDiscovered() && !isRevealed() && "hover:-rotate-2",
-        !rotateLeft && !pairIsDiscovered() && !isRevealed() && "hover:rotate-2",
-        pairIsDiscovered() && "cursor-default size-full",
-        className?.(),
+        !props.pairIsDiscovered() && "cursor-pointer",
+        props.rotateLeft ? "-rotate-z-1" : "rotate-z-1",
+        !props.pairIsDiscovered() && !props.isRevealed() && "hover:scale-105",
+        props.rotateLeft && !props.pairIsDiscovered() && !props.isRevealed() && "hover:-rotate-2",
+        !props.rotateLeft && !props.pairIsDiscovered() && !props.isRevealed() && "hover:rotate-2",
+        props.pairIsDiscovered() && "cursor-default size-full",
+        props.class?.(),
       )}
       onClick={() => {
         sounds.playUISound("click1");
-        onToggleReveal();
+        props.onToggleReveal();
       }}
       style={{
-        "view-transition-name": `memory-card-${id}`,
+        "view-transition-name": `memory-card-${props.id}`,
       }}
-      disabled={disabled}
-      data-card-position={dataCardPosition}
+      disabled={props.disabled}
+      data-card-position={props["data-card-position"]}
     >
       <span class="sr-only">
         {getAriaLabelByState({
-          title,
-          isRevealed: isRevealed(),
-          pairIsDiscovered: pairIsDiscovered(),
-          suffix: ariaLabelSuffix,
+          title: props.title,
+          isRevealed: props.isRevealed(),
+          pairIsDiscovered: props.pairIsDiscovered(),
+          suffix: props.ariaLabelSuffix,
         })}
       </span>
       <CardFront
-        id={() => id}
-        colorClass={colorClass}
-        title={() => title}
-        fadeWithBgClass={fadeWithBgClass}
-        class={() => cn(!turnAround() && "rotate-y-180", !pairIsDiscovered() && "glow-ring")}
+        id={() => props.id}
+        colorClass={props.colorClass}
+        title={() => props.title}
+        fadeWithBgClass={props.fadeWithBgClass}
+        class={() => cn(!turnAround() && "rotate-y-180", !props.pairIsDiscovered() && "glow-ring")}
         aria-hidden={!turnAround()}
       />
       <CardBack class={() => cn(turnAround() && "rotate-y-180")} aria-hidden={turnAround()} />

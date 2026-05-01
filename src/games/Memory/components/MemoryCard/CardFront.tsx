@@ -1,5 +1,5 @@
 import { ClassValue } from "clsx";
-import { ComponentProps } from "solid-js";
+import { ComponentProps, splitProps } from "solid-js";
 import { CardColorOverlay } from "~/games/Memory/components/MemoryCard/CardColorOverlay";
 import { CardFrontImage } from "~/games/Memory/components/MemoryCard/CardFrontImage";
 import { CardIllustration } from "~/games/Memory/components/MemoryCard/CardIllustration";
@@ -16,14 +16,15 @@ type CardFrontProps = Omit<ComponentProps<"div">, "id" | "title" | "class"> & {
   fadeWithBgClass?: () => ClassValue;
 };
 
-export function CardFront({
-  class: className,
-  fadeWithBgClass,
-  id,
-  colorClass,
-  title,
-  ...rest
-}: CardFrontProps) {
+export function CardFront(_props: CardFrontProps) {
+  const [props, rest] = splitProps(_props, [
+    "class",
+    "fadeWithBgClass",
+    "id",
+    "colorClass",
+    "title",
+  ]);
+
   return (
     <div
       {...rest}
@@ -32,7 +33,7 @@ export function CardFront({
         "transition-transform backface-hidden relative",
         "pointer-events-none select-none absolute top-1/2 left-1/2 -translate-1/2",
         "light:texture-mask",
-        className?.(),
+        props.class?.(),
       )}
     >
       <div
@@ -42,11 +43,11 @@ export function CardFront({
           "mask-[url('/memory/card-front.webp')] mask-cover",
         )}
       >
-        <CardColorOverlay class={colorClass} />
-        <CardIllustration id={id} title={title} />
+        <CardColorOverlay class={props.colorClass} />
+        <CardIllustration id={props.id} title={props.title} />
         <CardFrontImage />
-        <CardIngredientTitle title={title} />
-        <CardFadeOverlay class={fadeWithBgClass} />
+        <CardIngredientTitle title={props.title} />
+        <CardFadeOverlay class={props.fadeWithBgClass} />
       </div>
     </div>
   );

@@ -11,7 +11,7 @@ type MemoryLayoutProps = {
   children: JSXElement;
 };
 
-export function MemoryLayout({ children }: MemoryLayoutProps) {
+export function MemoryLayout(props: MemoryLayoutProps) {
   const [store] = useMemoryStore();
   const sounds = useMemorySounds();
   return (
@@ -46,7 +46,7 @@ export function MemoryLayout({ children }: MemoryLayoutProps) {
           </li>
         </GeneralControls>
       </Show>
-      {children}
+      {props.children}
       <Show when={import.meta.env.DEV}>
         <MemoryDebugger />
       </Show>

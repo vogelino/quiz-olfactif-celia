@@ -44,10 +44,7 @@ export default tseslint.config(
   {
     files: ["**/*.{jsx,tsx}"],
     plugins: solidTypeScript.plugins,
-    rules: {
-      ...solidTypeScript.rules,
-      "solid/no-destructure": "off",
-    },
+    rules: solidTypeScript.rules,
   },
   prettier,
 );

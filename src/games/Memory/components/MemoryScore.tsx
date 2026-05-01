@@ -6,7 +6,7 @@ type MemoryScoreProps = {
   class?: () => ClassValue;
 };
 
-export function MemoryScore({ class: className }: MemoryScoreProps) {
+export function MemoryScore(props: MemoryScoreProps) {
   const [store] = useMemoryStore();
 
   return (
@@ -16,7 +16,7 @@ export function MemoryScore({ class: className }: MemoryScoreProps) {
         "flex justify-center gap-x-2 slide-up delay-200 [corner-shape:scoop] rounded-lg",
         "bg-background bg-texture text-foreground px-6 pt-3 pb-2 texture-mask border-dashed",
         "border border-foreground max-sm:flex-col",
-        className?.(),
+        props.class?.(),
       )}
     >
       <ScoreItem label={() => "Turns:"} value={() => store.turnsCount} />
@@ -33,12 +33,14 @@ type ScoreItemProps = {
 
 const formatter = new Intl.NumberFormat();
 
-function ScoreItem({ label, value }: ScoreItemProps) {
+function ScoreItem(props: ScoreItemProps) {
   return (
     <>
-      <dt class="font-headline tracking-widest text-lg uppercase whitespace-nowrap">{label()}</dt>
+      <dt class="font-headline tracking-widest text-lg uppercase whitespace-nowrap">
+        {props.label()}
+      </dt>
       <dd class="text-xl -translate-y-0.5 inline-block pr-4 last-of-type:pr-0">
-        {formatter.format(value())}
+        {formatter.format(props.value())}
       </dd>
     </>
   );
