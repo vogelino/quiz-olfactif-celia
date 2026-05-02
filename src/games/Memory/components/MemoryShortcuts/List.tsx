@@ -1,14 +1,19 @@
-import { HotkeySequence, RegisterableHotkey } from "@omniaura/solid-hotkeys";
 
-import { ShortcutsList } from "~/components/ShortcutsList";
+import { ShortcutKey, ShortcutsList } from "~/components/ShortcutsList";
 
-const shortcuts = new Map<RegisterableHotkey | HotkeySequence, string>([
+const moves = new Map<ShortcutKey, string>([
   ["Enter", "Start game"],
   ["ArrowUp", "Move up"],
   ["ArrowDown", "Move down"],
   ["ArrowLeft", "Move left"],
   ["ArrowRight", "Move right"],
   ["Space", "Reveal card"],
+  [["A", "1"], "Reveal card A1"],
+  ["Mod+Shift+D", "Debug mode"],
+]);
+
+const shortcuts = new Map<string, Map<ShortcutKey, string>>([
+  ["Game Controls", moves],
 ]);
 
 export function MemoryShortcutList() {

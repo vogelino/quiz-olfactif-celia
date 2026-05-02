@@ -1,32 +1,48 @@
 import { HotkeySequence, RegisterableHotkey } from "@omniaura/solid-hotkeys";
 import { For, Show } from "solid-js";
 
+import { isMacOS } from "~/games/Memory/utils/isMacOS";
+
 import { KeyIndicator } from "./ui/KeyIndicator";
 
+export type ShortcutKey = RegisterableHotkey | HotkeySequence;
+
 export function ShortcutsList(props: {
-  shortcutsMap: Map<RegisterableHotkey | HotkeySequence, string>;
+  shortcutsMap: Map<string, Map<ShortcutKey, string>>;
 }) {
   return (
     <div class="grid gap-x-6 gap-y-2 grid-cols-[1fr_auto]">
       <For each={Array.from(props.shortcutsMap.entries())}>
-        {([hotkey, description]) => (
+        {([groupTitle, shortcuts]) => (
           <>
-            <p>{description}</p>
-            <div class="flex items-center w-full gap-1">
-              <For each={parseHotKey(hotkey)}>
-                {(part, index) => (
-                  <>
-                    <Show when={index() > 0}>
-                      <span class="font-mono text-sm px-2">+</span>
-                    </Show>
-                    <KeyIndicator key={part.hotkeyPart}>
-                      {part.part}
-                    </KeyIndicator>
-                    {part.type === "sequence" && <span class="mx-1">then</span>}
-                  </>
-                )}
-              </For>
+            <h3 class="font-bold col-span-2 text-lg border-b pb-1 mb-1 border-border">{groupTitle}</h3>
+            <div class="grid grid-cols-subgrid col-span-full">
+              <span>Description</span>
+              <span>Hotkey</span>
             </div>
+
+            <For each={Array.from(shortcuts.entries())}>
+              {([hotkey, description]) => (
+                <>
+                  <p>{description}</p>
+                  <div class="flex items-center w-full gap-1">
+                    <For each={parseHotKey(hotkey)}>
+                      {(part, index) => (
+                        <>
+                          <Show when={index() > 0}>
+                            <span class="font-mono text-sm px-2">+</span>
+                          </Show>
+                          <KeyIndicator key={part.hotkeyPart}>
+                            {part.part}
+                          </KeyIndicator>
+                          {part.type === "sequence" && <span class="mx-1">then</span>}
+                        </>
+                      )}
+                    </For>
+                  </div>
+                </>
+              )}
+            </For>
           </>
         )}
       </For>
@@ -83,11 +99,4 @@ function keywordToSymbol(key: string) {
     default:
       return key;
   }
-}
-
-function isMacOS() {
-  return (
-    typeof navigator !== "undefined" &&
-    /Mac|iPod|iPhone|iPad/.test(navigator.platform)
-  );
 }
