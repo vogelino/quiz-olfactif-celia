@@ -11,38 +11,44 @@ export function ShortcutsList(props: {
   shortcutsMap: Map<string, Map<ShortcutKey, string>>;
 }) {
   return (
-    <div class="grid gap-x-6 gap-y-2 grid-cols-[1fr_auto]">
+    <div class="grid gap-x-6 gap-y-2 grid-cols-[1fr_auto] pt-4">
       <For each={Array.from(props.shortcutsMap.entries())}>
         {([groupTitle, shortcuts]) => (
           <>
-            <h3 class="font-bold col-span-2 text-lg border-b pb-1 mb-1 border-border">{groupTitle}</h3>
-            <div class="grid grid-cols-subgrid col-span-full">
+            <h3 class="font-bold col-span-2 text-lg font-headline py-2 border-b border-border texture-mask">{groupTitle}</h3>
+            <div class="grid grid-cols-subgrid col-span-full pb-2 border-b border-border leading-tight text-xs text-muted-foreground uppercase tracking-wide">
               <span>Description</span>
               <span>Hotkey</span>
             </div>
 
-            <For each={Array.from(shortcuts.entries())}>
-              {([hotkey, description]) => (
-                <>
-                  <p>{description}</p>
-                  <div class="flex items-center w-full gap-1">
-                    <For each={parseHotKey(hotkey)}>
-                      {(part, index) => (
-                        <>
-                          <Show when={index() > 0}>
-                            <span class="font-mono text-sm px-2">+</span>
-                          </Show>
-                          <KeyIndicator key={part.hotkeyPart}>
-                            {part.part}
-                          </KeyIndicator>
-                          {part.type === "sequence" && <span class="mx-1">then</span>}
-                        </>
-                      )}
-                    </For>
-                  </div>
-                </>
-              )}
-            </For>
+            <Show when={shortcuts.size > 0} fallback={<p class="col-span-2 text-sm text-muted-foreground">No shortcuts available.</p>}>
+              <div class="col-span-full grid grid-cols-subgrid pb-4 gap-y-2">
+                <For each={Array.from(shortcuts.entries())}>
+                  {([hotkey, description]) => (
+                    <>
+                      <p>{description}</p>
+                      <div class="flex items-center w-full gap-1">
+                        <For each={parseHotKey(hotkey)}>
+                          {(part, index) => (
+                            <>
+                              <Show when={index() > 0 && part.type === "hotkey"}>
+                                <span class="font-mono text-sm px-2">+</span>
+                              </Show>
+                              <KeyIndicator key={part.hotkeyPart}>
+                                {part.part}
+                              </KeyIndicator>
+                              <Show when={part.type === "sequence" && index() < parseHotKey(hotkey).length - 1}>
+                                <span class="mx-1">then</span>
+                              </Show>
+                            </>
+                          )}
+                        </For>
+                      </div>
+                    </>
+                  )}
+                </For>
+              </div>
+            </Show>
           </>
         )}
       </For>
@@ -86,6 +92,8 @@ function keywordToSymbol(key: string) {
       return "←";
     case "ArrowRight":
       return "→";
+    case "Tab":
+      return "Tab ⇥";
     case "Mod":
       return isMacOS() ? "Option ⌥" : "Alt";
     case "Meta":
