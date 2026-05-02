@@ -104,7 +104,7 @@ export function MemoryMatchModal() {
             >
               <div class="w-full contain-inline-size flex flex-col items-center shrink-0 gap-3">
                 <div
-                  class={cn("starting:opacity-0 delay-800 transition-opacity")}
+                  class={cn("starting:opacity-0 delay-200 transition-opacity")}
                 >
                   <img
                     src={`/memory/molecules/${molecule().id}.webp`}
@@ -119,13 +119,13 @@ export function MemoryMatchModal() {
                     text="It's a Match!"
                     fontFamily="Pouler"
                     fontSize={72}
-                    class="[--start-delay:500ms]"
+                    class="[--stagger-unit:20ms]"
                   />
                 </h2>
                 <h3
                   class={cn(
                     "text-xl flex flex-col gap-5 items-center transition",
-                    "slide-up delay-700 uppercase tracking-widest font-headline",
+                    "slide-up delay-300 uppercase tracking-widest font-headline",
                   )}
                 >
                   <ShardUnderlinedText>{molecule().title}</ShardUnderlinedText>
@@ -135,7 +135,7 @@ export function MemoryMatchModal() {
                     text={pair().description}
                     fontFamily="Martian Grotesk"
                     fontSize={18}
-                    class="[--stagger-unit:1ms] [--start-delay:600ms] ease-out-smooth"
+                    class="[--stagger-unit:0.5ms] [--start-delay:100ms] ease-out-smooth"
                   />
                 </div>
               </div>
@@ -150,7 +150,7 @@ export function MemoryMatchModal() {
                     colorClass={() => molecule().colorClass}
                     isRevealed={() => true}
                     pairIsDiscovered={() => false}
-                    onToggleReveal={() => {}}
+                    onToggleReveal={() => { }}
                     rotateLeft
                     class={() => "-rotate-1 size-[25vmin]"}
                     ariaLabelSuffix={`Card A`}
@@ -169,7 +169,7 @@ export function MemoryMatchModal() {
                     colorClass={() => molecule().colorClass}
                     isRevealed={() => true}
                     pairIsDiscovered={() => false}
-                    onToggleReveal={() => {}}
+                    onToggleReveal={() => { }}
                     class={() => "-rotate-1 size-[25vmin]"}
                     ariaLabelSuffix={`Card B`}
                     disabled
@@ -179,7 +179,7 @@ export function MemoryMatchModal() {
               <footer
                 class={cn(
                   "flex justify-center shrink-0",
-                  "delay-1300 duration-[2s] slide-up",
+                  "delay-600 duration-[2s] slide-up",
                 )}
               >
                 <Button

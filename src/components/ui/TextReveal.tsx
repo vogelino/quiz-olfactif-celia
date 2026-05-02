@@ -131,14 +131,13 @@ export function TextReveal(props: TextRevealType) {
                             "inline-block transition whitespace-nowrap",
                             "delay-(--transition-delay) duration-500 ease-in-out",
                             props.startingClass ??
-                              "starting:translate-y-4 starting:opacity-0",
+                            "starting:translate-y-4 starting:opacity-0",
                           )}
                           style={{
-                            "--transition-delay": `calc(${
-                              (props.segmentationUnit ?? "character") === "word"
+                            "--transition-delay": `calc(${(props.segmentationUnit ?? "character") === "word"
                                 ? wordIndex
                                 : charIndex
-                            } * var(--stagger-unit, 20ms) + var(--start-delay, 0ms))`,
+                              } * var(--stagger-unit, 20ms) + var(--start-delay, 0ms))`,
                           }}
                           aria-hidden="true"
                         >

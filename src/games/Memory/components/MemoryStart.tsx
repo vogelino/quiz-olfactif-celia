@@ -72,7 +72,7 @@ Memory Game!`}
             )}
           />
         </ShardUnderlinedText>
-        <div class={cn("delay-1300 duration-[2s] slide-up mt-6")}>
+        <div class={cn("delay-500 duration-[2s] slide-up mt-6")}>
           <Button
             id="start-button"
             onMouseEnter={() => {
