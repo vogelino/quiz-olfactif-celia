@@ -9,7 +9,7 @@ import { MemoryShortcutList } from "./List";
 export function MemoryShortcutsButton() {
   const modalId = "memory-shortcuts-modal";
 
-  createHotkey("H", () => {
+  createHotkey({ key: "?", shift: true }, () => {
     const modal = document.getElementById(modalId) as HTMLDialogElement | null;
     if (!modal) return;
     if (modal.open) {
