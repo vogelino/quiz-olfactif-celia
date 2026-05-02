@@ -37,6 +37,7 @@ export function MemoryMatchModal() {
     });
   };
 
+  createHotkey("Escape", onContinue);
   createHotkey("Enter", onContinue);
   createHotkey("Space", onContinue);
 
