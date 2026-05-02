@@ -2,14 +2,14 @@ import { usePreloadedMemoryImages } from "@memory/hooks/usePreloadedMemoryImages
 import { cn } from "~/utils/cn";
 
 type MemoryLoadingProps = {
-  percentage: number;
+  percentage: () => number;
 };
 
 export function MemoryLoading(props: MemoryLoadingProps) {
   const { loadingPercentage } = usePreloadedMemoryImages();
 
-  const combinedPercentage = Math.round(
-    (loadingPercentage + props.percentage) / 2,
+  const combinedPercentage = () => Math.round(
+    (loadingPercentage + props.percentage()) / 2,
   );
   return (
     <div
@@ -29,9 +29,9 @@ export function MemoryLoading(props: MemoryLoadingProps) {
             "size-full bg-background absolute inset-0 -z-10",
             "transition origin-right",
           )}
-          style={{ scale: `${1 - combinedPercentage / 100} 1` }}
+          style={{ scale: `${1 - combinedPercentage() / 100} 1` }}
         />
-        {props.percentage}%
+        {props.percentage()}%
       </div>
     </div>
   );

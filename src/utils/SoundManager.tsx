@@ -133,7 +133,7 @@ export class SoundManager {
       try {
         const arrayBuffer = await this.fetchWithProgress(
           url,
-          (loaded, total) => {
+          (loaded) => {
             // Update progress
             const previousLoaded = sizes
               .slice(0, index)

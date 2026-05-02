@@ -60,7 +60,7 @@ function MemoryInner() {
     <MemoryLayout>
       <Show when={!!store.error}>{store.error}</Show>
       <Show when={store.status === "loading" && showLoadingScreen()}>
-        <MemoryLoading percentage={sounds.loadingProgess().percentage} />
+        <MemoryLoading percentage={() => sounds.loadingProgess().percentage} />
       </Show>
       <Show when={store.status === "initial"}>
         <MemoryStart />

@@ -21,7 +21,7 @@ type StoreType = {
   error?: string;
 };
 
-const defaultStore: StoreType = {
+const defaultStore = () => ({
   pairMatchId: null,
   status: "loading" as const,
   currentTurn: [],
@@ -32,9 +32,12 @@ const defaultStore: StoreType = {
   cards: getShuffledCards(),
   debuggerStatus: import.meta.env.DEV ? "collapsed" : "hidden",
   error: undefined,
-};
+} satisfies StoreType);
 
-export const createMemoryStore = () => createStore(defaultStore);
+export const createMemoryStore = () => {
+  const [store, setStore] = createStore(defaultStore());
+  return [store, setStore] as const;
+}
 type StoreReturn = ReturnType<typeof createMemoryStore>;
 
 const MemoryStoreContext = createContext<StoreReturn>();

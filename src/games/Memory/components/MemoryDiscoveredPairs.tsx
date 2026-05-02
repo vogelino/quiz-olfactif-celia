@@ -38,7 +38,7 @@ export function MemoryDiscoveredPairs() {
       <div class="absolute size-[97vmin] left-1/2 top-1/2 -translate-1/2 aspect-square max-w-full max-h-full">
         <For each={pairGroups()}>
           {(pairGroup, pairGroupIndex) => {
-            const diplacementClass = [
+            const diplacementClass = () => [
               "top-0 left-0 -translate-full rotate-3",
               "top-0 left-1/2 -translate-full -rotate-2",
               "top-0 right-0 translate-x-full -translate-y-full rotate-6",
@@ -48,7 +48,7 @@ export function MemoryDiscoveredPairs() {
               "bottom-0 left-0 -translate-x-full translate-y-full rotate-6",
               "left-0 top-1/2 -translate-full -rotate-3",
             ][pairGroupIndex()];
-            const completeDisplacementClass = [
+            const completeDisplacementClass = () => [
               "translate-x-0 translate-y-1/2",
               "-translate-y-[250%] sm:-translate-y-1/2 -translate-x-1/2",
               "translate-y-1/3 translate-x-0",
@@ -62,15 +62,15 @@ export function MemoryDiscoveredPairs() {
               <ul
                 class={cn(
                   "absolute",
-                  diplacementClass,
-                  store.status === "complete" && completeDisplacementClass,
+                  diplacementClass(),
+                  store.status === "complete" && completeDisplacementClass(),
                 )}
               >
                 <For each={pairGroup}>
                   {(cards) => (
                     <li
                       class="size-[15vmin] relative"
-                      aria-label={`Discovered pair: ${cards[0][0]?.ingredient.name} and ${cards[1][0]?.ingredient.name}`}
+                      aria-label={`Discovered pair: ${cards[0]?.ingredient.title} and ${cards[1]?.ingredient.title}`}
                     >
                       <Show when={store.status === "complete"}>
                         <div
@@ -89,7 +89,7 @@ export function MemoryDiscoveredPairs() {
                             colorClass={() => card.colorClass}
                             isRevealed={() => true}
                             pairIsDiscovered={() => true}
-                            onToggleReveal={() => {}}
+                            onToggleReveal={() => { }}
                             rotateLeft={card.rotateLeft}
                             class={() =>
                               cn(
