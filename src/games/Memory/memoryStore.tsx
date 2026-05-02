@@ -32,7 +32,7 @@ const defaultStore: StoreType = {
   cards: getShuffledCards(),
   debuggerStatus: import.meta.env.DEV ? "collapsed" : "hidden",
   error: undefined,
-}
+};
 
 export const createMemoryStore = () => createStore(defaultStore);
 type StoreReturn = ReturnType<typeof createMemoryStore>;

@@ -115,7 +115,7 @@ export function MemoryDebugger() {
                           "rounded px-2 py-0.5 text-left text-xs transition-colors truncate",
                           "bg-background hover:bg-background-muted cursor-pointer",
                           isActive(pair.id) &&
-                          "bg-foreground text-background hover:bg-foreground border-foreground",
+                            "bg-foreground text-background hover:bg-foreground border-foreground",
                         )}
                         onClick={() => {
                           batch(() => {
@@ -136,7 +136,7 @@ export function MemoryDebugger() {
                             "rounded px-2 py-0.5 text-center text-xs transition-colors",
                             "bg-background hover:bg-background-muted cursor-pointer",
                             isDiscovered(pair.id) &&
-                            "bg-foreground text-background hover:bg-foreground border-foreground",
+                              "bg-foreground text-background hover:bg-foreground border-foreground",
                           )}
                           onClick={() => onPairDiscoveryToggle(pair.id)}
                         >

@@ -1,4 +1,3 @@
-
 import { Hotkey, HotkeySequence } from "@omniaura/solid-hotkeys";
 
 import { ShortcutKey, ShortcutsList } from "~/components/ShortcutsList";

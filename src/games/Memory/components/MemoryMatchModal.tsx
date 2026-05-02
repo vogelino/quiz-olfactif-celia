@@ -150,7 +150,7 @@ export function MemoryMatchModal() {
                     colorClass={() => molecule().colorClass}
                     isRevealed={() => true}
                     pairIsDiscovered={() => false}
-                    onToggleReveal={() => { }}
+                    onToggleReveal={() => {}}
                     rotateLeft
                     class={() => "-rotate-1 size-[25vmin]"}
                     ariaLabelSuffix={`Card A`}
@@ -169,7 +169,7 @@ export function MemoryMatchModal() {
                     colorClass={() => molecule().colorClass}
                     isRevealed={() => true}
                     pairIsDiscovered={() => false}
-                    onToggleReveal={() => { }}
+                    onToggleReveal={() => {}}
                     class={() => "-rotate-1 size-[25vmin]"}
                     ariaLabelSuffix={`Card B`}
                     disabled

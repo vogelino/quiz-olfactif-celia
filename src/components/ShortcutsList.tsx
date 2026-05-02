@@ -15,13 +15,22 @@ export function ShortcutsList(props: {
       <For each={Array.from(props.shortcutsMap.entries())}>
         {([groupTitle, shortcuts]) => (
           <>
-            <h3 class="font-bold col-span-2 text-lg font-headline py-2 border-b border-border texture-mask">{groupTitle}</h3>
+            <h3 class="font-bold col-span-2 text-lg font-headline py-2 border-b border-border texture-mask">
+              {groupTitle}
+            </h3>
             <div class="grid grid-cols-subgrid col-span-full pb-2 border-b border-border leading-tight text-xs text-muted-foreground uppercase tracking-wide">
               <span>Description</span>
               <span>Hotkey</span>
             </div>
 
-            <Show when={shortcuts.size > 0} fallback={<p class="col-span-2 text-sm text-muted-foreground">No shortcuts available.</p>}>
+            <Show
+              when={shortcuts.size > 0}
+              fallback={
+                <p class="col-span-2 text-sm text-muted-foreground">
+                  No shortcuts available.
+                </p>
+              }
+            >
               <div class="col-span-full grid grid-cols-subgrid pb-4 gap-y-2">
                 <For each={Array.from(shortcuts.entries())}>
                   {([hotkey, description]) => (
@@ -31,13 +40,20 @@ export function ShortcutsList(props: {
                         <For each={parseHotKey(hotkey)}>
                           {(part, index) => (
                             <>
-                              <Show when={index() > 0 && part.type === "hotkey"}>
+                              <Show
+                                when={index() > 0 && part.type === "hotkey"}
+                              >
                                 <span class="font-mono text-sm px-2">+</span>
                               </Show>
                               <KeyIndicator key={part.hotkeyPart}>
                                 {part.part}
                               </KeyIndicator>
-                              <Show when={part.type === "sequence" && index() < parseHotKey(hotkey).length - 1}>
+                              <Show
+                                when={
+                                  part.type === "sequence" &&
+                                  index() < parseHotKey(hotkey).length - 1
+                                }
+                              >
                                 <span class="mx-1">then</span>
                               </Show>
                             </>
