@@ -21,7 +21,7 @@ export function MemoryLayout(props: MemoryLayoutProps) {
     <main class="contents">
       <Show when={store.status === "started" && !store.pairMatchId}>
         <MemoryScore
-          class={() => "absolute top-4 left-1/2 -translate-x-1/2 z-10"}
+          class={() => "absolute top-4 left-4 sm:left-1/2 sm:-translate-x-1/2 z-10"}
         />
       </Show>
       <Show when={["started", "complete"].includes(store.status)}>

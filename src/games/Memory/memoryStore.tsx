@@ -34,10 +34,7 @@ const defaultStore = () => ({
   error: undefined,
 } satisfies StoreType);
 
-export const createMemoryStore = () => {
-  const [store, setStore] = createStore(defaultStore());
-  return [store, setStore] as const;
-}
+export const createMemoryStore = () => createStore(defaultStore());
 type StoreReturn = ReturnType<typeof createMemoryStore>;
 
 const MemoryStoreContext = createContext<StoreReturn>();
@@ -45,10 +42,12 @@ const MemoryStoreContext = createContext<StoreReturn>();
 export const MemoryStoreProvider = (props: {
   children: JSXElement;
   value: StoreReturn;
-}) => (
-  <MemoryStoreContext.Provider value={props.value}>
-    {props.children}
-  </MemoryStoreContext.Provider>
-);
+}) => {
+  return (
+    <MemoryStoreContext.Provider value={props.value}>
+      {props.children}
+    </MemoryStoreContext.Provider>
+  )
+};
 
 export const useMemoryStore = () => useContext(MemoryStoreContext)!;

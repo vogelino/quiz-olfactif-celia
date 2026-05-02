@@ -14,9 +14,9 @@ export function MemoryScore(props: MemoryScoreProps) {
     <dl
       aria-label="Memory game score"
       class={cn(
-        "flex justify-center gap-x-2 slide-up delay-200 [corner-shape:scoop] rounded-lg",
-        "bg-background bg-texture text-foreground px-6 pt-3 pb-2 texture-mask",
-        "border-2 border-foreground max-sm:flex-col",
+        "flex sm:justify-center gap-x-2 slide-up delay-200 [corner-shape:scoop] rounded-lg",
+        "bg-background bg-texture text-foreground px-4 sm:px-6 pt-3 pb-2 texture-mask max-sm:w-48",
+        "border-2 border-foreground max-sm:max-w-[calc(100vw-10rem)] max-sm:flex-wrap",
         props.class?.(),
       )}
     >
@@ -43,10 +43,10 @@ const formatter = new Intl.NumberFormat();
 function ScoreItem(props: ScoreItemProps) {
   return (
     <>
-      <dt class="font-headline tracking-widest text-lg uppercase whitespace-nowrap">
+      <dt class="sm:font-headline max-sm:font-bold tracking-widest sm:text-lg uppercase whitespace-nowrap">
         {props.label()}
       </dt>
-      <dd class="text-xl -translate-y-0.5 inline-block pr-4 last-of-type:pr-0">
+      <dd class="sm:text-xl sm:-translate-y-0.5 inline-block pr-4 last-of-type:pr-0">
         {formatter.format(props.value())}
       </dd>
     </>
