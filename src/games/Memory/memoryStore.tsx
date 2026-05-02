@@ -17,23 +17,24 @@ type StoreType = {
   pairsStreak: number;
   pairsBestStreak: number;
   discoveredPairs: MemoryPairId[];
-  debuggerStatus: "expanded" | "collapsed";
+  debuggerStatus: "hidden" | "expanded" | "collapsed";
   error?: string;
 };
 
-export const createMemoryStore = () =>
-  createStore<StoreType>({
-    pairMatchId: null,
-    status: "loading" as const,
-    currentTurn: [],
-    turnsCount: 0,
-    pairsStreak: 0,
-    pairsBestStreak: 0,
-    discoveredPairs: [],
-    cards: getShuffledCards(),
-    debuggerStatus: "collapsed",
-    error: undefined,
-  });
+const defaultStore: StoreType = {
+  pairMatchId: null,
+  status: "loading" as const,
+  currentTurn: [],
+  turnsCount: 0,
+  pairsStreak: 0,
+  pairsBestStreak: 0,
+  discoveredPairs: [],
+  cards: getShuffledCards(),
+  debuggerStatus: import.meta.env.DEV ? "collapsed" : "hidden",
+  error: undefined,
+}
+
+export const createMemoryStore = () => createStore(defaultStore);
 type StoreReturn = ReturnType<typeof createMemoryStore>;
 
 const MemoryStoreContext = createContext<StoreReturn>();

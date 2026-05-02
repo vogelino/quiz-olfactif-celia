@@ -55,9 +55,7 @@ export function MemoryLayout(props: MemoryLayoutProps) {
         </GeneralControls>
       </Show>
       {props.children}
-      <Show when={import.meta.env.DEV}>
-        <MemoryDebugger />
-      </Show>
+      <MemoryDebugger />
     </main>
   );
 }
