@@ -15,8 +15,8 @@ export function MemoryScore(props: MemoryScoreProps) {
       aria-label="Memory game score"
       class={cn(
         "flex justify-center gap-x-2 slide-up delay-200 [corner-shape:scoop] rounded-lg",
-        "bg-background bg-texture text-foreground px-6 pt-3 pb-2 texture-mask border-dashed",
-        "border border-foreground max-sm:flex-col",
+        "bg-background bg-texture text-foreground px-6 pt-3 pb-2 texture-mask",
+        "border-2 border-foreground max-sm:flex-col",
         props.class?.(),
       )}
     >
