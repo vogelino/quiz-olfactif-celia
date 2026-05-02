@@ -35,7 +35,7 @@ export default function Modal(props: ModalProps) {
           "rounded-xl border-2 border-foreground [corner-shape:scoop] bg-texture",
         )}
       >
-        <header class="flex items-center justify-between mb-4 gap-8">
+        <header class="flex items-center justify-between gap-8">
           <h2 class="font-headline text-2xl texture-mask">{props.title}</h2>
           <Button
             aria-label="Close modal"
