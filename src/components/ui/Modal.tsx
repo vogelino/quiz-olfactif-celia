@@ -18,9 +18,9 @@ export default function Modal(props: ModalProps) {
       {...rest}
       id={id()}
       class={cn(
-        "group/dialog",
+        "group/dialog text-foreground",
         "fixed inset-0 w-screen h-screen min-w-screen min-h-screen",
-        "hidden grid place-content-center bg-transparent pointer-events-none open:ponter-events-auto",
+        "grid place-content-center bg-transparent pointer-events-none open:ponter-events-auto",
         "transition backdrop:bg-transparent p-4",
         "before:content-[''] before:fixed before:inset-0 before:w-screen before:h-screen",
         "before:min-w-screen before:min-h-screen before:bg-foreground/20",
