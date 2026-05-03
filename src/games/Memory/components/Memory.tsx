@@ -8,7 +8,6 @@ import { MemoryMatchModal } from "@memory/components/MemoryMatchModal";
 import { MemoryStart } from "@memory/components/MemoryStart";
 import { useMemorySounds } from "@memory/memorySounds";
 import {
-  createMemoryStore,
   MemoryStoreProvider,
   useMemoryStore,
 } from "@memory/memoryStore";
@@ -84,7 +83,7 @@ function MemoryInner() {
 
 export function Memory() {
   return (
-    <MemoryStoreProvider value={createMemoryStore()}>
+    <MemoryStoreProvider>
       <MemoryInner />
     </MemoryStoreProvider>
   );

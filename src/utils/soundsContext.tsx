@@ -2,6 +2,7 @@ import {
   Accessor,
   createContext,
   createEffect,
+  createMemo,
   createSignal,
   JSXElement,
   onCleanup,
@@ -108,12 +109,7 @@ export const SoundsProvider = <
   onCleanup(() => manager.dispose());
 
   // Ensure a function is not executed if sounds are not loaded or if sounds are turned off
-  const guard =
-    <ParamT extends unknown[], ReturnT>(fn: (...p: ParamT) => ReturnT) =>
-    (...params: ParamT) => {
-      if (progress().percentage !== 100) return;
-      return fn(...params);
-    };
+  const isLoaded = createMemo(() => progress().percentage === 100);
 
   createEffect(() => {
     if (soundOn().soundOn && !isMutedByPageVisibility()) {
@@ -136,13 +132,13 @@ export const SoundsProvider = <
         turnOffSounds: () =>
           setSoundOn((prev) => ({ ...prev, soundOn: false })),
         playUISound: (key, ...rest) =>
-          guard(manager.play)(normalizeKey(key), ...rest),
-        stopUISound: guard(manager.stop),
-        stopAllUISounds: guard(manager.stopAll),
+          guard(isLoaded())(manager.play)(normalizeKey(key), ...rest),
+        stopUISound: (...args) => guard(isLoaded())(manager.stop)(...args),
+        stopAllUISounds: () => guard(isLoaded())(manager.stopAll)(),
         playMusicLoop: (key, ...rest) =>
-          guard(manager.playLoop)(normalizeKey(key), ...rest),
-        stopMusicLoop: guard(manager.stopAllLoops),
-        stopAllMusicLoops: guard(manager.stopAllLoops),
+          guard(isLoaded())(manager.playLoop)(normalizeKey(key), ...rest),
+        stopMusicLoop: () => guard(isLoaded())(manager.stopAllLoops),
+        stopAllMusicLoops: () => guard(isLoaded())(manager.stopAllLoops)(),
       }}
     >
       {props.children}
@@ -166,4 +162,12 @@ export const useSounds = () => {
     throw new Error("The SoundsContext must be used with the SoundsProvider");
   }
   return ctx;
+};
+
+function guard(loaded: boolean) {
+  return <ParamT extends unknown[], ReturnT>(fn: (...p: ParamT) => ReturnT) =>
+    (...params: ParamT) => {
+      if (!loaded) return;
+      return fn(...params);
+    };
 };
