@@ -34,7 +34,7 @@ const defaultStore = () => ({
   error: undefined,
 } satisfies StoreType);
 
-export const createMemoryStore = () => createStore(defaultStore());
+export const createMemoryStore = () => createStore<StoreType>(defaultStore());
 type StoreReturn = ReturnType<typeof createMemoryStore>;
 
 const MemoryStoreContext = createContext<StoreReturn>();
