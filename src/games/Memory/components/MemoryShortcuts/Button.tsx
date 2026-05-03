@@ -2,7 +2,9 @@ import { createHotkey } from "@omniaura/solid-hotkeys";
 
 import { Keyboard } from "~/components/icons";
 import { Button } from "~/components/ui/Button";
+import { KeyIndicator } from "~/components/ui/KeyIndicator";
 import Modal from "~/components/ui/Modal";
+import { Tooltip } from "~/components/ui/Tooltip";
 
 import { MemoryShortcutList } from "./List";
 
@@ -21,16 +23,28 @@ export function MemoryShortcutsButton() {
 
   return (
     <>
-      <Button
-        commandfor={modalId}
-        command="show-modal"
-        aria-controls={modalId}
-        aria-label="View keyboard shortcuts"
-        variant="ghost"
-        size="icon"
-      >
-        <Keyboard />
-      </Button>
+      <Tooltip
+        id="memory-shortcuts-button-tooltip"
+        text={() => (
+          <>
+            View keyboard shortcuts
+            <KeyIndicator key="?" />
+          </>
+        )}
+        trigger={(triggerProps) => (
+          <Button
+            {...triggerProps}
+            commandfor={modalId}
+            command="show-modal"
+            aria-controls={modalId}
+            variant="ghost"
+            size="icon"
+          >
+            <span class="sr-only">View keyboard shortcuts</span>
+            <Keyboard />
+          </Button>
+        )}
+      />
       <Modal
         id={modalId}
         title="Keyboard Shortcuts"
