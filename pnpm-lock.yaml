@@ -51,6 +51,9 @@ importers:
       '@tailwindcss/vite':
         specifier: ^4.0.7
         version: 4.2.1(vite@7.3.1(jiti@2.6.1)(lightningcss@1.31.1)(terser@5.46.0)(yaml@2.8.3))
+      '@toolwind/anchors':
+        specifier: 1.0.10
+        version: 1.0.10(tailwindcss@4.2.1)
       eslint:
         specifier: 9.39.4
         version: 9.39.4(jiti@2.6.1)
@@ -1151,6 +1154,11 @@ packages:
 
   '@tanstack/store@0.9.3':
     resolution: {integrity: sha512-8reSzl/qGWGGVKhBoxXPMWzATSbZLZFWhwBAFO9NAyp0TxzfBP0mIrGb8CP8KrQTmvzXlR/vFPPUrHTLBGyFyw==}
+
+  '@toolwind/anchors@1.0.10':
+    resolution: {integrity: sha512-F3J/lxGGPUy+GIpT49NmYMF1X7l0d7UzdDASni29il2ro5sT4cYfPBFHBAfOM0lpgKOr/HnqINlomngt8BcvnA==}
+    peerDependencies:
+      tailwindcss: '>=3.0.0 || >=4.0.0'
 
   '@types/babel__core@7.20.5':
     resolution: {integrity: sha512-qoQprZvz5wQFJwMDqeseRXWv3rqMvhgpbXFfVyWhbx9X47POIA6i/+dXefEmZKoAgOaTdaIgNSMqMIU61yRyzA==}
@@ -4248,6 +4256,10 @@ snapshots:
   '@tanstack/store@0.8.1': {}
 
   '@tanstack/store@0.9.3': {}
+
+  '@toolwind/anchors@1.0.10(tailwindcss@4.2.1)':
+    dependencies:
+      tailwindcss: 4.2.1
 
   '@types/babel__core@7.20.5':
     dependencies:
