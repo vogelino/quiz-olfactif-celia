@@ -35,7 +35,9 @@ export function TextReveal(props: TextRevealType) {
 
   function calculateLayout() {
     if (!hostRef) return;
-    const width = Math.floor(hostRef.getBoundingClientRect().width);
+    const width = Math.floor(
+      (hostRef.parentElement ?? hostRef).getBoundingClientRect().width,
+    );
 
     if (width <= 0) return;
 
@@ -100,7 +102,10 @@ export function TextReveal(props: TextRevealType) {
   onCleanup(() => resizeObserver?.disconnect());
 
   return (
-    <div ref={hostRef} class={cn("w-full min-w-0 max-w-full", props.class)}>
+    <div
+      ref={hostRef}
+      class={cn("w-full min-w-0 max-w-full overflow-hidden", props.class)}
+    >
       <span class="sr-only">{props.text}</span>
       <For each={lines()}>
         {(line) => (
@@ -131,14 +136,13 @@ export function TextReveal(props: TextRevealType) {
                             "inline-block transition whitespace-nowrap",
                             "delay-(--transition-delay) duration-500 ease-in-out",
                             props.startingClass ??
-                              "starting:translate-y-4 starting:opacity-0",
+                            "starting:translate-y-4 starting:opacity-0",
                           )}
                           style={{
-                            "--transition-delay": `calc(${
-                              (props.segmentationUnit ?? "character") === "word"
-                                ? wordIndex
-                                : charIndex
-                            } * var(--stagger-unit, 20ms) + var(--start-delay, 0ms))`,
+                            "--transition-delay": `calc(${(props.segmentationUnit ?? "character") === "word"
+                              ? wordIndex
+                              : charIndex
+                              } * var(--stagger-unit, 20ms) + var(--start-delay, 0ms))`,
                           }}
                           aria-hidden="true"
                         >
